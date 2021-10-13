@@ -65,7 +65,7 @@ width: 445px;
 height: 50px;
 margin-right: 20px;
 margin-left: 25px;
-margin-top: 30px;
+margin-top: 3px;
 margin-bottom: 200px;
 padding-top: 15px;
 padding-bottom: 15px;
@@ -152,4 +152,14 @@ color: #131313;
 
   .login-input-btn:hover, .login-input-btn-social:hover{
     background-color: #99f888;;
+  }
+
+  .mess-age{
+width: 445px;
+height: 1px;
+margin-right: 20px;
+margin-left: 20px;
+margin-bottom: 3%;
+padding: 10px;
+text-align: center;
   }

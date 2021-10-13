@@ -1,6 +1,5 @@
-import React, {useState } from 'react'
+import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-
 
 const UseForm = (validateLogin: { (values: any): any; (arg0: { email: string; password: string }): React.SetStateAction<{}> }) => {
     const [values, setValues] = useState({
@@ -16,18 +15,37 @@ const UseForm = (validateLogin: { (values: any): any; (arg0: { email: string; pa
             [name]: value
 })
 }
-const handleSubmit =  async (e: { preventDefault: () => void }) => { 
-    e.preventDefault()
-    //console.log(values)
-    const data  = await axios
-    .post('http://localhost:4000/auth/login', values)
-    
-  console.log(data)
-    
+const  [login, setlogin]: any = useState('')
+const [message, setmessage]: any = useState('')
 
+const handleSubmit = async (e: { preventDefault: () => void }) => { 
+    e.preventDefault()
+    await axios.post('http://localhost:4000/auth/login', values, {withCredentials:true})
+    .then(response => {
+        setlogin(response.data)
+        console.log("Major:",response.data)
+        setmessage("login successful")
+            window.location.href = "/success"
+          
+        
+    }).catch(err=>{
+        console.log(err.response.data.msg);
+        setmessage("Error: "+err.response.data.msg)
+
+    })
+    //console.log(message)
+    console.log(values)
     setErrors(validateLogin(values))
 }
-return {handleChange, values, handleSubmit, errors}
+
+
+useEffect(() => {
+
+      
+}, []);
+
+
+return {handleChange, values, handleSubmit, errors, login, message}
 }
 
 export default UseForm

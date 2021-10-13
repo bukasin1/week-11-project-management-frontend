@@ -4,7 +4,7 @@ const LoginSuccess = () => {
     return (
         <div>
             <div>
-                We have received your Request
+                Welcome Back
             </div>
         </div>
     )

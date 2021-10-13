@@ -14,8 +14,8 @@ errors.email = "Email Address is Invalid"
 if (!values.password){
     errors.password = "Password is Required"
 }
-else if (values.password.length <= 5){
-    errors.password = "Password must not be Less than 6 characters"
+else if (values.password.length < 5){
+    errors.password = "Password must not be Less than 5 characters"
 }
 return errors
 }
