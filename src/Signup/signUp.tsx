@@ -28,8 +28,8 @@ import {Link} from "react-router-dom";
        }
     axios.post('https://jaraaa.herokuapp.com/users/signup', details, {withCredentials:true})
     .then(response => {
-        setmessage("login successful")  
-        window.location.href = "/login"  
+        setmessage("Account Created successful")  
+        window.location.href = "/verify"  
     }).catch(err=>{
         setmessage (`Error: ${err.response.data}`)
     })
@@ -84,7 +84,7 @@ import {Link} from "react-router-dom";
               <button type="submit">
                Sign Up
               </button>
-            <p>"Already have an account yet? <Link to={"/login"}>Login" </Link> </p>
+            <p>"Already have an account? <Link to={"/login"}>Login" </Link> </p>
             <div className="footer">
            <button><a href="https://jaraaa.herokuapp.com/auth/google">Use Google Account</a></button>
            </div>
