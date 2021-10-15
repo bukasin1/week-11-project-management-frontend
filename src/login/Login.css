@@ -1,23 +1,29 @@
 body{
-    background: #F2F2F2;
+    background: #110f0f;
 }
 
 .loginForm-content {
 display: inline-block;
 align-items: center;
+height: 20px;
 width: 505px;
-height: 650px;
 left: 468px;
 margin-top: 50px;
 margin-bottom: 0px;
 background: #FFFFFF;
 border-radius: 8px;
 text-align:left;
+
+}
+.btn_socials{
+  display: flex;
+  flex-direction: row;
+  margin-top: 90px;
 }
 .login{
-    margin-top: 120px;
+    margin-top: 70px;
     margin-bottom: 700px;
-}
+} 
 
 .login-label{
 height: 20px;
@@ -29,9 +35,8 @@ font-style: normal;
 font-weight: bold;
 font-size: 18px;
 line-height: 20px;
-/* identical to box height, or 125% */
 color: #131313;
-}
+} 
 
 .login-input{
 width: 445px;
@@ -44,7 +49,7 @@ padding: 10px;
 background: #EAEAEA;
 border-radius: 8px;
 border: none;
-}
+} 
 
 ::placeholder{
     height: 20px;
@@ -55,18 +60,17 @@ font-family: Heebo;
 font-style: normal;
 font-size: 18px;
 line-height: 23.5px;
-/* identical to box height, or 125% */
 color: #131313;
 
-}
+} 
 
-.login-input-btn{
+ .login-input-btn{
 width: 445px;
 height: 50px;
 margin-right: 20px;
-margin-left: 25px;
+margin-left: 20px;
 margin-top: 3px;
-margin-bottom: 200px;
+
 padding-top: 15px;
 padding-bottom: 15px;
 background: #CEF9C6;
@@ -77,7 +81,6 @@ font-style: normal;
 font-weight: bold;
 font-size: 16px;
 line-height: 23.5px;
-/* identical to box height, or 125% */
 color: #131313;
 
 }
@@ -88,11 +91,13 @@ height: 1px;
 left: 497px;
 margin-top: 45px;
 border-color: #ffffff;
+
+
 }
 
 .login-input-btn-social{
 width: 250px;
-height: 50px;
+/* height: 50px; */
 margin-right: 3%;
 margin-left: 4%;
 margin-top: 20px;
@@ -107,7 +112,6 @@ font-style: normal;
 font-weight: bold;
 font-size: 16px;
 line-height: 23.5px;
-/* identical to box height, or 125% */
 color: #131313;
 }
 
@@ -145,16 +149,15 @@ color: #131313;
     font-weight: bold;
     font-size: 14px;
     text-align: center;
-    /* identical to box height, or 125% */
     color: #cf0a0a;
 
   }
 
   .login-input-btn:hover, .login-input-btn-social:hover{
-    background-color: #99f888;;
+    background-color:#FFC200;
   }
 
-  .mess-age{
+.mess-age{
 width: 445px;
 height: 1px;
 margin-right: 20px;
@@ -162,4 +165,4 @@ margin-left: 20px;
 margin-bottom: 3%;
 padding: 10px;
 text-align: center;
-  }
+  } 

@@ -2,14 +2,17 @@ import React from 'react'
 import UseForm from './UseForm'
 import './Login.css' 
 import validateLogin from './ValidateLogin'
+import {Link} from "react-router-dom"
  
 const FormLogin =  () => {
     const {handleChange, values, handleSubmit, errors, message} = UseForm(validateLogin)
     return (
         <div className="loginForm-content">
-            <div className="check"></div><div className="check1 "></div>
+            <div className="check"></div>
+            <div className="check1 "></div>
             <br/>
-            <div className="check"></div><div className="check1"></div>
+            <div className="check"></div>
+            <div className="check1"></div>
             <hr className="horizon1"/>
          <form className="login" onSubmit={handleSubmit} >
              <div className="login-inputs">
@@ -33,7 +36,7 @@ const FormLogin =  () => {
              </div>
              <p className="mess-age">{message}</p>
              <button className='login-input-btn' type="submit">Sign In</button>
-            
+             <p className="mess-age">"Don't have an account yet?  <Link to={"/signup"}>Sign Up" </Link> </p>
     
          </form>
          
