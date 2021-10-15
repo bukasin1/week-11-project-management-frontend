@@ -8,9 +8,8 @@ body{
     left: 468px;
     top: 20px;  
     border-radius: 8px;
-    background: #FFFFFF;
+    background: #FFFFFF; 
     position: relative;
-    /* box-shadow: inset; */
   }
   .form_body{
    height: 692px;
@@ -96,6 +95,10 @@ body{
     color: #131313;
     margin-bottom: 10px;
   }
+  .error_mssg{
+    margin-top: 0;
+    color: red;
+  }
   input{
     left: 0%;
     right: 0%;
@@ -121,13 +124,14 @@ body{
     border: none;
     outline: lightskyblue;
     transition: all 2s linear;
+    margin-top: -15px;
   }
   .form_body > button:hover,
   .footer > button:focus{
     background: #FFC200;
   }
   .footer > button{
-    margin-top: 80px;
+    margin-top: 50px;
     height: 40px;
     margin-left: 300px;
     width: 200px;
@@ -175,6 +179,7 @@ body{
       margin-left: 100px;
     } 
   }
+ 
    @media (max-width: 280px){
       .container{
         max-width: 400px;
@@ -184,6 +189,8 @@ body{
         margin: 0 auto;
         min-height: 700px;
         text-align: center;
+        margin-right: 30px;
+        background-color: red;
       }
       .form_body > button{
         margin-top: 5px;
@@ -194,4 +201,5 @@ body{
         margin-left: 70px;
         margin-top: 15px;
       }
-    } 
+    }
+    

@@ -7,7 +7,7 @@ import LoginSuccess from './login/LoginSuccess';
 
 function App() {
   return ( 
-    <div >
+    <div className="app">
       <BrowserRouter>
         <Switch>
         <div className="container">

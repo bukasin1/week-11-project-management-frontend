@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
    const [message, setmessage] = useState('')
    const [validate, setValidate] = useState('')
     const nameForm: any = useRef(null);
-     async function handler(e:any){
+     function handler(e:any){
         e.preventDefault()
         const form = nameForm.current;
         if(form.firstname.value || form.lastname.value === "" || 
@@ -26,18 +26,12 @@ import {Link} from "react-router-dom";
        if(form.password.value !== form.password2.value){
         setValidate("Password do not match")
        }
-       
-       await axios.post('https://jaraaa.herokuapp.com/users/signup', details, {withCredentials:true})
+    axios.post('https://jaraaa.herokuapp.com/users/signup', details, {withCredentials:true})
     .then(response => {
-        console.log("Major:",response.data)
-        setmessage("login successful")
-            //window.location.href = "/success"
-          
-        
+        setmessage("login successful")  
+        window.location.href = "/login"  
     }).catch(err=>{
-        console.log(err.response.data.msg);
-        setmessage (`Error: Email Already exist`)
-
+        setmessage (`Error: ${err.response.data}`)
     })
        
      }
@@ -86,11 +80,10 @@ import {Link} from "react-router-dom";
               </label>
               <input type="password" name="password2"  className="form_input"/>
               </div>
-              {!validate? message : validate}
-              {/* //{message} */}
-            <button type="submit">
-            Sign Up
-            </button>
+              <h5 className="error_mssg"> {!validate? message : validate}</h5>
+              <button type="submit">
+               Sign Up
+              </button>
             <p>"Already have an account yet? <Link to={"/login"}>Login" </Link> </p>
             <div className="footer">
            <button><a href="https://jaraaa.herokuapp.com/auth/google">Use Google Account</a></button>

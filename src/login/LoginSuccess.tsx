@@ -8,14 +8,14 @@ const LoginSuccess = () => {
 
     async function getUserProfile(){
 
-        await axios.get('http://localhost:4000/profile', {withCredentials:true})
+        await axios.get('https://jaraaa.herokuapp.com/profile', {withCredentials:true})
         .then(response => {
             const data = response.data as any
             console.log("Major:",data.user.firstname)
             setUser(data.user.firstname)   
         }).catch(err=>{
             console.log(err.response.data.msg);
-            window.location.href = "/"
+            window.location.href = "/login"
     
         })
     }
