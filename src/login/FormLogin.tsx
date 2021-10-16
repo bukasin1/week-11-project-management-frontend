@@ -7,6 +7,7 @@ import {Link} from "react-router-dom"
 const FormLogin =  () => {
     const {handleChange, values, handleSubmit, errors, message} = UseForm(validateLogin)
     return (
+        <div className="container">
         <div className="loginForm-content">
             <div className="check"></div>
             <div className="check1 "></div>
@@ -40,6 +41,7 @@ const FormLogin =  () => {
     
          </form>
          
+        </div>
         </div>
 
     )

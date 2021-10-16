@@ -36,8 +36,7 @@ import {Link} from "react-router-dom";
        
      }
     return (
-        
-        <div>
+          <div className="container">
              <div className="header">
                <div className="firstDivElement">
                    <div className="mark"></div>
@@ -88,8 +87,9 @@ import {Link} from "react-router-dom";
             <div className="footer">
            <button><a href="https://jaraaa.herokuapp.com/auth/google">Use Google Account</a></button>
            </div>
+          
             </form>   
-            
+  
         </div>
       
     )
