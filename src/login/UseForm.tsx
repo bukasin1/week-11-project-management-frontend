@@ -7,7 +7,7 @@ const UseForm = (validateLogin: { (values: any): any; (arg0: { email: string; pa
         password: ''
     })
     const [errors, setErrors]: any = useState({})
-   
+
     const handleChange = (e: { target: { name: string; value: string } }) => {
         const {name, value } = e.target
         setValues({
@@ -18,16 +18,18 @@ const UseForm = (validateLogin: { (values: any): any; (arg0: { email: string; pa
 const  [login, setlogin]: any = useState('')
 const [message, setmessage]: any = useState('')
 
-const handleSubmit = async (e: { preventDefault: () => void }) => { 
+const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
     await axios.post('https://jaraaa.herokuapp.com/auth/login', values, {withCredentials:true})
-    .then(response => {
+    .then((response: any) => {
         setlogin(response.data)
         console.log("Major:",response.data)
+        const token = response.data.token
+        localStorage.setItem("token", token!)
         setmessage("login successful")
             // window.location.href = "/success"
-          
-        
+
+
     }).catch(err=>{
         console.log(err.response.data.msg);
         setmessage("Error: "+err.response.data.msg)
@@ -41,7 +43,7 @@ const handleSubmit = async (e: { preventDefault: () => void }) => {
 
 useEffect(() => {
 
-      
+
 }, []);
 
 

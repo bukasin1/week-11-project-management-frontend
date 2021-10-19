@@ -5,9 +5,10 @@ import './App.css';
 import SignUp from './Signup/signUp';
 import LoginSuccess from './login/LoginSuccess';
 import Verify from './Signup/Verify';
+import Profile from './Profile/Profile';
 
 function App() {
-  return ( 
+  return (
     <div className="app">
       <BrowserRouter>
         <Switch>
@@ -16,7 +17,7 @@ function App() {
          <Route path="/signup" exact component={SignUp}></Route>
           <Route path="/verify" exact  component={Verify}></Route>
           <Route path="/signup" exact component={SignUp}></Route>
-          
+          <Route path = "/profile" exact component={Profile}></Route>
         </Switch>
       </BrowserRouter>
     </div>

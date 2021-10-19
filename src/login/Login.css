@@ -1,6 +1,6 @@
-body{
+/* body{
     background: #110f0f;
-}
+} */
 
 .loginForm-content {
 display: inline-block;
@@ -22,7 +22,7 @@ text-align:left;
 .login{
     margin-top: 70px;
     margin-bottom: 700px;
-} 
+}
 
 .login-label{
 height: 20px;
@@ -35,7 +35,7 @@ font-weight: bold;
 font-size: 18px;
 line-height: 20px;
 color: #131313;
-} 
+}
 
 .login-input{
 width: 445px;
@@ -48,7 +48,7 @@ padding: 10px;
 background: #EAEAEA;
 border-radius: 8px;
 border: none;
-} 
+}
 
 ::placeholder{
     height: 20px;
@@ -61,7 +61,7 @@ font-size: 18px;
 line-height: 23.5px;
 color: #131313;
 
-} 
+}
 
  .login-input-btn{
 width: 450px;
