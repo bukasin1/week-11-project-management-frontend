@@ -37,7 +37,8 @@ const FormLogin = () => {
                     </div>
                     <p className="mess-age">{message}</p>
                     <button className='login-input-btn' type="submit">Sign In</button>
-                    <p className="mess-age">"Don't have an account yet?  <Link to={"/signup"}>Sign Up" </Link> </p>
+                    <p className="mess-age"><Link to={"/forgotpassword"}>Forgot password?   </Link> </p>
+                    <p className="mess-age">Don't have an account yet?  <Link to={"/signup"}>Sign Up </Link> </p>
 
                 </form>
 

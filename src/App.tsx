@@ -6,6 +6,8 @@ import SignUp from './Signup/signUp';
 import LoginSuccess from './login/LoginSuccess';
 import Verify from './Signup/Verify';
 import { FilesPage } from './filesPage/files';
+import ForgotPasswordEmail from "./ForgotPasswordEmail/ForgotPasswordEmail";
+import ForgotPasswordReset from "./ForgotPasswordReset/ForgotPasswordReset";
 
 function App() {
 
@@ -33,6 +35,12 @@ function App() {
          <Route path="/signup" exact component={SignUp}></Route>
           <Route path="/verify" exact  component={Verify}></Route>
           <Route path="/signup" exact component={SignUp}></Route>
+          <Route exact path="/forgotpassword" component={ForgotPasswordEmail} />
+          <Route
+               exact
+               path="/password/resetpassword/:token"
+              component={ForgotPasswordReset}
+          />
           <Route path="/success/:userToken/" exact component={LoginSuccess}></Route>
           <Route path="/files/:test" exact>{notloggedIn ? <Redirect to="/login" /> : <FilesPage />}</Route>
           
