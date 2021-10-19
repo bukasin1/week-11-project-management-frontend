@@ -1,35 +1,28 @@
 import React, {useState, useEffect} from 'react'
+import { useParams } from 'react-router'
 import axios from 'axios'
 import "./Success.css"
 
 
 const LoginSuccess = () => {
-    const [user, setUser]:any = useState()
-
-    async function getUserProfile(){
-
-        await axios.get('https://jaraaa.herokuapp.com/profile', {withCredentials:true})
-        .then(response => {
-            const data = response.data as any
-            console.log("Major:",data.user.firstname)
-            setUser(data.user.firstname)   
-        }).catch(err=>{
-            console.log(err.response.data.msg);
-            window.location.href = "/login"
-    
-        })
+    const {userToken} = useParams() as any
+    let logged
+    if(userToken){
+        console.log(userToken)
+        const user = userToken.split('~').slice(1).join('~')
+        const token = userToken.split('~')[0]
+        logged = JSON.parse(user)
+        console.log(user)
+        console.log(logged)
+        localStorage.setItem('token', token)
+        localStorage.setItem('user', user)
     }
-
-
-    useEffect(() => {
-        window.addEventListener('load', getUserProfile)
-        return () => window.addEventListener('load', getUserProfile)
-    }, []);
+    logged = JSON.parse(localStorage.getItem('user') as string)
 
     return (
         <div className="welcom">
             <div className="wel-page">
-               <h1> Welcome Back {user} </h1>
+               <h1> Welcome Back {logged.firstname} </h1>
             </div>
         </div>
     )

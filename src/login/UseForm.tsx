@@ -21,11 +21,13 @@ const [message, setmessage]: any = useState('')
 const handleSubmit = async (e: { preventDefault: () => void }) => { 
     e.preventDefault()
     await axios.post('https://jaraaa.herokuapp.com/auth/login', values, {withCredentials:true})
-    .then(response => {
+    .then((response:any) => {
         setlogin(response.data)
         console.log("Major:",response.data)
         setmessage("login successful")
-            // window.location.href = "/success"
+        localStorage.setItem('token', response.data.token)
+        localStorage.setItem('user', JSON.stringify(response.data.user))
+            window.location.href = "/success"
           
         
     }).catch(err=>{

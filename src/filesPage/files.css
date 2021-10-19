@@ -1,0 +1,124 @@
+.main-flex-container {
+    max-width: 100%;
+    color: brown;
+    margin: 100px auto;
+    display: flex;
+    flex-wrap: no-wrap;
+    font-size: 30px;
+    text-align: center;
+  }
+  
+  .flex-item-left {
+    background-color: #f1f1f1;
+    padding: 10px;
+    flex: 20%;
+  }
+  
+  .flex-item-right {
+    background-color: dodgerblue;
+    padding: 10px;
+    flex: 80%;
+  }
+
+
+
+.fileDiv {
+    background-color: #FFFFFF;
+    height: 958px;
+    /* max-width: 1110px; */
+    color: brown;
+    margin: 50px 20px;
+    border-radius: 10px;
+}
+
+.head {
+    border-bottom: 2px solid grey;
+}
+
+.flex-container {
+    color: #131313;
+    opacity: 0.5;
+    border-radius: 10px 10px 0px 0px;
+    display: flex;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #ECECEC;
+}
+
+.flex-container > div {
+    margin: 10px 0 0 20px;
+    text-align: left;
+    line-height: -10px;
+    font-size: 10px;
+}
+
+.first{
+    /* width: 50px; */
+    flex: 5%;
+}
+
+.second{
+    /* width: 250px; */
+    flex: 25%;
+}
+
+.fourth{
+    /* width: 170px; */
+    flex: 16%;
+}
+
+.double {
+    width: 100px;
+    flex: 20%;
+}
+
+.file-container {
+    display: flex;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #ECECEC;
+}
+
+.file-container > div {
+    margin: 10px 0 10px 20px;
+    text-align: left;
+    line-height: -10px;
+    font-size: 10px;
+}
+
+.file-logo {
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    width: 40px;
+    height: 37px;
+}
+.file-logo > img {
+    /* border-radius: 10px; */
+    width: 40px;
+    height: 37px;
+}
+
+.user {
+    display: flex;
+    /* flex-direction: row; */
+    align-items: center;
+}
+
+.userLogo {
+    margin-right: 10px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px; 
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: #2196F3;
+    padding: 10px;
+}
+.grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+}
