@@ -9,6 +9,20 @@ import { FilesPage } from './filesPage/files';
 import ForgotPasswordEmail from "./ForgotPasswordEmail/ForgotPasswordEmail";
 import ForgotPasswordReset from "./ForgotPasswordReset/ForgotPasswordReset";
 
+function ProtectedRoute(props: any){
+  const token = localStorage.getItem('token')
+  console.log(token, 'token')
+  if(token){
+    console.log(token, 'protected')
+    return (
+      <Route path = {props.path} exact component = {props.component}></Route>
+    )
+  }
+  return (
+    <Route><Redirect to="/login" /> </Route>
+  )
+}
+
 function App() {
 
   const [notloggedIn, setLoggedIn] = useState(false)
@@ -31,7 +45,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path="/login" exact component={Form}></Route>
-          <Route path="/success" exact  component={LoginSuccess}></Route>
+          <ProtectedRoute path="/success" exact  component={LoginSuccess}/>
          <Route path="/signup" exact component={SignUp}></Route>
           <Route path="/verify" exact  component={Verify}></Route>
           <Route path="/signup" exact component={SignUp}></Route>
@@ -42,7 +56,8 @@ function App() {
               component={ForgotPasswordReset}
           />
           <Route path="/success/:userToken/" exact component={LoginSuccess}></Route>
-          <Route path="/files/:test" exact>{notloggedIn ? <Redirect to="/login" /> : <FilesPage />}</Route>
+          <ProtectedRoute path="/files/:test" component = {FilesPage}/>
+          {/* <Route path="/files/:test" exact>{notloggedIn ? <Redirect to="/login" /> : <FilesPage />}</Route> */}
           
         </Switch>
       </BrowserRouter>

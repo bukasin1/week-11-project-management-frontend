@@ -19,10 +19,17 @@ const LoginSuccess = () => {
     }
     logged = JSON.parse(localStorage.getItem('user') as string)
 
+    function handleLogout(){
+        localStorage.removeItem('user')
+        localStorage.removeItem('token')
+        window.location.href = "/login"
+    }
+
     return (
         <div className="welcom">
             <div className="wel-page">
                <h1> Welcome Back {logged.firstname} </h1>
+               <button onClick = {handleLogout}>Log Out</button>
             </div>
         </div>
     )
