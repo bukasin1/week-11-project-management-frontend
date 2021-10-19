@@ -8,6 +8,7 @@ import Verify from './Signup/Verify';
 import { FilesPage } from './filesPage/files';
 import ForgotPasswordEmail from "./ForgotPasswordEmail/ForgotPasswordEmail";
 import ForgotPasswordReset from "./ForgotPasswordReset/ForgotPasswordReset";
+import ChangeLogin from './ChangePassword/changeLogin';
 
 function ProtectedRoute(props: any){
   const token = localStorage.getItem('token')
@@ -58,6 +59,7 @@ function App() {
           <Route path="/success/:userToken/" exact component={LoginSuccess}></Route>
           <ProtectedRoute path="/files/:test" component = {FilesPage}/>
           {/* <Route path="/files/:test" exact>{notloggedIn ? <Redirect to="/login" /> : <FilesPage />}</Route> */}
+          <ProtectedRoute path="/changepassword" exact component={ChangeLogin}/>
           
         </Switch>
       </BrowserRouter>

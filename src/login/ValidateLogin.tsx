@@ -17,6 +17,27 @@ if (!values.password){
 else if (values.password.length < 5){
     errors.password = "Password must not be Less than 5 characters"
 }
+if (!values.oldPassword){
+    errors.oldPassword = "Field Must Not be Empty"
+}
+else if (values.oldPassword.length < 5){
+    errors.oldPassword = "length must not be Less than 5 characters"
+}
+if (!values.newPassword){
+    errors.newPassword = "Field Must Not be Empty"
+}
+else if (values.newPassword.length < 5){
+    errors.newPassword = "length must not be Less than 5 characters"
+}
+if (!values.repeatPassword){
+    errors.repeatPassword = "Field Must Not be Empty"
+}
+else if (values.repeatPassword.length < 5){
+    errors.repeatPassword = "length must not be Less than 5 characters"
+}
+else if (values.newPassword !== values.repeatPassword){
+    errors.OnMatchPassword = "Password Do Not Match"
+}
 return errors
 }
 

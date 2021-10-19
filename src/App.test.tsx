@@ -3,8 +3,8 @@ import { render, screen, } from '@testing-library/react';
 import App from './App';
 import SignUp from './Signup/signUp';
 import { MemoryRouter } from "react-router-dom";
-import Form from "./login/Form"
-import FormLogin from "./login/FormLogin"
+import Form from "./ChangePassword/Password"
+import FormLogin from "./ChangePassword/changeLogin"
 
 // test('For registeration', () => {
 //   render(<SignUp/>);

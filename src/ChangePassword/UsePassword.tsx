@@ -1,16 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 
-interface changepasswordInt {
-    email: string;
-    password: string;
-    token?: string;
-   
-}
-const UseForm = (validateLogin: { (values: any): any; (arg0: { email: string; password: string }): React.SetStateAction<{}> }) => {
+const UsePassword = (validateLogin: { (values: any): any; (arg0: { email: string; password: string }): React.SetStateAction<{}> }) => {
     const [values, setValues] = useState({
-        email: '',
-        password: '',
+        oldPassword: '',
+        newPassword: '',
+        repeatPassword: ''
     })
     const [errors, setErrors]: any = useState({})
    
@@ -26,19 +21,18 @@ const [message, setmessage]: any = useState('')
 
 const handleSubmit = async (e: { preventDefault: () => void }) => { 
     e.preventDefault()
-    await axios.post('https://jaraaa.herokuapp.com/auth/login', values, {withCredentials:true})
-    .then((response:any) => {
+    const token = localStorage.getItem('token') as string
+    console.log(token)
+    await axios.request({url:'https://jaraaa.herokuapp.com/password/changepassword', method: "post", data: values, headers: {authorization: token}, withCredentials:true})
+    .then(response => {
         setlogin(response.data)
         console.log("Major:",response.data)
         setmessage("login successful")
-        localStorage.setItem('token', response.data.token)
-        localStorage.setItem('user', JSON.stringify(response.data.user))
-            window.location.href = "/success"
+            // window.location.href = "/success"
           
-        
     }).catch(err=>{
-        console.log(err.response.data.message);
-        setmessage("Error: "+err.response.data.message)
+        console.log(err);
+        setmessage(err)
 
     })
     //console.log(message)
@@ -56,4 +50,4 @@ useEffect(() => {
 return {handleChange, values, handleSubmit, errors, login, message}
 }
 
-export default UseForm
+export default UsePassword
