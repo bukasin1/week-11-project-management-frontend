@@ -15,7 +15,7 @@ function ForgotPasswordReset() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `http://localhost:3002/password/resetpassword/${token}`,
+        `https://jaraaa.herokuapp.com/password/resetpassword/${token}`,
         passwordreset
       );
       setPasswordReset({ newPassword: "", repeatPassword: "" });
