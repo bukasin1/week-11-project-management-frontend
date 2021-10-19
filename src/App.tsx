@@ -5,6 +5,7 @@ import './App.css';
 import SignUp from './Signup/signUp';
 import LoginSuccess from './login/LoginSuccess';
 import Verify from './Signup/Verify';
+import ChangeLogin from './ChangePassword/changeLogin';
 
 function App() {
   return ( 
@@ -16,6 +17,7 @@ function App() {
          <Route path="/signup" exact component={SignUp}></Route>
           <Route path="/verify" exact  component={Verify}></Route>
           <Route path="/signup" exact component={SignUp}></Route>
+          <Route path="/changepassword" exact component={ChangeLogin}></Route>
           
         </Switch>
       </BrowserRouter>

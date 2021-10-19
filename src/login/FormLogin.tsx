@@ -35,8 +35,10 @@ const FormLogin =  () => {
                  {errors.password && <p className='message-error'>{errors.password }</p>}
                  
              </div>
+             <div className="login-inputs">
              <p className="mess-age">{message}</p>
              <button className='login-input-btn' type="submit">Sign In</button>
+             </div>
              <p className="mess-age">"Don't have an account yet?  <Link to={"/signup"}>Sign Up" </Link> </p>
     
          </form>
