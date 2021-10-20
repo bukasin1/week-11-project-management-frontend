@@ -9,6 +9,8 @@ import { FilesPage } from './filesPage/files';
 import ForgotPasswordEmail from "./ForgotPasswordEmail/ForgotPasswordEmail";
 import ForgotPasswordReset from "./ForgotPasswordReset/ForgotPasswordReset";
 import ChangeLogin from './ChangePassword/changeLogin';
+import Side from './Sidebar/Side';
+import { ModalComp } from './Sidebar/Mod';
 
 function ProtectedRoute(props: any){
   const token = localStorage.getItem('token')
@@ -23,6 +25,7 @@ function ProtectedRoute(props: any){
     <Route><Redirect to="/login" /> </Route>
   )
 }
+
 
 function App() {
 
@@ -60,7 +63,8 @@ function App() {
           <ProtectedRoute path="/files/:test" component = {FilesPage}/>
           {/* <Route path="/files/:test" exact>{notloggedIn ? <Redirect to="/login" /> : <FilesPage />}</Route> */}
           <ProtectedRoute path="/changepassword" exact component={ChangeLogin}/>
-          
+          <Route path="/side" exact component={Side}></Route>
+          {/* <Route path="/modal" exact component={ModalComp}></Route> */}
         </Switch>
       </BrowserRouter>
     </div>

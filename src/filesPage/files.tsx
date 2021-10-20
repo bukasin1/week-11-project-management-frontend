@@ -47,7 +47,7 @@ export const FilesPage = () => {
 
     return (
         <div className = "main-flex-container">
-            <div className = "flex-item-left"></div>
+            {/* <div className = "flex-item-left"></div> */}
             <div className="fileDiv flex-item-right">
                 <div className="flex-container">
                     <div className="first"><h3>Image</h3></div>

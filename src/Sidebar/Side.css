@@ -1,0 +1,311 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap');
+
+*{
+    /* box-sizing: border-box; */
+    /* max-width: 100vw; */
+    /* max-height: 100vh; */
+    /* overflow-x: hidden; */
+    top: 0;
+}
+body {
+    /* margin: 0;
+    overflow: visible;
+    font-family: 'Roboto', sans-serif;
+    position: fixed; */
+  }
+  .sidebar {
+    max-height: 100vh;
+    margin: 0;
+    padding: 0;
+    width: 300px;
+    background-color: #000; 
+    color: #fff;
+    position: absolute;
+    height: 145vh;
+    overflow: scroll;
+  }
+  .sidebar > .sidebar_header > .MuiSvgIcon-root{
+    color: yellow;
+    font-size: 25px;
+  }
+  .firstDivElement {
+    height: 20px;
+  }
+  .firstDivElement > .mark{
+    transform: rotate(45deg);
+    height: 12px;
+    width: 9px;
+    border-bottom: 6px solid #FFC200;
+    border-right: 5px solid #FFC200;
+    border-radius: 7px;
+  }
+  .profile_sidebar{
+      margin-top: 15px;
+      display: flex;
+      justify-content: space-evenly;
+      background-color: #202020;
+      height: 80px;
+  }
+  .sidebar_name{
+    padding-top: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-weight: bolder;
+  }
+  .product_name{
+    margin-top: -10px;
+    color: #9B9B9B;
+  }
+  .firstDivElement > .dash{
+    width: 23px;
+    height: 4px;
+    background: #FFC200;
+    margin: 15px 10px;
+    border-radius: 20px;
+  }
+  .projectus{
+    height: 24px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: bolder;
+    font-size: 18px;
+    line-height: 24px;
+    margin-left: -70px;
+    margin-top: 14px;
+    align-items: center;
+    font-weight: bolder;
+    color: #fff;
+  }
+  .firstDivElement{
+    display: flex;
+    flex-direction: row;
+    margin-left: 30px;
+    width: 50px;
+  }
+
+  .sidebar a {
+    display: block;
+    color: #fff;
+    padding: 16px;
+    text-decoration: none;
+  } 
+  .sidebar a.active {
+    background-color: #04AA6D;
+    color: white;
+  }
+  .sidebar_header{
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
+  }
+  .sidebar a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+  }
+  .sidebar_footer{
+    margin-top: 200px;
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+  .sidebar_footer > span{
+    color: #FFC200;
+    border-bottom: 1px solid #FFC200;
+    font-family: 'Roboto', sans-serif;
+  }
+  .Menu_section {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Roboto', sans-serif;
+    row-gap: 15px;
+    margin: 40px;
+    margin-top: 15px;
+  }
+  .Menu_section > div{
+    margin-top: -5px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bolder;
+  }
+  .Menu_section > .notifications{
+    display: flex;
+  }
+  .Menu_section > .notifications > .circle_yellow{
+   background-color: #FFC200;
+   margin-top: 2px;
+   margin-left: 20px;
+   width: 20px;
+   height: 20px;
+   border-radius: 50%;
+   text-align: center;
+   color: #000;
+   display: flex;
+  }
+  .Menu_section > .notifications > .circle_yellow > span{
+    margin-left: 6px;
+    text-align: center;
+    font-weight: 900;
+    font-weight: bolder;
+  }
+  .menu{
+   color: #878787;
+   font-size: 15px; 
+   font-family: 'Roboto', sans-serif;
+  }
+ .Menu_projects{
+   display: flex;
+   flex-direction: column;
+   margin-left: 40px;
+   margin-top: -50px;
+   gap: 15px;
+ }
+ .Menu_projects > div{
+    margin-top: -5px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bolder;
+ }
+ .Team_projects{
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
+    margin-top: 20px;
+    font-style: normal;
+    font-weight: bold;
+ }
+ .Team_projects > div > .team{
+    font-size: 14px;
+ }
+ .Team_projects > div{
+    font-family: 'Roboto', sans-serif;
+    font-weight: bolder;
+    font-size: 16px;
+    line-height: 18px;
+ }
+ .designers > .MuiSvgIcon-root{
+    font-size: 10px;
+    width: 200px
+ }
+ .designers{
+    display: flex;
+ }
+
+ .Menu_projects > div > .project{
+    width: 60px;
+    height: 18px;
+    left: 30px;
+    top: 0px;
+    font-family: Heebo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 18px;
+    color: #878787;
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+ }
+ .addProject{
+    margin-top: 20px;
+    color: #FFC200;
+    font-family: Heebo;
+    font-style: normal;
+    font-weight: bold;
+    margin-left: 40px;
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+ }
+ .addTeam{
+  margin-top: 20px;
+  color: #FFC200;
+  font-family: Heebo;
+  font-style: normal;
+  font-weight: bold;
+  margin-left: 40px;
+  font-family: 'Roboto', sans-serif;
+  cursor: pointer;
+ }
+ .team{
+    color: #878787;
+ }
+ .completed_Task > h1,.open_Task > h1{
+    font-size: 25px;
+ }
+  .task_text{
+   color: #878787;
+   margin-top: -10px;
+   font-size: 15px;
+   font-family: 'Roboto', sans-serif;
+  }
+  div.content {
+    top: 0;
+    padding: 1px 16px;
+    height: 100vh;
+    margin-left: 285px;
+    /* background-color: red; */
+  }
+  .Task{
+    display: flex;
+    justify-content: space-evenly;
+    height: 70px;
+  }
+  .navbar_content{
+     display: flex;
+     justify-content: space-between;
+     height: 110px;
+     width: 80vw;
+     background-color: #fff;
+     padding-left: 50px;
+     align-items: center;
+     top: 0;
+     position: fixed; 
+  }
+  .navbar_title{
+    font-weight: bolder;
+    font-size: xx-large;
+    color: #000;
+  }
+  .navbar_content_add{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 120px;
+    background: #CEF9C6;
+    border-radius: 20px;
+    font-family: Heebo;
+    height: 30px;
+    width: 80px;
+    text-align: center;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+  }
+  .navbar_content_add:hover{
+    background: #a9f19d;
+  }
+  .team_modal{
+      background-color: red;
+      width: 40px;
+  }
+
+  .test {
+    /* background-color: red; */
+    max-width: 100%;
+    max-height: 100vh;
+    overflow: scroll;
+    margin-top: 100px;
+    /* margin-left: 100px; */
+    /* margin-right: 100px; */
+    /* padding: 0, 500px; */
+  }
+  @media screen and (max-width: 700px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+    .sidebar a {float: left;}
+    div.content {margin-left: 0;}
+  }
+  
+  @media screen and (max-width: 400px) {
+    .sidebar a {
+      text-align: center;
+      float: none;
+    }
+  }

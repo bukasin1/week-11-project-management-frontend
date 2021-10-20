@@ -1,7 +1,7 @@
 .main-flex-container {
     max-width: 100%;
     color: brown;
-    margin: 100px auto;
+    margin: 0 auto;
     display: flex;
     flex-wrap: no-wrap;
     font-size: 30px;
@@ -24,7 +24,7 @@
 
 .fileDiv {
     background-color: #FFFFFF;
-    height: 958px;
+    /* height: 958px; */
     /* max-width: 1110px; */
     color: brown;
     margin: 50px 20px;
