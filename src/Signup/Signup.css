@@ -34,16 +34,7 @@ body{
     margin-top: -50px;
     height: 1px;
   }
-  .firstDivElement > .mark{
-    transform: rotate(45deg);
-    height: 21px;
-    width: 10px;
-    border-bottom: 7px solid #FFC200;
-    border-right: 7px solid #FFC200;
-    top: 145px; 
-    left: 498px;
-    border-radius: 7px;
-  }
+  
   .secondDivElement > .mark{
     transform: rotate(45deg);
     height: 21px;
@@ -58,6 +49,25 @@ body{
     display: flex;
     flex-direction: row;
     margin-left: 30px;
+  }
+  .firstDivElement > .mark{
+    transform: rotate(45deg);
+    height: 21px;
+    width: 10px;
+    border-bottom: 7px solid #FFC200;
+    border-right: 7px solid #FFC200;
+    top: 145px; 
+    left: 498px;
+    border-radius: 7px;
+  }
+  .firstDivElement > .dash{
+    width: 23px;
+    height: 8px;
+    left: 541.75px;
+    top: 153.71px;
+    background: #FFC200;
+    margin: 15px 10px;
+    border-radius: 20px;
   }
   .secondDivElement {
     display: flex;
