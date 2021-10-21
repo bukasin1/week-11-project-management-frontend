@@ -83,7 +83,7 @@ export default function Profile() {
           cols={100} rows={10} className="profile-about" />
         </div>
 
-        <button className="profile-button" type="submit">
+        <button className="profile-button">
           Update Profile
         </button>
         <div className="cancel">

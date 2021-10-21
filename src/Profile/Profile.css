@@ -1,5 +1,5 @@
 body {
-display: flex;
+  display: flex;
 }
 
 .profile-container {
@@ -10,6 +10,7 @@ display: flex;
   font-size: 12px;
   font-weight: 600;
   margin-left: 70%;
+  margin-top: 30px;
 }
 .profile-imgwrap {
   /* display: flex;
@@ -61,20 +62,30 @@ img {
 }
 .profile-button {
   display: block;
-  margin: auto;
+  /* margin: auto; */
   height: 40px;
   width: 400px;
-  border: 1px solid #fff;
+  outline: none;
   background-color: #cef9c6;
   border-radius: 40px;
   cursor: pointer;
+  border: none;
+}
+.profile-button:hover {background-color: #bff0c0}
+
+.profile-button:active {
+  background-color: #cef9c6;
+  box-shadow: 0 0px #cef9c6;
+  transform: translateY(1px);
 }
 
 .profile-cancel {
   margin: auto;
-  justify-content: center;
+  align-content: center;
   text-align: center;
+  cursor: pointer;
 }
+
 
 .cancel {
   margin-top: 8px;
@@ -93,5 +104,5 @@ img {
   background-color: white;
   height: 25px;
   width: 100px;
-  margin: auto;
+  margin-top: 6px;
 }
