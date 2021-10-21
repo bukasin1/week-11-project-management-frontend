@@ -245,22 +245,41 @@ body {
     justify-content: space-evenly;
     height: 70px;
   }
+
+  .nav-fixed{
+    position: fixed;
+    height: 110px;
+    width: 80vw;
+    background-color: #fff;
+  }
+
   .navbar_content{
      display: flex;
-     justify-content: space-between;
-     height: 110px;
-     width: 80vw;
-     background-color: #fff;
+     justify-content: space-between; 
      padding-left: 50px;
      align-items: center;
-     top: 0;
-     position: fixed; 
+     top: 0; 
+     margin-top: 20px;
   }
   .navbar_title{
+    /* margin-top: 20px; */
     font-weight: bolder;
     font-size: xx-large;
     color: #000;
   }
+
+  .navbar-nav{
+    padding-left: 50px;
+    display: flex;
+    color: black;
+    margin-top: 10px;
+  }
+
+  .nav-item{
+    text-decoration: none;
+    margin-right: 20px;
+  }
+
   .navbar_content_add{
     display: flex;
     align-items: center;

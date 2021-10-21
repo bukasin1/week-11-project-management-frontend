@@ -8,7 +8,7 @@ interface Props {
 export function ModalComp(props:Props): JSX.Element {
   return (
     <>
-    <div onClick={() => props.setIsOpen(false)} className="modal">
+    <div className="modal">
     <div className="modal-content">
         <span onClick={props.closeModal} className="close">&times;</span>
         <h2><strong>Add a New Team</strong></h2>

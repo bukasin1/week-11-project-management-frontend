@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom'
 import Form from './login/Form'
 import './App.css';
@@ -12,13 +12,13 @@ import ChangeLogin from './ChangePassword/changeLogin';
 import Side from './Sidebar/Side';
 import { ModalComp } from './Sidebar/Mod';
 
-function ProtectedRoute(props: any){
+function ProtectedRoute(props: any) {
   const token = localStorage.getItem('token')
   console.log(token, 'token')
-  if(token){
+  if (token) {
     console.log(token, 'protected')
     return (
-      <Route path = {props.path} exact component = {props.component}></Route>
+      <Route path={props.path} exact component={props.component}></Route>
     )
   }
   return (
@@ -36,34 +36,35 @@ function App() {
     const user = JSON.parse(localStorage.getItem('user') as string)
     console.log(token)
 
-    if(user){
+    if (user) {
       console.log(user.firstname)
       setLoggedIn(false)
-    }else{
+    } else {
       setLoggedIn(true)
     }
   }, [])
 
-  return ( 
+  return (
     <div className="app">
       <BrowserRouter>
         <Switch>
           <Route path="/login" exact component={Form}></Route>
-          <ProtectedRoute path="/success" exact  component={LoginSuccess}/>
-         <Route path="/signup" exact component={SignUp}></Route>
-          <Route path="/verify" exact  component={Verify}></Route>
+          <ProtectedRoute path="/success" exact component={LoginSuccess} />
+          <Route path="/success/:userToken/" exact component={LoginSuccess}></Route>
+          <Route path="/signup" exact component={SignUp}></Route>
+          <Route path="/verify" exact component={Verify}></Route>
           <Route path="/signup" exact component={SignUp}></Route>
           <Route exact path="/forgotpassword" component={ForgotPasswordEmail} />
           <Route
-               exact
-               path="/password/resetpassword/:token"
-              component={ForgotPasswordReset}
+            exact
+            path="/password/resetpassword/:token"
+            component={ForgotPasswordReset}
           />
-          <Route path="/success/:userToken/" exact component={LoginSuccess}></Route>
-          <ProtectedRoute path="/files/:test" component = {FilesPage}/>
+          <Route path="/welcome/:userToken/" exact component={Side}></Route>
+          <ProtectedRoute path="/:files" component={Side} />
           {/* <Route path="/files/:test" exact>{notloggedIn ? <Redirect to="/login" /> : <FilesPage />}</Route> */}
-          <ProtectedRoute path="/changepassword" exact component={ChangeLogin}/>
-          <Route path="/side" exact component={Side}></Route>
+          <ProtectedRoute path="/changepassword" exact component={ChangeLogin} />
+          <ProtectedRoute path="/welcome" exact component={Side}></ProtectedRoute>
           {/* <Route path="/modal" exact component={ModalComp}></Route> */}
         </Switch>
       </BrowserRouter>

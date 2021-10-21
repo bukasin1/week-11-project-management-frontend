@@ -32,8 +32,8 @@ const handleSubmit = async (e: { preventDefault: () => void }) => {
         console.log("Major:",response.data)
         setmessage("login successful")
         localStorage.setItem('token', response.data.token)
-        localStorage.setItem('user', JSON.stringify(response.data.user))
-            window.location.href = "/success"
+        localStorage.setItem('user', JSON.stringify(response.data.sendUser))
+            window.location.href = "/welcome"
           
         
     }).catch(err=>{
