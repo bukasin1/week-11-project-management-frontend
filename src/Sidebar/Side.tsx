@@ -4,18 +4,19 @@ import { Link } from 'react-router-dom'
 import { Avatar, IconButton } from "@material-ui/core";
 import SearchIcon from "@mui/icons-material/Search";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import { Navbar, ProjectNavbar } from './navbar';
+import { Navbar, ProjectNavbar, ProfileNavbar } from './navbar';
 import "./Side.css";
 import { ModalComp } from "./Mod";
 import MainContent from './mainContent'
 import { FilesPage } from "../filesPage/files";
+import Password from "../ChangePassword/Password"
 
 function Side(props: any) {
 
   const path = props.location.pathname
 
   const { userToken } = useParams() as any
-  let loggedUser
+  let loggedUser: any
   if (userToken) {
     console.log(userToken)
     const user = userToken.split('~').slice(1).join('~')
@@ -26,8 +27,9 @@ function Side(props: any) {
   }
   loggedUser = JSON.parse(localStorage.getItem('user') as string)
 
-  const [project, setProject] = useState<{projectId:string, projectName:string}>({projectId:"", projectName: ""})
+  const [project, setProject] = useState<{ projectId: string, projectName: string }>({ projectId: "", projectName: "" })
   const [teamId, setTeamId] = useState('')
+  const [profile, setProfile] = useState('')
   if (project) console.log(project, 'project')
   interface ITeam {
     _id: string;
@@ -79,7 +81,7 @@ function Side(props: any) {
   }
 
   function openProject(e: any) {
-    setProject({projectId: project.projectId, projectName: project.projectName})
+    setProject({ projectId: project.projectId, projectName: project.projectName })
     window.location.href = '/welcome'
   }
 
@@ -103,17 +105,24 @@ function Side(props: any) {
               <SearchIcon style={{ fill: "#878787" }} />
             </IconButton>
           </div>
-          <div className="profile_sidebar">
-            <IconButton>
-              <Avatar style={{ width: "55px", height: "55px" }} src={loggedUser.avatar} />
-            </IconButton>
-            <div>
-              <p className="sidebar_name">{loggedUser.firstname} {loggedUser.lastname}</p>
-              <h5 className="product_name">{loggedUser.role}</h5>
-            </div>
-            <IconButton>
-              <MoreHorizIcon style={{ fill: "#878787" }} />
-            </IconButton>
+          <div 
+          onClick={e => {
+            setProfile(loggedUser)
+            setProject({ projectId: "", projectName: "" })
+          }}  className="profile_sidebar">
+            {/* <Link to="/profile"> */}
+              <IconButton>
+                <Avatar style={{ width: "55px", height: "55px" }} src={loggedUser.avatar} />
+              </IconButton>
+              <div>
+                <p className="sidebar_name">{loggedUser.firstname} {loggedUser.lastname}</p>
+                <h5 className="product_name">{loggedUser.role}</h5>
+              </div>
+              <IconButton>
+                <MoreHorizIcon style={{ fill: "#878787" }} />
+              </IconButton>
+            {/* </Link> */}
+
           </div>
           <div className="Task">
             <div className="completed_Task">
@@ -124,13 +133,13 @@ function Side(props: any) {
               <h1>{loggedUser.openedTasks.length}</h1>
               <h5 className="task_text">Open Tasks</h5>
             </div>
-            
+
           </div>
           <div className="Menu_section">
             <div>
               <h4 className="menu">MENU</h4>
             </div>
-            <div onClick = {e => window.location.href = '/welcome'}> Home </div>
+            <div onClick={e => window.location.href = '/welcome'}> Home </div>
             <div> My Tasks </div>
             <div className="notifications">
               <div> Notfications  </div>
@@ -145,7 +154,10 @@ function Side(props: any) {
             </div>
             {loggedUser.projects.map((project: any) => (
               // <a href={project.projectName}>
-              <div onClick={e => setProject({projectId: project.projectId, projectName: project.projectName})}> {project.projectName}</div>
+              <div onClick={e => {
+                setProject({ projectId: project.projectId, projectName: project.projectName })
+                setProfile('')
+              }}> {project.projectName}</div>
               // </a>
             ))}
           </div>
@@ -201,12 +213,15 @@ function Side(props: any) {
       <div className="content">
 
         {!project.projectId && <Navbar />}
+        {path === "/profile" && <ProfileNavbar user={loggedUser} />}
+        {profile && <ProfileNavbar user={profile} />}
         {project.projectId && <ProjectNavbar project={project} />}
         {path === "/files" && <ProjectNavbar project={project} />}
         {/* <Navbar /> */}
         <div className="test">
           {path === "/files" && <FilesPage project={project.projectId} />}
           {/* <FilesPage /> */}
+          {path === "/changepassword" && <Password />}
 
         </div>
       </div>

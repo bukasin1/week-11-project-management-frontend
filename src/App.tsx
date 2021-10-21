@@ -8,7 +8,7 @@ import Verify from './Signup/Verify';
 import { FilesPage } from './filesPage/files';
 import ForgotPasswordEmail from "./ForgotPasswordEmail/ForgotPasswordEmail";
 import ForgotPasswordReset from "./ForgotPasswordReset/ForgotPasswordReset";
-import ChangeLogin from './ChangePassword/changeLogin';
+import Password from "./ChangePassword/Password"
 import Side from './Sidebar/Side';
 import { ModalComp } from './Sidebar/Mod';
 
@@ -60,10 +60,11 @@ function App() {
             path="/password/resetpassword/:token"
             component={ForgotPasswordReset}
           />
+           {/* <ProtectedRoute path="/changepassword" exact component={Password} /> */}
           <Route path="/welcome/:userToken/" exact component={Side}></Route>
           <ProtectedRoute path="/:files" component={Side} />
           {/* <Route path="/files/:test" exact>{notloggedIn ? <Redirect to="/login" /> : <FilesPage />}</Route> */}
-          <ProtectedRoute path="/changepassword" exact component={ChangeLogin} />
+         
           <ProtectedRoute path="/welcome" exact component={Side}></ProtectedRoute>
           {/* <Route path="/modal" exact component={ModalComp}></Route> */}
         </Switch>

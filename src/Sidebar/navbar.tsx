@@ -57,3 +57,30 @@ export function ProjectNavbar(props: any) {
   );
 }
 
+export function ProfileNavbar(props: any) {
+
+  function handleLogout() {
+    localStorage.removeItem('user')
+    localStorage.removeItem('token')
+    window.location.href = "/login"
+  }
+
+  return (
+    <div className = "nav-fixed">
+      <nav className="navbar_content">
+        <div className="navbar_title">
+          Profile Settings
+          <IconButton>
+            <MoreHorizIcon style={{ fill: "black" }} />
+          </IconButton>
+        </div>
+        <button className="navbar_content_add" onClick={handleLogout}>Log Out</button>
+      </nav>
+        <div className = "navbar-nav">
+          <div className = "nav-item"><Link className = "nav-item2" to = "/profile">Profile</Link></div>
+          <div className = "nav-item"><Link className = "nav-item2" to = "/changepassword">Change password</Link></div>
+        </div>
+    </div>
+  );
+}
+
