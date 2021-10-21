@@ -63,7 +63,7 @@ body {
     margin: 15px 10px;
     border-radius: 20px;
   }
-  .projectus{
+  .projectus {
     height: 24px;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
@@ -124,6 +124,7 @@ body {
     margin-top: -5px;
     font-family: 'Roboto', sans-serif;
     font-weight: bolder;
+    cursor: pointer;
   }
   .Menu_section > .notifications{
     display: flex;
@@ -161,6 +162,7 @@ body {
     margin-top: -5px;
     font-family: 'Roboto', sans-serif;
     font-weight: bolder;
+    cursor: pointer;
  }
  .Team_projects{
     display: flex;
@@ -178,6 +180,7 @@ body {
     font-weight: bolder;
     font-size: 16px;
     line-height: 18px;
+    cursor: pointer;
  }
  .designers > .MuiSvgIcon-root{
     font-size: 10px;
@@ -200,6 +203,7 @@ body {
     color: #878787;
     font-family: 'Roboto', sans-serif;
     text-transform: uppercase;
+    padding-top: 30px;
  }
  .addProject{
     margin-top: 20px;
@@ -238,7 +242,6 @@ body {
     padding: 1px 16px;
     height: 100vh;
     margin-left: 285px;
-    /* background-color: red; */
   }
   .Task{
     display: flex;
@@ -274,7 +277,11 @@ body {
     color: black;
     margin-top: 10px;
   }
-
+  .navbar-nav > .nav-item > .nav-item2{
+    color: #000;
+    text-decoration: none;
+    list-style: none;
+  }
   .nav-item{
     text-decoration: none;
     margin-right: 20px;
@@ -293,6 +300,7 @@ body {
     text-align: center;
     cursor: pointer;
     font-family: 'Roboto', sans-serif;
+    border: none;
   }
   .navbar_content_add:hover{
     background: #a9f19d;

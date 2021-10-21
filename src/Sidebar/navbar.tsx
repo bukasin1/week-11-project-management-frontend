@@ -21,7 +21,6 @@ export function Navbar() {
             <MoreHorizIcon style={{ fill: "black" }} />
           </IconButton>
         </div>
-        <div className="navbar_content_add">+Add</div>
         <button className="navbar_content_add" onClick={handleLogout}>Log Out</button>
       </nav>
     </div>
@@ -45,15 +44,14 @@ export function ProjectNavbar(props: any) {
             <MoreHorizIcon style={{ fill: "black" }} />
           </IconButton>
         </div>
-        <div className="navbar_content_add">+Add</div>
         <button className="navbar_content_add" onClick={handleLogout}>Log Out</button>
       </nav>
         <div className = "navbar-nav">
-          <div className = "nav-item"><Link to = "/welcome">Tasks</Link></div>
-          <div className = "nav-item"><Link to = "/welcome">Kanban</Link></div>
-          <div className = "nav-item"><Link to = "/welcome">Activity</Link></div>
-          <div className = "nav-item"><Link to = "/welcome">Calender</Link></div>
-          <div className = "nav-item"><Link to = "/files">Files</Link></div>
+          <div className = "nav-item"><Link className = "nav-item2" to = "/welcome">Tasks</Link></div>
+          <div className = "nav-item"><Link className = "nav-item2" to = "/welcome">Kanban</Link></div>
+          <div className = "nav-item"><Link className = "nav-item2" to = "/welcome">Activity</Link></div>
+          <div className = "nav-item"><Link className = "nav-item2" to = "/welcome">Calender</Link></div>
+          <div className = "nav-item"><Link className = "nav-item2" to = "/files">Files</Link></div>
         </div>
     </div>
   );

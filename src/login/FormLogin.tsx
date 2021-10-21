@@ -9,12 +9,15 @@ const FormLogin = () => {
     return (
         <div >
             <div className="loginForm-content">
+                <div className="loginForm_box">
                 <div className="check"></div>
                 <div className="check1 "></div>
                 <br />
                 <div className="check"></div>
                 <div className="check1"></div>
                 <hr className="horizon1" />
+                </div>
+
                 <form className="login" onSubmit={handleSubmit} >
                     <div className="login-inputs">
                         <label htmlFor="email"

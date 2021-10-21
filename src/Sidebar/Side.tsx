@@ -124,6 +124,7 @@ function Side(props: any) {
               <h1>{loggedUser.openedTasks.length}</h1>
               <h5 className="task_text">Open Tasks</h5>
             </div>
+            
           </div>
           <div className="Menu_section">
             <div>
@@ -139,7 +140,7 @@ function Side(props: any) {
             </div>
           </div>
           <div className="Menu_projects">
-            <div>
+            <div className="Menu_projects_d">
               <h4 className="project">PROJECTS</h4>
             </div>
             {loggedUser.projects.map((project: any) => (
