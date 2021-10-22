@@ -62,6 +62,7 @@ function App() {
           <ProtectedRoute path = "/profile" exact component = {ProfileComponent}/>
           <ProtectedRoute path = "/changepassword" exact component = {ProfileComponent}/>
           <ProtectedRoute path = "/:projectid/:teamname/:teamid" component = {TeamComponent}/>
+          <Route path="/welcome/:userToken/" exact component={HomeComponent}></Route>
 
 
 

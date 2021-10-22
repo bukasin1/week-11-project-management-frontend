@@ -9,6 +9,7 @@ export default function Profile() {
   const [gender, setGender] = useState("")
   const [location, setLocation] = useState("")
   const [about, setAbout] = useState("")
+  const [avatar, setAvatar] = useState("")
 
 
   const token = localStorage.getItem("token") as string;
@@ -27,6 +28,7 @@ export default function Profile() {
         setGender(`${res.data.user.gender}`)
         setLocation(`${res.data.user.location}`)
         setAbout(`${res.data.user.about}`)
+        setAvatar(`${res.data.user.avatar}`)
       })
       .catch((err) => {
         console.log(err);
@@ -36,7 +38,7 @@ export default function Profile() {
   return (
     <div className="profile-container">
       <div className="profile-imgwrap">
-        <img src={fine}></img>
+        <img src={avatar}></img>
       </div>
 
       <div className="small-container">

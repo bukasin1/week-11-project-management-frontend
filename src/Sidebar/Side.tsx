@@ -23,8 +23,10 @@ function Side(props: any) {
     loggedUser = JSON.parse(user)
     localStorage.setItem('token', token)
     localStorage.setItem('user', user)
+    console.log(loggedUser, "before")
   }
   loggedUser = JSON.parse(localStorage.getItem('user') as string)
+  console.log(loggedUser, "after")
 
   const [project, setProject] = useState<{ projectId: string, projectName: string }>({ projectId: "", projectName: "" })
   const [teamId, setTeamId] = useState('')
