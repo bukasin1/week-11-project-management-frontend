@@ -10,10 +10,9 @@ import { ModalComp } from "./Mod";
 import MainContent from './mainContent'
 import { FilesPage } from "../filesPage/files";
 import Password from "../ChangePassword/Password"
+import Profile from "./profile";
 
 function Side(props: any) {
-
-  const path = props.location.pathname
 
   const { userToken } = useParams() as any
   let loggedUser: any
@@ -47,7 +46,7 @@ function Side(props: any) {
   useEffect(() => {
     const token = localStorage.getItem('token')
     console.log(token)
-    fetch(`https://jaraaa.herokuapp.com/${project.projectId}/get-teams`, {
+    fetch(`https://jaraaa.herokuapp.com/${props.projectId}/get-teams`, {
       method: "GET",
       headers: { 'Content-Type': 'application/json', "authorization": `${token}` }
     }).then(res => res.json())
@@ -107,6 +106,7 @@ function Side(props: any) {
           </div>
           <div 
           onClick={e => {
+            window.location.href = `/profile`
             setProfile(loggedUser)
             setProject({ projectId: "", projectName: "" })
           }}  className="profile_sidebar">
@@ -139,7 +139,7 @@ function Side(props: any) {
             <div>
               <h4 className="menu">MENU</h4>
             </div>
-            <div onClick={e => window.location.href = '/welcome'}> Home </div>
+            <div onClick={e => window.location.href = '/home'}> Home </div>
             <div> My Tasks </div>
             <div className="notifications">
               <div> Notfications  </div>
@@ -155,6 +155,7 @@ function Side(props: any) {
             {loggedUser.projects.map((project: any) => (
               // <a href={project.projectName}>
               <div onClick={e => {
+                window.location.href = `/${project.projectName}/${project.projectId}/task`
                 setProject({ projectId: project.projectId, projectName: project.projectName })
                 setProfile('')
               }}> {project.projectName}</div>
@@ -177,30 +178,6 @@ function Side(props: any) {
               </div>
             ))}
 
-            {/* <div className="designers">Designers
-              <IconButton>
-                <Avatar style={{ width: "25px", height: "25px" }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHZx41E6X-WX4Q7rru7Ut0tRUHgdkJn-qTDg&usqp=CAU" />
-              </IconButton>
-              <IconButton>
-                <Avatar style={{ width: "25px", height: "25px" }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHZx41E6X-WX4Q7rru7Ut0tRUHgdkJn-qTDg&usqp=CAU" />
-              </IconButton>
-              <IconButton>
-                <Avatar style={{ width: "25px", height: "25px" }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHZx41E6X-WX4Q7rru7Ut0tRUHgdkJn-qTDg&usqp=CAU" />
-              </IconButton>
-            </div>
-            <div className="backend">Backend
-              <IconButton>
-                <Avatar style={{ width: "25px", height: "25px" }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHZx41E6X-WX4Q7rru7Ut0tRUHgdkJn-qTDg&usqp=CAU" />
-              </IconButton>
-            </div>
-            <div className="frontend">Frontend
-              <IconButton>
-                <Avatar style={{ width: "25px", height: "25px" }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHZx41E6X-WX4Q7rru7Ut0tRUHgdkJn-qTDg&usqp=CAU" />
-              </IconButton>
-              <IconButton>
-                <Avatar style={{ width: "25px", height: "25px" }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHZx41E6X-WX4Q7rru7Ut0tRUHgdkJn-qTDg&usqp=CAU" />
-              </IconButton>
-            </div> */}
           </div>
           <div onClick={openModal} className="addTeam">+Add a Team</div>
           <div className="sidebar_footer">
@@ -210,21 +187,7 @@ function Side(props: any) {
 
 
       </div>
-      <div className="content">
 
-        {!project.projectId && <Navbar />}
-        {path === "/profile" && <ProfileNavbar user={loggedUser} />}
-        {profile && <ProfileNavbar user={profile} />}
-        {project.projectId && <ProjectNavbar project={project} />}
-        {path === "/files" && <ProjectNavbar project={project} />}
-        {/* <Navbar /> */}
-        <div className="test">
-          {path === "/files" && <FilesPage project={project.projectId} />}
-          {/* <FilesPage /> */}
-          {path === "/changepassword" && <Password />}
-
-        </div>
-      </div>
       {modalIsOpen && <ModalComp setIsOpen={setIsOpen} closeModal={closeModal} />}
     </>
 

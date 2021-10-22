@@ -33,7 +33,7 @@ const handleSubmit = async (e: { preventDefault: () => void }) => {
         setmessage("login successful")
         localStorage.setItem('token', response.data.token)
         localStorage.setItem('user', JSON.stringify(response.data.sendUser))
-            window.location.href = "/welcome"
+            window.location.href = "/home"
           
         
     }).catch(err=>{

@@ -35,11 +35,17 @@ export function ProjectNavbar(props: any) {
     window.location.href = "/login"
   }
 
+  const pathToFiles = `/${props.project.projectname}/${props.project.projectid}/files`
+  const pathToTask = `/${props.project.projectname}/${props.project.projectid}/task`
+  const pathToKanban = `/${props.project.projectname}/${props.project.projectid}/kanban`
+  const pathToActivity = `/${props.project.projectname}/${props.project.projectid}/activity`
+  const pathToCalender = `/${props.project.projectname}/${props.project.projectid}/calender`
+
   return (
     <div className = "nav-fixed">
       <nav className="navbar_content">
         <div className="navbar_title">
-          {props.project.projectName}
+          {props.project.projectname}
           <IconButton>
             <MoreHorizIcon style={{ fill: "black" }} />
           </IconButton>
@@ -47,11 +53,11 @@ export function ProjectNavbar(props: any) {
         <button className="navbar_content_add" onClick={handleLogout}>Log Out</button>
       </nav>
         <div className = "navbar-nav">
-          <div className = "nav-item"><Link className = "nav-item2" to = "/welcome">Tasks</Link></div>
-          <div className = "nav-item"><Link className = "nav-item2" to = "/welcome">Kanban</Link></div>
-          <div className = "nav-item"><Link className = "nav-item2" to = "/welcome">Activity</Link></div>
-          <div className = "nav-item"><Link className = "nav-item2" to = "/welcome">Calender</Link></div>
-          <div className = "nav-item"><Link className = "nav-item2" to = "/files">Files</Link></div>
+          <div className = "nav-item"><Link className = "nav-item2" to = {pathToTask}>Tasks</Link></div>
+          <div className = "nav-item"><Link className = "nav-item2" to = {pathToKanban}>Kanban</Link></div>
+          <div className = "nav-item"><Link className = "nav-item2" to = {pathToActivity}>Activity</Link></div>
+          <div className = "nav-item"><Link className = "nav-item2" to = {pathToCalender}>Calender</Link></div>
+          <div className = "nav-item"><Link className = "nav-item2" to = {pathToFiles}>Files</Link></div>
         </div>
     </div>
   );
