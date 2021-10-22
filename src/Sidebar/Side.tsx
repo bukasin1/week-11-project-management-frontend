@@ -11,11 +11,13 @@ import MainContent from "./mainContent";
 import { FilesPage } from "../filesPage/files";
 import Password from "../ChangePassword/Password";
 import TeamData from "../teams/teamsData";
+//import Password from "../ChangePassword/Password"
+// import Profile from "./profile";
 
 function Side(props: any) {
   const path = props.location.pathname;
 
-  const { userToken } = useParams() as any;
+  const { userToken, projectname, projectid } = useParams() as any;
   let loggedUser: any;
   if (userToken) {
     console.log(userToken);
@@ -50,7 +52,7 @@ function Side(props: any) {
   useEffect(() => {
     const token = localStorage.getItem("token");
     console.log(token);
-    fetch(`https://jaraaa.herokuapp.com/${project.projectId}/get-teams`, {
+    fetch(`https://jaraaa.herokuapp.com/${props.projectId}/get-teams`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -116,6 +118,7 @@ function Side(props: any) {
           </div>
           <div
             onClick={(e) => {
+              window.location.href = `/profile`;
               setProfile(loggedUser);
               setProject({ projectId: "", projectName: "" });
             }}
@@ -153,10 +156,7 @@ function Side(props: any) {
             <div>
               <h4 className="menu">MENU</h4>
             </div>
-            <div onClick={(e) => (window.location.href = "/welcome")}>
-              {" "}
-              Home{" "}
-            </div>
+            <div onClick={(e) => (window.location.href = "/home")}> Home </div>
             <div> My Tasks </div>
             <div className="notifications">
               <div> Notfications </div>
@@ -170,6 +170,7 @@ function Side(props: any) {
               // <a href={project.projectName}>
               <div
                 onClick={(e) => {
+                  window.location.href = `/${project.projectName}/${project.projectId}/task`;
                   setProject({
                     projectId: project.projectId,
                     projectName: project.projectName,
@@ -192,7 +193,13 @@ function Side(props: any) {
             </div>
 
             {teams.map((team) => (
-              <div onClick={(e) => setTeamId(team._id)} className="backend">
+              <div
+                onClick={(e) => {
+                  window.location.href = `/${projectid}/${team.teamName}/${team._id}`;
+                  setTeamId(team._id);
+                }}
+                className="backend"
+              >
                 {team.teamName}
                 {team.members.map((member) => (
                   <IconButton>
@@ -205,27 +212,17 @@ function Side(props: any) {
               </div>
             ))}
           </div>
-          <div onClick={openModal} className="addTeam">
-            +Add a Team
-          </div>
+          {projectid && (
+            <div onClick={openModal} className="addTeam">
+              +Add a Team
+            </div>
+          )}
           <div className="sidebar_footer">
             <span>Invite your team</span> and start collaborating!
           </div>
         </div>
       </div>
-      <div className="content">
-        {!project.projectId && <Navbar />}
-        {path === "/profile" && <ProfileNavbar user={loggedUser} />}
-        {profile && <ProfileNavbar user={profile} />}
-        {project.projectId && <ProjectNavbar project={project} />}
-        {path === "/files" && <ProjectNavbar project={project} />}
-        {/* <Navbar /> */}
-        <div className="test">
-          {path === "/files" && <FilesPage project={project.projectId} />}
-          {/* <FilesPage /> */}
-          {path === "/changepassword" && <Password />}
-        </div>
-      </div>
+
       {modalIsOpen && (
         <ModalComp setIsOpen={setIsOpen} closeModal={closeModal} />
       )}

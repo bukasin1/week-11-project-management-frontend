@@ -11,8 +11,12 @@ import ForgotPasswordReset from "./ForgotPasswordReset/ForgotPasswordReset";
 import Password from "./ChangePassword/Password";
 import Side from "./Sidebar/Side";
 import { ModalComp } from "./Sidebar/Mod";
+import HomeComponent from "./Sidebar/Home";
+import ProjectComponent from "./Sidebar/ProjectComp";
+import ProfileComponent from "./Sidebar/ProfileComp";
+import TeamComponent from "./Sidebar/teamComponent";
 
-function ProtectedRoute(props: any) {
+export function ProtectedRoute(props: any) {
   const token = localStorage.getItem("token");
   console.log(token, "token");
   if (token) {
@@ -46,6 +50,38 @@ function App() {
     <div className="app">
       <BrowserRouter>
         <Switch>
+          <ProtectedRoute path="/home" exact component={HomeComponent} />
+          <ProtectedRoute
+            path="/:projectname/:projectid/task"
+            component={ProjectComponent}
+          />
+          <ProtectedRoute
+            path="/:projectname/:projectid/kanban"
+            component={ProjectComponent}
+          />
+          <ProtectedRoute
+            path="/:projectname/:projectid/activity"
+            component={ProjectComponent}
+          />
+          <ProtectedRoute
+            path="/:projectname/:projectid/calender"
+            component={ProjectComponent}
+          />
+          <ProtectedRoute
+            path="/:projectname/:projectid/files"
+            component={ProjectComponent}
+          />
+          <ProtectedRoute path="/profile" exact component={ProfileComponent} />
+          <ProtectedRoute
+            path="/changepassword"
+            exact
+            component={ProfileComponent}
+          />
+          <ProtectedRoute
+            path="/:projectid/:teamname/:teamid"
+            component={TeamComponent}
+          />
+
           <Route path="/login" exact component={Form}></Route>
           <ProtectedRoute path="/success" exact component={LoginSuccess} />
           <Route
@@ -63,20 +99,11 @@ function App() {
             component={ForgotPasswordReset}
           />
           {/* <ProtectedRoute path="/changepassword" exact component={Password} /> */}
-          <Route path="/welcome/:userToken/" exact component={Side}></Route>
-          <ProtectedRoute path="/:files" component={Side} />
+          {/* <Route path="/welcome/:userToken/" exact component={Side}></Route> */}
+          {/* <ProtectedRoute path="/:files" component={Side} /> */}
           {/* <Route path="/files/:test" exact>{notloggedIn ? <Redirect to="/login" /> : <FilesPage />}</Route> */}
 
-          {/* <ProtectedRoute
-            path="/changepassword"
-            exact
-            component={Password}
-          ></ProtectedRoute> */}
-          <ProtectedRoute
-            path="/welcome"
-            exact
-            component={Side}
-          ></ProtectedRoute>
+          {/* <ProtectedRoute path="/welcome" exact component={Side}></ProtectedRoute> */}
           {/* <Route path="/modal" exact component={ModalComp}></Route> */}
         </Switch>
       </BrowserRouter>
