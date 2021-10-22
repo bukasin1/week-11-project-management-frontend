@@ -1,6 +1,5 @@
 body{
     background: #110f0f;
-    
 }
 
 .loginForm-content {
@@ -10,6 +9,7 @@ height: 20px;
 width: 505px;
 left: 468px;
 margin-top: 50px;
+margin-left: 40px;
 margin-bottom: 0px;
 border-radius: 8px;
 text-align:left;
@@ -18,10 +18,11 @@ text-align:left;
 .btn_socials{
   display: flex;
   flex-direction: row;
-  /* margin-top: 90px; */
+  margin-top: 90px;
 }
 .login{
-  margin-top: -40px;
+    margin-top: 70px;
+    margin-bottom: 700px;
 } 
 
 .login-label{
@@ -39,7 +40,7 @@ color: #131313;
 
 .login-input{
 width: 445px;
-height: 20px;
+height: 30px;
 margin-right: 20px;
 margin-left: 20px;
 margin-top: 10px;
@@ -51,7 +52,7 @@ border: none;
 } 
 
 ::placeholder{
-height: 20px;
+    height: 20px;
 margin-left: 3%;
 margin-right: 3%;
 margin-top: calc(50% - 20px/2 - 30px);
@@ -63,42 +64,15 @@ color: #131313;
 
 } 
 
+
  .login-input-btn{
 width: 450px;
-height: 39px;
+height: 50px;
 margin-right: 200px;
 margin-left: 30px;
-margin-top: -8px;
-background: #CEF9C6;
-border-radius: 25px;
-border: none;
-font-family: Heebo;
-font-style: normal;
-font-weight: bold;
-font-size: 16px;
-color: #131313;
-transition: all 2s linear;
-}
-.login-input-btn:hover, .login-input-btn-social:hover{
-  background-color:#FFC200;
-}
-.horizon1{
-width: 90%;
-margin-right: 150px;
-margin-left: 20px;
-height: 1px;
-margin-top: 37px;
-border-color: #ffffff;
-}
-
-.login-input-btn-social{
-width: 200px;
-margin-right: 3%;
-margin-left: 30px;
-margin-top: 60px;
-margin-bottom: 4%;
-padding-top: 7px;
-padding-bottom: 7px;
+margin-top: 3px;
+padding-top: 15px;
+padding-bottom: 15px;
 background: #CEF9C6;
 border-radius: 25px;
 border: none;
@@ -108,19 +82,46 @@ font-weight: bold;
 font-size: 16px;
 line-height: 23.5px;
 color: #131313;
-transition: all 2s linear;
+
 }
-.btn_socials > .login-input-btn-social > a{
-  text-decoration: none;
- 
-  font-size: 16px;
+
+.horizon1{
+width: 90%;
+margin-right: 150px;
+margin-left: 20px;
+height: 1px;
+margin-top: 45px;
+border-color: #ffffff;
 }
+
+.login-input-btn-social{
+width: 250px;
+/* height: 50px; */
+margin-right: 3%;
+margin-left: 4%;
+margin-top: 20px;
+margin-bottom: 4%;
+padding-top: 15px;
+padding-bottom: 15px;
+background: #CEF9C6;
+border-radius: 25px;
+border: none;
+font-family: Heebo;
+font-style: normal;
+font-weight: bold;
+font-size: 16px;
+line-height: 23.5px;
+color: #131313;
+}
+
 .check{
+
     display: inline-block;
     transform: rotate(45deg);
-    height: 20px;
+    height: 27px;
     width: 12px;
     margin-left: 5%;
+    margin-top: 10px;
     border-bottom:8px solid #FFC200;
     border-right:8px solid #FFC200;
     border-radius: 5px;
@@ -130,15 +131,13 @@ transition: all 2s linear;
     display: inline-block;
     width: 20px;
     margin-left: 15px;
+    margin-top: 10px;
     margin-bottom: 5px;
     border:5px solid #FFC200;
     border-radius: 4px;
 
   }
-  .loginForm-content > .loginForm_box{
-    margin-top: -10px;
-    margin-bottom: 80px;
- }
+
   .message-error {
     margin-top: 0px;
     padding-top: 0px;
@@ -152,20 +151,21 @@ transition: all 2s linear;
     color: #cf0a0a;
 
   }
+
+  .login-input-btn:hover, .login-input-btn-social:hover{
+    background-color:#FFC200;
+  }
+
 .mess-age{
-  width: 445px;
-  height: 1px;
-  margin-right: 20px;
-  margin-bottom: 10px;
-  margin-left: 20px;
-  margin-bottom: 3%;
-  padding: 10px;
-  text-align: center;
-}
-.message{
-  color: #110f0f;
-  
-}
+width: 445px;
+height: 1px;
+margin-right: 20px;
+margin-left: 20px;
+margin-bottom: 3%;
+padding: 10px;
+text-align: center;
+  }
+
 
 @media (max-width: 367px){
     .horizon1{

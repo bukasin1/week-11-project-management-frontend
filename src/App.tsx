@@ -9,8 +9,8 @@ import { FilesPage } from './filesPage/files';
 import ForgotPasswordEmail from "./ForgotPasswordEmail/ForgotPasswordEmail";
 import ForgotPasswordReset from "./ForgotPasswordReset/ForgotPasswordReset";
 import Password from "./ChangePassword/Password"
-import Side from './Sidebar/Side';
-import { ModalComp } from './Sidebar/Mod';
+import Side, { userType } from './Sidebar/Side';
+// import { ModalComp } from './Sidebar/Mod';
 import HomeComponent from './Sidebar/Home';
 import ProjectComponent from './Sidebar/ProjectComp';
 import ProfileComponent from './Sidebar/ProfileComp';
@@ -33,6 +33,31 @@ export function ProtectedRoute(props: any) {
 
 function App() {
 
+
+  const preUser = {closedTasks: [], openedTasks: []} as userType
+  const [user, setUser] = useState<userType>(preUser)
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    fetch(`https://jaraaa.herokuapp.com`, {
+      method: "GET",
+      headers: { 'Content-Type': 'application/json', "authorization": `${token}` }
+    }).then(res => res.json())
+      .then(data => {
+        if (!data.msg) {
+          console.log("Major:", data)
+        } else {
+          console.log(data, 'data')
+          setUser(data.sendUser)
+        }
+        // window.location.href = "/success"
+      })
+      .catch(err => {
+        console.log(err.response, 'error');
+      })
+  },[])
+  console.log(user, 'from app')
+
   const [notloggedIn, setLoggedIn] = useState(false)
 
   useEffect(() => {
@@ -53,15 +78,21 @@ function App() {
       <BrowserRouter>
         <Switch>
 
+          <Route
+            exact
+            path="/password/resetpassword/:token"
+            component={ForgotPasswordReset}
+          />
+
           <ProtectedRoute path = "/home" exact component = {HomeComponent}/>
-          <ProtectedRoute path = "/:projectname/:projectid/task" component = {ProjectComponent}/>
-          <ProtectedRoute path = "/:projectname/:projectid/kanban" component = {ProjectComponent}/>
-          <ProtectedRoute path = "/:projectname/:projectid/activity" component = {ProjectComponent}/>
-          <ProtectedRoute path = "/:projectname/:projectid/calender" component = {ProjectComponent}/>
-          <ProtectedRoute path = "/:projectname/:projectid/files" component = {ProjectComponent}/>
-          <ProtectedRoute path = "/profile" exact component = {ProfileComponent}/>
-          <ProtectedRoute path = "/changepassword" exact component = {ProfileComponent}/>
-          <ProtectedRoute path = "/:projectid/:teamname/:teamid" component = {TeamComponent}/>
+          <ProtectedRoute path = "/:projectname/:projectid/task" component = {ProjectComponent}></ProtectedRoute>
+          <ProtectedRoute path = "/:projectname/:projectid/kanban" component = {ProjectComponent}></ProtectedRoute>
+          <ProtectedRoute path = "/:projectname/:projectid/activity" component = {ProjectComponent}></ProtectedRoute>
+          <ProtectedRoute path = "/:projectname/:projectid/calender" component = {ProjectComponent}></ProtectedRoute>
+          <ProtectedRoute path = "/:projectname/:projectid/files" component = {ProjectComponent}></ProtectedRoute>
+          <ProtectedRoute path = "/profile" exact component = {ProfileComponent}></ProtectedRoute>
+          <ProtectedRoute path = "/changepassword" exact component = {ProfileComponent}></ProtectedRoute>
+          <ProtectedRoute path = "/:projectid/:teamname/:teamid" component = {TeamComponent}></ProtectedRoute>
           <Route path="/welcome/:userToken/" exact component={HomeComponent}></Route>
 
 
@@ -82,13 +113,8 @@ function App() {
           <Route path="/verify" exact component={Verify}></Route>
           <Route path="/signup" exact component={SignUp}></Route>
           <Route exact path="/forgotpassword" component={ForgotPasswordEmail} />
-          <Route
-            exact
-            path="/password/resetpassword/:token"
-            component={ForgotPasswordReset}
-          />
            {/* <ProtectedRoute path="/changepassword" exact component={Password} /> */}
-          {/* <Route path="/welcome/:userToken/" exact component={Side}></Route> */}
+          <Route path="/welcome/:userToken/" exact component={Side}></Route>
           {/* <ProtectedRoute path="/:files" component={Side} /> */}
           {/* <Route path="/files/:test" exact>{notloggedIn ? <Redirect to="/login" /> : <FilesPage />}</Route> */}
          

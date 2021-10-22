@@ -6,31 +6,121 @@ import SearchIcon from "@mui/icons-material/Search";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Navbar, ProjectNavbar, ProfileNavbar } from './navbar';
 import "./Side.css";
-import { ModalComp } from "./Mod";
+import { ProjectModalComp, TeamModalComp } from "./Mod";
 import MainContent from './mainContent'
 import { FilesPage } from "../filesPage/files";
 import Password from "../ChangePassword/Password"
 // import Profile from "./profile";
 
+export interface ITask {
+  [x: string]: any;
+  title: string;
+  projectID: string;
+  assignedUser: string;
+  description: string;
+  files: [file];
+  comments: [iComment];
+  dueDate: Date;
+  status: string;
+}
+
+export interface file {
+  _id?: string,
+  fileUrl: string;
+  fileName: string;
+  uploadedBy: {
+    userId: string,
+    userName?: string,
+    userAvatar?: string
+  };
+  fileSize: string,
+  uploadedOn: number
+}
+
+export interface iComment {
+  _id?: string,
+  id?: string,
+  createdBy: {
+    userId: string,
+    userName: string
+  };
+  content: string;
+  createdOn: number;
+  updatedOn?: number;
+}
+
+export interface userProject {
+  projectId?: string;
+  projectName?: string;
+}
+
+export interface userType {
+  _id?: string
+  firstname?: string;
+  lastname?: string;
+  email?: string;
+  password?: string;
+  gender?: string;
+  role?: string;
+  location?: string;
+  projects?: Array<userProject>;
+  teams?: string[];
+  about?: string;
+  isVerified?: boolean;
+  avatar?: string;
+  resetpasswordtoken?: string;
+  resetpasswordexpires?: string;
+  facebookId?: string;
+  googleId?: string;
+  closedTasks: ITask[],
+  openedTasks: ITask[]
+}
+
 function Side(props: any) {
 
   const { userToken, projectname, projectid } = useParams() as any
-  let loggedUser: any
+  let loggedUser: userType
   if (userToken) {
     console.log(userToken)
-    const user = userToken.split('~').slice(1).join('~')
+    const userFromToken = userToken.split('~').slice(1).join('~')
     const token = userToken.split('~')[0]
-    loggedUser = JSON.parse(user)
+    loggedUser = JSON.parse(userFromToken)
     localStorage.setItem('token', token)
-    localStorage.setItem('user', user)
-    console.log(loggedUser, "before")
+    localStorage.setItem('user', userFromToken)
   }
   loggedUser = JSON.parse(localStorage.getItem('user') as string)
-  console.log(loggedUser, "after")
+  const preUser = {closedTasks: [], openedTasks: []} as userType
+  const [projects, setProjects] = useState<any[]>([])
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    fetch(`https://jaraaa.herokuapp.com/profile/getprojects`, {
+      method: "GET",
+      headers: { 'Content-Type': 'application/json', "authorization": `${token}` }
+    }).then(res => res.json())
+      .then(data => {
+        if (!data.msg) {
+          console.log("Major:", data)
+          setProjects(data)
+        } else {
+          console.log(data.user, ' project data')
+          setProjects(data)
+        }
+        // window.location.href = "/success"
+      })
+      .catch(err => {
+        console.log(err.response, 'error');
+      })
+  },[])
+
+  console.log(projects, "projects found")
+
+  console.log(loggedUser, 'logged user')
+
 
   const [project, setProject] = useState<{ projectId: string, projectName: string }>({ projectId: "", projectName: "" })
   const [teamId, setTeamId] = useState('')
-  const [profile, setProfile] = useState('')
+  const [profile, setProfile] = useState<userType>(preUser)
   if (project) console.log(project, 'project')
   interface ITeam {
     _id: string;
@@ -71,14 +161,20 @@ function Side(props: any) {
   }, [teamId])
 
 
-  const [modalIsOpen, setIsOpen] = useState<boolean>(false);
+  const [projectModalIsOpen, setProjectIsOpen] = useState<boolean>(false);
+  const [teamModalIsOpen, setTeamIsOpen] = useState<boolean>(false);
 
-  function openModal() {
-    setIsOpen(true);
+  function openProjectModal() {
+    setProjectIsOpen(true);
+  }
+
+  function openTeamModal() {
+    setTeamIsOpen(true);
   }
 
   function closeModal() {
-    setIsOpen(false);
+    setProjectIsOpen(false);
+    setTeamIsOpen(false);
   }
 
   function openProject(e: any) {
@@ -154,17 +250,17 @@ function Side(props: any) {
             <div className="Menu_projects_d">
               <h4 className="project">PROJECTS</h4>
             </div>
-            {loggedUser.projects.map((project: any) => (
+            {projects.map((project: any) => (
               // <a href={project.projectName}>
               <div onClick={e => {
-                window.location.href = `/${project.projectName}/${project.projectId}/task`
+                window.location.href = `/${project.projectName}/${project._id}/task`
                 setProject({ projectId: project.projectId, projectName: project.projectName })
-                setProfile('')
+                setProfile(preUser)
               }}> {project.projectName}</div>
               // </a>
             ))}
           </div>
-          <div onClick={openModal} className="addProject">+Add a Project</div>
+          <div onClick={openProjectModal} className="addProject">+Add a Project</div>
           <div className="Team_projects">
             <div>
               <h4 className="team">TEAMS</h4>
@@ -184,7 +280,7 @@ function Side(props: any) {
             ))}
 
           </div>
-          {projectid && <div onClick={openModal} className="addTeam">+Add a Team</div>}
+          {projectid && <div onClick={openTeamModal} className="addTeam">+Add a Team</div>}
           <div className="sidebar_footer">
             <span>Invite your team</span> and start collaborating!
           </div>
@@ -193,7 +289,8 @@ function Side(props: any) {
 
       </div>
 
-      {modalIsOpen && <ModalComp setIsOpen={setIsOpen} closeModal={closeModal} />}
+      {projectModalIsOpen && <ProjectModalComp setIsOpen={setProjectIsOpen} closeModal={closeModal} />}
+      {teamModalIsOpen && <TeamModalComp setIsOpen={setTeamIsOpen} closeModal={closeModal} />}
     </>
 
   );
