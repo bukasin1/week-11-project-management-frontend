@@ -10,7 +10,7 @@ import { ModalComp } from "./Mod";
 import MainContent from './mainContent'
 import { FilesPage } from "../filesPage/files";
 import Password from "../ChangePassword/Password"
-import Profile from "./profile";
+// import Profile from "./profile";
 
 function Side(props: any) {
 

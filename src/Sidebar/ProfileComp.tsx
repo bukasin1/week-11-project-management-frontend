@@ -2,6 +2,7 @@ import { ProfileNavbar } from "../Sidebar/navbar";
 import { FilesPage } from "../filesPage/files";
 import Password from "../ChangePassword/Password";
 import Side from "./Side";
+import Profile from "../Profile/Profile";
 
 
 export default function ProfileComponent(props: any) {
@@ -17,7 +18,7 @@ export default function ProfileComponent(props: any) {
                 <ProfileNavbar />
                 <div className="test">
                     {path.includes('changepassword') && <Password />}
-                    {/* {path.includes('profile') && <Password />} */}
+                    {path.includes('profile') && <Profile />}
 
                 </div>
 
