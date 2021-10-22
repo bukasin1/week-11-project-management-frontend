@@ -14,6 +14,7 @@ import { ModalComp } from './Sidebar/Mod';
 import HomeComponent from './Sidebar/Home';
 import ProjectComponent from './Sidebar/ProjectComp';
 import ProfileComponent from './Sidebar/ProfileComp';
+import TeamComponent from './Sidebar/teamComponent';
 
 export function ProtectedRoute(props: any) {
   const token = localStorage.getItem('token')
@@ -60,6 +61,7 @@ function App() {
           <ProtectedRoute path = "/:projectname/:projectid/files" component = {ProjectComponent}/>
           <ProtectedRoute path = "/profile" exact component = {ProfileComponent}/>
           <ProtectedRoute path = "/changepassword" exact component = {ProfileComponent}/>
+          <ProtectedRoute path = "/:projectid/:teamname/:teamid" component = {TeamComponent}/>
 
 
 

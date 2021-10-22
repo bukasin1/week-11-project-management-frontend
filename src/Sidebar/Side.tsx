@@ -14,7 +14,7 @@ import Password from "../ChangePassword/Password"
 
 function Side(props: any) {
 
-  const { userToken } = useParams() as any
+  const { userToken, projectname, projectid } = useParams() as any
   let loggedUser: any
   if (userToken) {
     console.log(userToken)
@@ -169,7 +169,10 @@ function Side(props: any) {
             </div>
 
             {teams.map(team => (
-              <div onClick={e => setTeamId(team._id)} className="backend">{team.teamName}
+              <div onClick={e =>{ 
+              window.location.href = `/${projectid}/${team.teamName}/${team._id}`
+              setTeamId(team._id)}} 
+              className="backend">{team.teamName}
                 {team.members.map(member => (
                   <IconButton>
                     <Avatar style={{ width: "25px", height: "25px" }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHZx41E6X-WX4Q7rru7Ut0tRUHgdkJn-qTDg&usqp=CAU" />
@@ -179,7 +182,7 @@ function Side(props: any) {
             ))}
 
           </div>
-          <div onClick={openModal} className="addTeam">+Add a Team</div>
+          {projectid && <div onClick={openModal} className="addTeam">+Add a Team</div>}
           <div className="sidebar_footer">
             <span>Invite your team</span> and start collaborating!
           </div>
