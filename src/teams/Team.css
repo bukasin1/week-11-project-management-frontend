@@ -1,0 +1,13 @@
+.main-page {
+  display: grid;
+}
+
+.members-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 20%;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+}
