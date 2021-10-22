@@ -9,7 +9,7 @@ function ForgotPasswordEmail() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3002/password/forgetpassword",
+        "https://jaraaa.herokuapp.com/password/forgetpassword",
         emailValue
       );
       setEmail({ email: "" });
