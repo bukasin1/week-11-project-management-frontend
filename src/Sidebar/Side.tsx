@@ -6,30 +6,146 @@ import SearchIcon from "@mui/icons-material/Search";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Navbar, ProjectNavbar, ProfileNavbar } from './navbar';
 import "./Side.css";
-import { ModalComp } from "./Mod";
+import { ProjectModalComp, TeamModalComp } from "./Mod";
 import MainContent from './mainContent'
 import { FilesPage } from "../filesPage/files";
 import Password from "../ChangePassword/Password"
+import axios from "axios";
+// import Profile from "./profile";
+
+export interface ITask {
+  [x: string]: any;
+  title: string;
+  projectID: string;
+  assignedUser: string;
+  description: string;
+  files: [file];
+  comments: [iComment];
+  dueDate: Date;
+  status: string;
+}
+
+export interface file {
+  _id?: string,
+  fileUrl: string;
+  fileName: string;
+  uploadedBy: {
+    userId: string,
+    userName?: string,
+    userAvatar?: string
+  };
+  fileSize: string,
+  uploadedOn: number
+}
+
+export interface iComment {
+  _id?: string,
+  id?: string,
+  createdBy: {
+    userId: string,
+    userName: string
+  };
+  content: string;
+  createdOn: number;
+  updatedOn?: number;
+}
+
+export interface userProject {
+  projectId?: string;
+  projectName?: string;
+  owner: boolean;
+}
+
+export interface userType {
+  _id?: string
+  firstname?: string;
+  lastname?: string;
+  email?: string;
+  password?: string;
+  gender?: string;
+  role?: string;
+  location?: string;
+  projects?: Array<userProject>;
+  teams?: string[];
+  about?: string;
+  isVerified?: boolean;
+  avatar?: string;
+  resetpasswordtoken?: string;
+  resetpasswordexpires?: string;
+  facebookId?: string;
+  googleId?: string;
+  closedTasks: ITask[],
+  openedTasks: ITask[]
+}
 
 function Side(props: any) {
 
-  const path = props.location.pathname
-
-  const { userToken } = useParams() as any
-  let loggedUser: any
+  const { userToken, projectname, projectid } = useParams() as any
+  let loggedUser: userType
   if (userToken) {
     console.log(userToken)
-    const user = userToken.split('~').slice(1).join('~')
+    const userFromToken = userToken.split('~').slice(1).join('~')
     const token = userToken.split('~')[0]
-    loggedUser = JSON.parse(user)
+    loggedUser = JSON.parse(userFromToken)
     localStorage.setItem('token', token)
-    localStorage.setItem('user', user)
+    localStorage.setItem('user', userFromToken)
   }
   loggedUser = JSON.parse(localStorage.getItem('user') as string)
+  const preUser = {closedTasks: [], openedTasks: []} as userType
+  const [profile, setProfile] = useState<userType>(preUser)
 
-  const [project, setProject] = useState<{ projectId: string, projectName: string }>({ projectId: "", projectName: "" })
+
+  useEffect(() => {
+    const token = localStorage.getItem('token') as string
+    axios
+      .request({
+        url: "https://jaraaa.herokuapp.com/profile",
+        method: "get",
+        headers: { authorization: token },
+        withCredentials: true,
+      })
+      .then((res: any) => {
+        console.log(res.data);
+        // setName(`${res.data.user.firstname} ${res.data.user.lastname}`);
+        setProfile(res.data.sendUser)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+
+
+  const [projects, setProjects] = useState<any[]>([])
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    fetch(`https://jaraaa.herokuapp.com/profile/getprojects`, {
+      method: "GET",
+      headers: { 'Content-Type': 'application/json', "authorization": `${token}` }
+    }).then(res => res.json())
+      .then(data => {
+        if (!data.msg) {
+          console.log("Major:", data)
+          setProjects(data)
+        } else {
+          console.log(data.user, ' project data')
+          setProjects(data)
+        }
+        // window.location.href = "/success"
+      })
+      .catch(err => {
+        console.log(err.response, 'error');
+      })
+  },[])
+
+  console.log(projects, "projects found")
+
+  console.log(loggedUser, 'logged user')
+
+
+  const [project, setProject] = useState<{ projectId: string, projectName: string, owner: boolean}>({ projectId: "", projectName: "", owner: false })
   const [teamId, setTeamId] = useState('')
-  const [profile, setProfile] = useState('')
   if (project) console.log(project, 'project')
   interface ITeam {
     _id: string;
@@ -47,7 +163,7 @@ function Side(props: any) {
   useEffect(() => {
     const token = localStorage.getItem('token')
     console.log(token)
-    fetch(`https://jaraaa.herokuapp.com/${project.projectId}/get-teams`, {
+    fetch(`https://jaraaa.herokuapp.com/${props.projectId}/get-teams`, {
       method: "GET",
       headers: { 'Content-Type': 'application/json', "authorization": `${token}` }
     }).then(res => res.json())
@@ -70,18 +186,24 @@ function Side(props: any) {
   }, [teamId])
 
 
-  const [modalIsOpen, setIsOpen] = useState<boolean>(false);
+  const [projectModalIsOpen, setProjectIsOpen] = useState<boolean>(false);
+  const [teamModalIsOpen, setTeamIsOpen] = useState<boolean>(false);
 
-  function openModal() {
-    setIsOpen(true);
+  function openProjectModal() {
+    setProjectIsOpen(true);
+  }
+
+  function openTeamModal() {
+    setTeamIsOpen(true);
   }
 
   function closeModal() {
-    setIsOpen(false);
+    setProjectIsOpen(false);
+    setTeamIsOpen(false);
   }
 
   function openProject(e: any) {
-    setProject({ projectId: project.projectId, projectName: project.projectName })
+    setProject({ projectId: project.projectId, projectName: project.projectName, owner: false })
     window.location.href = '/welcome'
   }
 
@@ -105,38 +227,33 @@ function Side(props: any) {
               <SearchIcon style={{ fill: "#878787" }} />
             </IconButton>
           </div>
-          <div
-            onClick={(e) => {
-              setProfile(loggedUser);
-              setProject({ projectId: "", projectName: "" });
-            }}
-            className="profile_sidebar"
-          >
+          <div 
+          onClick={e => {
+            window.location.href = `/profile`
+            setProfile(loggedUser)
+            setProject({ projectId: "", projectName: "", owner: false })
+          }}  className="profile_sidebar">
             {/* <Link to="/profile"> */}
-            <IconButton>
-              <Avatar
-                style={{ width: "55px", height: "55px" }}
-                src={loggedUser.avatar}
-              />
-            </IconButton>
-            <div>
-              <p className="sidebar_name">
-                {loggedUser.firstname} {loggedUser.lastname}
-              </p>
-              <h5 className="product_name">{loggedUser.role}</h5>
-            </div>
-            <IconButton>
-              <MoreHorizIcon style={{ fill: "#878787" }} />
-            </IconButton>
+              <IconButton>
+                <Avatar style={{ width: "55px", height: "55px" }} src={profile.avatar} />
+              </IconButton>
+              <div>
+                <p className="sidebar_name">{profile.firstname} {profile.lastname}</p>
+                {props.owner === "true"? <h5 className="product_name">Project Owner</h5> : <h5 className="product_name">{profile.role}</h5>}
+                {/* <h5 className="product_name">{profile.role}</h5> */}
+              </div>
+              <IconButton>
+                <MoreHorizIcon style={{ fill: "#878787" }} />
+              </IconButton>
             {/* </Link> */}
           </div>
           <div className="Task">
             <div className="completed_Task">
-              <h1>{loggedUser.closedTasks.length}</h1>
+              <h1>{profile.closedTasks.length}</h1>
               <h5 className="task_text">Completed Tasks</h5>
             </div>
             <div className="open_Task">
-              <h1>{loggedUser.openedTasks.length}</h1>
+              <h1>{profile.openedTasks.length}</h1>
               <h5 className="task_text">Open Tasks</h5>
             </div>
           </div>
@@ -144,10 +261,7 @@ function Side(props: any) {
             <div>
               <h4 className="menu">MENU</h4>
             </div>
-            <div onClick={(e) => (window.location.href = "/welcome")}>
-              {" "}
-              Home{" "}
-            </div>
+            <div onClick={e => window.location.href = '/home'}> Home </div>
             <div> My Tasks </div>
             <div className="notifications">
               <div> Notfications </div>
@@ -160,35 +274,28 @@ function Side(props: any) {
             <div className="Menu_projects_d">
               <h4 className="project">PROJECTS</h4>
             </div>
-            {loggedUser.projects.map((project: any) => (
+            {profile.projects?.map((project) => (
               // <a href={project.projectName}>
-              <div
-                onClick={(e) => {
-                  setProject({
-                    projectId: project.projectId,
-                    projectName: project.projectName,
-                  });
-                  setProfile("");
-                }}
-              >
-                {" "}
-                {project.projectName}
-              </div>
+              <div onClick={e => {
+                window.location.href = `/${project.projectName}/${project.projectId}/${project.owner}/task`
+                setProject({ projectId: project.projectId as string, projectName: project.projectName as string, owner: project.owner })
+                setProfile(preUser)
+              }}> {project.projectName}</div>
               // </a>
             ))}
           </div>
-          <div onClick={openModal} className="addProject">
-            +Add a Project
-          </div>
+          <div onClick={openProjectModal} className="addProject">+Add a Project</div>
           <div className="Team_projects">
             <div>
               <h4 className="team">TEAMS</h4>
             </div>
 
-            {teams.map((team) => (
-              <div onClick={(e) => setTeamId(team._id)} className="backend">
-                {team.teamName}
-                {team.members.map((member) => (
+            {teams.map(team => (
+              <div onClick={e =>{ 
+              window.location.href = `/${projectid}/${team.teamName}/${team._id}`
+              setTeamId(team._id)}} 
+              className="backend">{team.teamName}
+                {team.members.map(member => (
                   <IconButton>
                     <Avatar
                       style={{ width: "25px", height: "25px" }}
@@ -198,31 +305,17 @@ function Side(props: any) {
                 ))}
               </div>
             ))}
+
           </div>
-          <div onClick={openModal} className="addTeam">
-            +Add a Team
-          </div>
+          {projectid && <div onClick={openTeamModal} className="addTeam">+Add a Team</div>}
           <div className="sidebar_footer">
             <span>Invite your team</span> and start collaborating!
           </div>
         </div>
       </div>
-      <div className="content">
-        {!project.projectId && <Navbar />}
-        {path === "/profile" && <ProfileNavbar user={loggedUser} />}
-        {profile && <ProfileNavbar user={profile} />}
-        {project.projectId && <ProjectNavbar project={project} />}
-        {path === "/files" && <ProjectNavbar project={project} />}
-        {/* <Navbar /> */}
-        <div className="test">
-          {path === "/files" && <FilesPage project={project.projectId} />}
-          {/* <FilesPage /> */}
-          {path === "/changepassword" && <Password />}
-        </div>
-      </div>
-      {modalIsOpen && (
-        <ModalComp setIsOpen={setIsOpen} closeModal={closeModal} />
-      )}
+
+      {projectModalIsOpen && <ProjectModalComp setIsOpen={setProjectIsOpen} closeModal={closeModal} />}
+      {teamModalIsOpen && <TeamModalComp setIsOpen={setTeamIsOpen} closeModal={closeModal} />}
     </>
   );
 }

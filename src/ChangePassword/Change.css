@@ -1,0 +1,53 @@
+.chan-container1{
+    display: flex;
+    justify-content: center;    
+}
+.change-container{
+    background-color: white;
+    margin-top: 20px;
+    padding-top: 90px;
+    padding-bottom: 150px;
+    padding-left: 60px;
+    padding-right: 60px;
+border-radius: 8px;
+}
+.change-label{
+  margin-left: 5px;
+padding-top: 80px;
+font-family: Heebo;
+font-style: normal;
+font-weight: bold;
+font-size: 14px;
+line-height: 21px;
+}
+.change-input-btn1{
+margin-left: 2px;
+padding: 10px;
+background: #CEF9C6;
+border-radius: 25px;
+border: none;
+font-family: Heebo;
+font-style: normal;
+font-weight: bold;
+font-size: 14px;
+color: #131313;
+transition: all 2s linear;
+width: 98%;
+margin-top: 25px;
+}
+.change-input{
+    width: 350px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+.btn-cancel{
+font-family: Heebo;
+font-style: normal;
+font-weight: bold;
+font-size: 14px;
+line-height: 21px;
+/* identical to box height */
+text-align: center;
+color: #131313;
+}

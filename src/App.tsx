@@ -9,10 +9,14 @@ import { FilesPage } from './filesPage/files';
 import ForgotPasswordEmail from "./ForgotPasswordEmail/ForgotPasswordEmail";
 import ForgotPasswordReset from "./ForgotPasswordReset/ForgotPasswordReset";
 import Password from "./ChangePassword/Password"
-import Side from './Sidebar/Side';
-import { ModalComp } from './Sidebar/Mod';
+import Side, { userType } from './Sidebar/Side';
+// import { ModalComp } from './Sidebar/Mod';
+import HomeComponent from './Sidebar/Home';
+import ProjectComponent from './Sidebar/ProjectComp';
+import ProfileComponent from './Sidebar/ProfileComp';
+import TeamComponent from './Sidebar/teamComponent';
 
-function ProtectedRoute(props: any) {
+export function ProtectedRoute(props: any) {
   const token = localStorage.getItem('token')
   console.log(token, 'token')
   if (token) {
@@ -28,6 +32,31 @@ function ProtectedRoute(props: any) {
 
 
 function App() {
+
+
+  const preUser = {closedTasks: [], openedTasks: []} as userType
+  const [user, setUser] = useState<userType>(preUser)
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    fetch(`https://jaraaa.herokuapp.com`, {
+      method: "GET",
+      headers: { 'Content-Type': 'application/json', "authorization": `${token}` }
+    }).then(res => res.json())
+      .then(data => {
+        if (!data.msg) {
+          console.log("Major:", data)
+        } else {
+          console.log(data, 'data')
+          setUser(data.sendUser)
+        }
+        // window.location.href = "/success"
+      })
+      .catch(err => {
+        console.log(err.response, 'error');
+      })
+  },[])
+  console.log(user, 'from app')
 
   const [notloggedIn, setLoggedIn] = useState(false)
 
@@ -48,6 +77,35 @@ function App() {
     <div className="app">
       <BrowserRouter>
         <Switch>
+
+          <Route
+            exact
+            path="/password/resetpassword/:token"
+            component={ForgotPasswordReset}
+          />
+
+          <ProtectedRoute path = "/home" exact component = {HomeComponent}/>
+          <ProtectedRoute path = "/:projectname/:projectid/:owner/task" component = {ProjectComponent}></ProtectedRoute>
+          <ProtectedRoute path = "/:projectname/:projectid/:owner/kanban" component = {ProjectComponent}></ProtectedRoute>
+          <ProtectedRoute path = "/:projectname/:projectid/:owner/activity" component = {ProjectComponent}></ProtectedRoute>
+          <ProtectedRoute path = "/:projectname/:projectid/:owner/calender" component = {ProjectComponent}></ProtectedRoute>
+          <ProtectedRoute path = "/:projectname/:projectid/:owner/files" component = {ProjectComponent}></ProtectedRoute>
+          <ProtectedRoute path = "/profile" exact component = {ProfileComponent}></ProtectedRoute>
+          <ProtectedRoute path = "/changepassword" exact component = {ProfileComponent}></ProtectedRoute>
+          <ProtectedRoute path = "/:projectid/:teamname/:teamid" component = {TeamComponent}></ProtectedRoute>
+          <Route path="/welcome/:userToken/" exact component={HomeComponent}></Route>
+
+
+
+
+
+
+
+
+
+
+
+
           <Route path="/login" exact component={Form}></Route>
           <ProtectedRoute path="/success" exact component={LoginSuccess} />
           <Route path="/success/:userToken/" exact component={LoginSuccess}></Route>
@@ -55,17 +113,12 @@ function App() {
           <Route path="/verify" exact component={Verify}></Route>
           <Route path="/signup" exact component={SignUp}></Route>
           <Route exact path="/forgotpassword" component={ForgotPasswordEmail} />
-          <Route
-            exact
-            path="/password/resetpassword/:token"
-            component={ForgotPasswordReset}
-          />
            {/* <ProtectedRoute path="/changepassword" exact component={Password} /> */}
           <Route path="/welcome/:userToken/" exact component={Side}></Route>
-          <ProtectedRoute path="/:files" component={Side} />
+          {/* <ProtectedRoute path="/:files" component={Side} /> */}
           {/* <Route path="/files/:test" exact>{notloggedIn ? <Redirect to="/login" /> : <FilesPage />}</Route> */}
          
-          <ProtectedRoute path="/welcome" exact component={Side}></ProtectedRoute>
+          {/* <ProtectedRoute path="/welcome" exact component={Side}></ProtectedRoute> */}
           {/* <Route path="/modal" exact component={ModalComp}></Route> */}
         </Switch>
       </BrowserRouter>
