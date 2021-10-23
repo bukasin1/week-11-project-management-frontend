@@ -27,20 +27,18 @@ const FormLogin = () => {
                             Email Address
                         </label>
                         <br />
-                        <input id='email' type='name' name='email' className='login-input' placeholder='ugochukwu@company.com' value={values.email} onChange={handleChange} />
-                        {errors.email && <p className='message-error'>{errors.email}</p>}
-                   
-                    
+                        <input id='email' type='email' name='email' className='login-input' placeholder='ugochukwu@company.com' value={values.email} onChange={handleChange} required/>
+                        
                         <label htmlFor="password"
                             className="login-label">
                             Password
                         </label>
                         <br />
-                        <input id='password' type='password' name='password' className='login-input' placeholder='password' value={values.password} onChange={handleChange} />
+                        <input id='password' type='password' name='password' className='login-input' placeholder='password' value={values.password} onChange={handleChange} required/>
                         {errors.password && <p className='message-error'>{errors.password}</p>}
 
                    
-                    <p className="mess-age">{message}</p>
+                    <p className="mess-age1">{message}</p>
                     <button className='login-input-btn' type="submit">Sign In</button>
                     
                    

@@ -73,6 +73,8 @@ img {
   /* margin-bottom: 20px; */
   margin-top: 5px;
   padding: 8px;
+  background-color: rgba(234,234,234,1);
+    border:none;
  
 }
 .profile-about {
@@ -132,4 +134,8 @@ img {
 .input-content{
   margin-bottom: 10px;
   margin-top: 10px;
+}
+.profile-meassage{
+  display: flex;
+  justify-content: center;
 }

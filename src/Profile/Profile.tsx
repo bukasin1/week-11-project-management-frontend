@@ -14,6 +14,7 @@ export default function Profile() {
   const [failed, setFailed] = useState("");
   const [file, setFile] = useState("");
   const [update, setUpdate] = useState("");
+  const [message, setMessage] = useState("");
   const token = localStorage.getItem("token") as string;
   useEffect(() => {
     axios
@@ -64,10 +65,12 @@ export default function Profile() {
       .then((res: any) => {
         setUpdate(res.data.user);
         setFailed("Updated successfully");
+        setMessage("Profile Updated successfully")
         console.log(res.data);
       })
       .catch((err) => {
         setFailed(err);
+        setMessage(err)
         console.log(err);
       });
   };
@@ -88,6 +91,7 @@ export default function Profile() {
       .then((res: any) => {
         setLoading(false);
         setFailed("Updated successfully");
+        setMessage("Profile Updated successfully")
         console.log("Change PicFile says: ", res);
         setProfileImgUrl(res.data.user.profileImage);
       })
@@ -157,6 +161,7 @@ export default function Profile() {
             className="profile-about"
           />
         </div>
+        <p className="profile-meassage">{message}</p>
         <button
           onClick={submitHandler}
           className="profile-button"
