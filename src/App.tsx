@@ -85,11 +85,11 @@ function App() {
           />
 
           <ProtectedRoute path = "/home" exact component = {HomeComponent}/>
-          <ProtectedRoute path = "/:projectname/:projectid/task" component = {ProjectComponent}></ProtectedRoute>
-          <ProtectedRoute path = "/:projectname/:projectid/kanban" component = {ProjectComponent}></ProtectedRoute>
-          <ProtectedRoute path = "/:projectname/:projectid/activity" component = {ProjectComponent}></ProtectedRoute>
-          <ProtectedRoute path = "/:projectname/:projectid/calender" component = {ProjectComponent}></ProtectedRoute>
-          <ProtectedRoute path = "/:projectname/:projectid/files" component = {ProjectComponent}></ProtectedRoute>
+          <ProtectedRoute path = "/:projectname/:projectid/:owner/task" component = {ProjectComponent}></ProtectedRoute>
+          <ProtectedRoute path = "/:projectname/:projectid/:owner/kanban" component = {ProjectComponent}></ProtectedRoute>
+          <ProtectedRoute path = "/:projectname/:projectid/:owner/activity" component = {ProjectComponent}></ProtectedRoute>
+          <ProtectedRoute path = "/:projectname/:projectid/:owner/calender" component = {ProjectComponent}></ProtectedRoute>
+          <ProtectedRoute path = "/:projectname/:projectid/:owner/files" component = {ProjectComponent}></ProtectedRoute>
           <ProtectedRoute path = "/profile" exact component = {ProfileComponent}></ProtectedRoute>
           <ProtectedRoute path = "/changepassword" exact component = {ProfileComponent}></ProtectedRoute>
           <ProtectedRoute path = "/:projectid/:teamname/:teamid" component = {TeamComponent}></ProtectedRoute>

@@ -10,6 +10,7 @@ import { ProjectModalComp, TeamModalComp } from "./Mod";
 import MainContent from './mainContent'
 import { FilesPage } from "../filesPage/files";
 import Password from "../ChangePassword/Password"
+import axios from "axios";
 // import Profile from "./profile";
 
 export interface ITask {
@@ -52,6 +53,7 @@ export interface iComment {
 export interface userProject {
   projectId?: string;
   projectName?: string;
+  owner: boolean;
 }
 
 export interface userType {
@@ -90,6 +92,30 @@ function Side(props: any) {
   }
   loggedUser = JSON.parse(localStorage.getItem('user') as string)
   const preUser = {closedTasks: [], openedTasks: []} as userType
+  const [profile, setProfile] = useState<userType>(preUser)
+
+
+  useEffect(() => {
+    const token = localStorage.getItem('token') as string
+    axios
+      .request({
+        url: "https://jaraaa.herokuapp.com/profile",
+        method: "get",
+        headers: { authorization: token },
+        withCredentials: true,
+      })
+      .then((res: any) => {
+        console.log(res.data);
+        // setName(`${res.data.user.firstname} ${res.data.user.lastname}`);
+        setProfile(res.data.sendUser)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+
+
   const [projects, setProjects] = useState<any[]>([])
 
   useEffect(() => {
@@ -118,9 +144,8 @@ function Side(props: any) {
   console.log(loggedUser, 'logged user')
 
 
-  const [project, setProject] = useState<{ projectId: string, projectName: string }>({ projectId: "", projectName: "" })
+  const [project, setProject] = useState<{ projectId: string, projectName: string, owner: boolean}>({ projectId: "", projectName: "", owner: false })
   const [teamId, setTeamId] = useState('')
-  const [profile, setProfile] = useState<userType>(preUser)
   if (project) console.log(project, 'project')
   interface ITeam {
     _id: string;
@@ -178,7 +203,7 @@ function Side(props: any) {
   }
 
   function openProject(e: any) {
-    setProject({ projectId: project.projectId, projectName: project.projectName })
+    setProject({ projectId: project.projectId, projectName: project.projectName, owner: false })
     window.location.href = '/welcome'
   }
 
@@ -206,15 +231,16 @@ function Side(props: any) {
           onClick={e => {
             window.location.href = `/profile`
             setProfile(loggedUser)
-            setProject({ projectId: "", projectName: "" })
+            setProject({ projectId: "", projectName: "", owner: false })
           }}  className="profile_sidebar">
             {/* <Link to="/profile"> */}
               <IconButton>
-                <Avatar style={{ width: "55px", height: "55px" }} src={loggedUser.avatar} />
+                <Avatar style={{ width: "55px", height: "55px" }} src={profile.avatar} />
               </IconButton>
               <div>
-                <p className="sidebar_name">{loggedUser.firstname} {loggedUser.lastname}</p>
-                <h5 className="product_name">{loggedUser.role}</h5>
+                <p className="sidebar_name">{profile.firstname} {profile.lastname}</p>
+                {props.owner === "true"? <h5 className="product_name">Project Owner</h5> : <h5 className="product_name">{profile.role}</h5>}
+                {/* <h5 className="product_name">{profile.role}</h5> */}
               </div>
               <IconButton>
                 <MoreHorizIcon style={{ fill: "#878787" }} />
@@ -224,11 +250,11 @@ function Side(props: any) {
           </div>
           <div className="Task">
             <div className="completed_Task">
-              <h1>{loggedUser.closedTasks.length}</h1>
+              <h1>{profile.closedTasks.length}</h1>
               <h5 className="task_text">Completed Tasks</h5>
             </div>
             <div className="open_Task">
-              <h1>{loggedUser.openedTasks.length}</h1>
+              <h1>{profile.openedTasks.length}</h1>
               <h5 className="task_text">Open Tasks</h5>
             </div>
 
@@ -250,11 +276,11 @@ function Side(props: any) {
             <div className="Menu_projects_d">
               <h4 className="project">PROJECTS</h4>
             </div>
-            {projects.map((project: any) => (
+            {profile.projects?.map((project) => (
               // <a href={project.projectName}>
               <div onClick={e => {
-                window.location.href = `/${project.projectName}/${project._id}/task`
-                setProject({ projectId: project.projectId, projectName: project.projectName })
+                window.location.href = `/${project.projectName}/${project.projectId}/${project.owner}/task`
+                setProject({ projectId: project.projectId as string, projectName: project.projectName as string, owner: project.owner })
                 setProfile(preUser)
               }}> {project.projectName}</div>
               // </a>

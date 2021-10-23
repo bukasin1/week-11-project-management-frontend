@@ -7,15 +7,16 @@ export default function ProjectComponent(props: any) {
 
     const path = props.location.pathname
 
-    const {projectname, projectid}: {projectname: string, projectid: string} = useParams()
+    const {projectname, projectid, owner}: {projectname: string, projectid: string, owner: string} = useParams()
     const project = {
         projectname ,
-        projectid
+        projectid,
+        owner
     }
 
     return (
         <>
-            <Side projectId = {project.projectid}/>
+            <Side projectId = {project.projectid} owner = {project.owner}/>
             <div className="content">
 
                 <ProjectNavbar project = {project} />
