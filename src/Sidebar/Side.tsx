@@ -105,24 +105,30 @@ function Side(props: any) {
               <SearchIcon style={{ fill: "#878787" }} />
             </IconButton>
           </div>
-          <div 
-          onClick={e => {
-            setProfile(loggedUser)
-            setProject({ projectId: "", projectName: "" })
-          }}  className="profile_sidebar">
+          <div
+            onClick={(e) => {
+              setProfile(loggedUser);
+              setProject({ projectId: "", projectName: "" });
+            }}
+            className="profile_sidebar"
+          >
             {/* <Link to="/profile"> */}
-              <IconButton>
-                <Avatar style={{ width: "55px", height: "55px" }} src={loggedUser.avatar} />
-              </IconButton>
-              <div>
-                <p className="sidebar_name">{loggedUser.firstname} {loggedUser.lastname}</p>
-                <h5 className="product_name">{loggedUser.role}</h5>
-              </div>
-              <IconButton>
-                <MoreHorizIcon style={{ fill: "#878787" }} />
-              </IconButton>
+            <IconButton>
+              <Avatar
+                style={{ width: "55px", height: "55px" }}
+                src={loggedUser.avatar}
+              />
+            </IconButton>
+            <div>
+              <p className="sidebar_name">
+                {loggedUser.firstname} {loggedUser.lastname}
+              </p>
+              <h5 className="product_name">{loggedUser.role}</h5>
+            </div>
+            <IconButton>
+              <MoreHorizIcon style={{ fill: "#878787" }} />
+            </IconButton>
             {/* </Link> */}
-
           </div>
           <div className="Task">
             <div className="completed_Task">
@@ -133,16 +139,18 @@ function Side(props: any) {
               <h1>{loggedUser.openedTasks.length}</h1>
               <h5 className="task_text">Open Tasks</h5>
             </div>
-
           </div>
           <div className="Menu_section">
             <div>
               <h4 className="menu">MENU</h4>
             </div>
-            <div onClick={e => window.location.href = '/welcome'}> Home </div>
+            <div onClick={(e) => (window.location.href = "/welcome")}>
+              {" "}
+              Home{" "}
+            </div>
             <div> My Tasks </div>
             <div className="notifications">
-              <div> Notfications  </div>
+              <div> Notfications </div>
               {/* <p className="circle_yellow">
             <span>3</span>
             </p> */}
@@ -154,64 +162,52 @@ function Side(props: any) {
             </div>
             {loggedUser.projects.map((project: any) => (
               // <a href={project.projectName}>
-              <div onClick={e => {
-                setProject({ projectId: project.projectId, projectName: project.projectName })
-                setProfile('')
-              }}> {project.projectName}</div>
+              <div
+                onClick={(e) => {
+                  setProject({
+                    projectId: project.projectId,
+                    projectName: project.projectName,
+                  });
+                  setProfile("");
+                }}
+              >
+                {" "}
+                {project.projectName}
+              </div>
               // </a>
             ))}
           </div>
-          <div onClick={openModal} className="addProject">+Add a Project</div>
+          <div onClick={openModal} className="addProject">
+            +Add a Project
+          </div>
           <div className="Team_projects">
             <div>
               <h4 className="team">TEAMS</h4>
             </div>
 
-            {teams.map(team => (
-              <div onClick={e => setTeamId(team._id)} className="backend">{team.teamName}
-                {team.members.map(member => (
+            {teams.map((team) => (
+              <div onClick={(e) => setTeamId(team._id)} className="backend">
+                {team.teamName}
+                {team.members.map((member) => (
                   <IconButton>
-                    <Avatar style={{ width: "25px", height: "25px" }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHZx41E6X-WX4Q7rru7Ut0tRUHgdkJn-qTDg&usqp=CAU" />
+                    <Avatar
+                      style={{ width: "25px", height: "25px" }}
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHZx41E6X-WX4Q7rru7Ut0tRUHgdkJn-qTDg&usqp=CAU"
+                    />
                   </IconButton>
                 ))}
               </div>
             ))}
-
-            {/* <div className="designers">Designers
-              <IconButton>
-                <Avatar style={{ width: "25px", height: "25px" }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHZx41E6X-WX4Q7rru7Ut0tRUHgdkJn-qTDg&usqp=CAU" />
-              </IconButton>
-              <IconButton>
-                <Avatar style={{ width: "25px", height: "25px" }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHZx41E6X-WX4Q7rru7Ut0tRUHgdkJn-qTDg&usqp=CAU" />
-              </IconButton>
-              <IconButton>
-                <Avatar style={{ width: "25px", height: "25px" }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHZx41E6X-WX4Q7rru7Ut0tRUHgdkJn-qTDg&usqp=CAU" />
-              </IconButton>
-            </div>
-            <div className="backend">Backend
-              <IconButton>
-                <Avatar style={{ width: "25px", height: "25px" }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHZx41E6X-WX4Q7rru7Ut0tRUHgdkJn-qTDg&usqp=CAU" />
-              </IconButton>
-            </div>
-            <div className="frontend">Frontend
-              <IconButton>
-                <Avatar style={{ width: "25px", height: "25px" }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHZx41E6X-WX4Q7rru7Ut0tRUHgdkJn-qTDg&usqp=CAU" />
-              </IconButton>
-              <IconButton>
-                <Avatar style={{ width: "25px", height: "25px" }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHZx41E6X-WX4Q7rru7Ut0tRUHgdkJn-qTDg&usqp=CAU" />
-              </IconButton>
-            </div> */}
           </div>
-          <div onClick={openModal} className="addTeam">+Add a Team</div>
+          <div onClick={openModal} className="addTeam">
+            +Add a Team
+          </div>
           <div className="sidebar_footer">
             <span>Invite your team</span> and start collaborating!
           </div>
         </div>
-
-
       </div>
       <div className="content">
-
         {!project.projectId && <Navbar />}
         {path === "/profile" && <ProfileNavbar user={loggedUser} />}
         {profile && <ProfileNavbar user={profile} />}
@@ -222,12 +218,12 @@ function Side(props: any) {
           {path === "/files" && <FilesPage project={project.projectId} />}
           {/* <FilesPage /> */}
           {path === "/changepassword" && <Password />}
-
         </div>
       </div>
-      {modalIsOpen && <ModalComp setIsOpen={setIsOpen} closeModal={closeModal} />}
+      {modalIsOpen && (
+        <ModalComp setIsOpen={setIsOpen} closeModal={closeModal} />
+      )}
     </>
-
   );
 }
 
