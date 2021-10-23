@@ -132,7 +132,19 @@ text-decoration: none;
     background-color: white;
 }
 
+.message-error{
+  display: flex;
+  justify-content: center;
+  color: rgb(128, 5, 5);
+  margin-bottom: 10px;
 
+}
+
+.mess-age1{
+  display: flex;
+  justify-content: center;
+  margin-bottom: -5px;
+}
 /* .login-input{
   width: 83%;
   padding: 10px;

@@ -27,17 +27,22 @@ const handleSubmit = async (e: { preventDefault: () => void }) => {
     .then(response => {
         setlogin(response.data)
         console.log("Major:",response.data)
-        setmessage("login successful")
-            // window.location.href = "/success"
+        setmessage("Password successfully Changed")
+            // window.location.href = "/home"
+            setValues({
+        oldPassword: '',
+        newPassword: '',
+        repeatPassword: ''
+            })
           
     }).catch(err=>{
         console.log(err);
-        setmessage(err)
+        setmessage("Invalid Password")
 
     })
     //console.log(message)
-    console.log(values)
-    setErrors(validateLogin(values))
+    // console.log(values)
+    // setErrors(validateLogin(values))
 }
 
 
