@@ -5,6 +5,8 @@ import axios from "axios";
 function ForgotPasswordEmail() {
   const [emailValue, setEmail] = useState({ email: "" });
 
+  const [error, setError] = useState("");
+
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     try {
@@ -16,6 +18,7 @@ function ForgotPasswordEmail() {
       console.log("i am a response", response.data);
     } catch (error: any) {
       console.log(error.response.data, "res error");
+      setError(error.response.data.message);
     }
   };
 
@@ -46,6 +49,7 @@ function ForgotPasswordEmail() {
                 className="ForgotPasswordEmail_form-row-input"
               />
             </div>
+            {error && <p style={{ color: "red" }}>{error}</p>}
             <button type="submit" className="ForgotPasswordEmail_btn">
               Submit
             </button>

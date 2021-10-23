@@ -77,47 +77,68 @@ function App() {
     <div className="app">
       <BrowserRouter>
         <Switch>
-
           <Route
             exact
             path="/password/resetpassword/:token"
             component={ForgotPasswordReset}
           />
 
-          <ProtectedRoute path = "/home" exact component = {HomeComponent}/>
-          <ProtectedRoute path = "/:projectname/:projectid/:owner/task" component = {ProjectComponent}></ProtectedRoute>
-          <ProtectedRoute path = "/:projectname/:projectid/:owner/kanban" component = {ProjectComponent}></ProtectedRoute>
-          <ProtectedRoute path = "/:projectname/:projectid/:owner/activity" component = {ProjectComponent}></ProtectedRoute>
-          <ProtectedRoute path = "/:projectname/:projectid/:owner/calender" component = {ProjectComponent}></ProtectedRoute>
-          <ProtectedRoute path = "/:projectname/:projectid/:owner/files" component = {ProjectComponent}></ProtectedRoute>
-          <ProtectedRoute path = "/profile" exact component = {ProfileComponent}></ProtectedRoute>
-          <ProtectedRoute path = "/changepassword" exact component = {ProfileComponent}></ProtectedRoute>
-          <ProtectedRoute path = "/:projectid/:teamname/:teamid" component = {TeamComponent}></ProtectedRoute>
-          <Route path="/welcome/:userToken/" exact component={HomeComponent}></Route>
-
-
-
-
-
-
-
-
-
-
-
-
+          <ProtectedRoute path="/home" exact component={HomeComponent} />
+          <ProtectedRoute
+            path="/:projectname/:projectid/:owner/task"
+            component={ProjectComponent}
+          ></ProtectedRoute>
+          <ProtectedRoute
+            path="/:projectname/:projectid/:owner/kanban"
+            component={ProjectComponent}
+          ></ProtectedRoute>
+          <ProtectedRoute
+            path="/:projectname/:projectid/:owner/activity"
+            component={ProjectComponent}
+          ></ProtectedRoute>
+          <ProtectedRoute
+            path="/:projectname/:projectid/:owner/calender"
+            component={ProjectComponent}
+          ></ProtectedRoute>
+          <ProtectedRoute
+            path="/:projectname/:projectid/:owner/files"
+            component={ProjectComponent}
+          ></ProtectedRoute>
+          <ProtectedRoute
+            path="/profile"
+            exact
+            component={ProfileComponent}
+          ></ProtectedRoute>
+          <ProtectedRoute
+            path="/changepassword"
+            exact
+            component={ProfileComponent}
+          ></ProtectedRoute>
+          <ProtectedRoute
+            path="/:projectid/:teamname/:teamid"
+            component={TeamComponent}
+          ></ProtectedRoute>
+          <Route
+            path="/welcome/:userToken/"
+            exact
+            component={HomeComponent}
+          ></Route>
           <Route path="/login" exact component={Form}></Route>
           <ProtectedRoute path="/success" exact component={LoginSuccess} />
-          <Route path="/success/:userToken/" exact component={LoginSuccess}></Route>
+          <Route
+            path="/success/:userToken/"
+            exact
+            component={LoginSuccess}
+          ></Route>
           <Route path="/signup" exact component={SignUp}></Route>
           <Route path="/verify" exact component={Verify}></Route>
           <Route path="/signup" exact component={SignUp}></Route>
           <Route exact path="/forgotpassword" component={ForgotPasswordEmail} />
-           {/* <ProtectedRoute path="/changepassword" exact component={Password} /> */}
+          {/* <ProtectedRoute path="/changepassword" exact component={Password} /> */}
           <Route path="/welcome/:userToken/" exact component={Side}></Route>
           {/* <ProtectedRoute path="/:files" component={Side} /> */}
           {/* <Route path="/files/:test" exact>{notloggedIn ? <Redirect to="/login" /> : <FilesPage />}</Route> */}
-         
+
           {/* <ProtectedRoute path="/welcome" exact component={Side}></ProtectedRoute> */}
           {/* <Route path="/modal" exact component={ModalComp}></Route> */}
         </Switch>

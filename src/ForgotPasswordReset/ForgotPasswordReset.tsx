@@ -10,7 +10,9 @@ function ForgotPasswordReset() {
     newPassword: "",
     repeatPassword: "",
   });
-  console.log(passwordreset);
+
+  const [error, setError] = useState("");
+
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     try {
@@ -22,6 +24,7 @@ function ForgotPasswordReset() {
       console.log("i am a response", response.data);
     } catch (error: any) {
       console.log(error.response.data, "res error");
+      setError(error.response.data.message);
     }
   };
 
@@ -64,6 +67,7 @@ function ForgotPasswordReset() {
                 className="ForgotPasswordReset_form-row-input"
               />
             </div>
+            {error && <p style={{ color: "Red" }}>{error}</p>}
             <button type="submit" className="ForgotPasswordReset_btn">
               Submit
             </button>
