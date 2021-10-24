@@ -1,6 +1,4 @@
-import React from "react";
 import "./personalData.css";
-//import "./oluchi2.jpg";
 
 const person = {
   _id: "5b21ca3eeb7f6fbccd471815",
@@ -13,7 +11,7 @@ const person = {
 };
 function PersonalData() {
   return (
-    <div className="main-container">
+    <div className="main-container-personal">
       <div className="first-division">
         <div className="sub-main">
           <div className="avatar">
@@ -37,7 +35,7 @@ function PersonalData() {
         </div>
       </div>
       <hr />
-      <div className="task-container">
+      <div className="task-container-personal">
         <div className="closed-task">
           <h1>400</h1>
           <br />

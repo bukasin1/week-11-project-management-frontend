@@ -1,0 +1,98 @@
+.main {
+  /* display: flex; */
+  background: #f2f2f2;
+  padding-top: 10px;
+}
+.home-main-container {
+  /* border: 1px solid red; */
+
+  padding: 10px;
+  /* flex: 2.5; */
+  margin-top: 10px;
+}
+.email-confirmation {
+  /* flex: 1; */
+  /* background: #ffffff; */
+  /* border-radius: 8px; */
+  border: 1px solid black;
+  margin: 10px 20px;
+  background: #fff1e2;
+  border-radius: 8px;
+  padding: 10px;
+}
+.Top {
+  /* border: 1px solid blue; */
+  display: flex;
+  border-radius: 8px;
+  background: white;
+  margin: 10px;
+  padding: 10px;
+}
+.number-of-tasks {
+  /* border: 1px solid palegoldenrod; */
+  flex: 1;
+}
+.tsks-logo {
+  /* border: 1px solid palevioletred; */
+  flex: 1;
+}
+.Middle {
+  /* border: 1px solid yellow; */
+  border-radius: 8px 8px 0px 0px;
+  background: white;
+  margin: 10px;
+}
+.middle-content {
+  background: #f7f6f3;
+  border-radius: 10px;
+  margin: 10px 5px;
+  padding: 10px;
+}
+.today-task-main {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 10px;
+  margin: 10px 10px;
+  /* border: 1px solid goldenrod; */
+}
+.add-button > button {
+  /* flex: 1; */
+  border: none;
+  border-radius: 20px;
+  background-color: #cef9c6;
+}
+.today-task {
+  /* flex: 1; */
+  font-size: 24px;
+  font-weight: 500;
+  font-style: bold;
+  /* border: 1px solid pink; */
+}
+.middle-content-container {
+  padding: 10px;
+}
+.Bottom {
+  margin: 10px;
+  /* border: 1px solid green; */
+  background: white;
+  border-radius: 8px 8px 0px 0px;
+}
+.bottom-content {
+  background: #f7f6f3;
+  border-radius: 10px;
+  margin: 10px 5px;
+  padding: 10px;
+}
+.pending-task {
+  font-size: 24px;
+  font-weight: 500;
+  font-style: bold;
+}
+.bottom-content-container {
+  padding: 10px 10px;
+}
+
+.pending-task-main {
+  padding: 20px 10px;
+  margin: 10px 10px;
+}

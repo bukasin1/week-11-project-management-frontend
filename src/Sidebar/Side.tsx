@@ -15,8 +15,6 @@ import TeamData from "../teams/teamsData";
 // import Profile from "./profile";
 
 function Side(props: any) {
-  const path = props.location.pathname;
-
   const { userToken, projectname, projectid } = useParams() as any;
   let loggedUser: any;
   if (userToken) {
