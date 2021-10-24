@@ -6,33 +6,150 @@ import SearchIcon from "@mui/icons-material/Search";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Navbar, ProjectNavbar, ProfileNavbar } from "./navbar";
 import "./Side.css";
-import { ModalComp } from "./Mod";
+import { ProjectModalComp, TeamModalComp } from "./Mod";
 import MainContent from "./mainContent";
 import { FilesPage } from "../filesPage/files";
 import Password from "../ChangePassword/Password";
+import axios from "axios";
 import TeamData from "../teams/teamsData";
-//import Password from "../ChangePassword/Password"
 // import Profile from "./profile";
+
+export interface ITask {
+  [x: string]: any;
+  title: string;
+  projectID: string;
+  assignedUser: string;
+  description: string;
+  files: [file];
+  comments: [iComment];
+  dueDate: Date;
+  status: string;
+}
+
+export interface file {
+  _id?: string;
+  fileUrl: string;
+  fileName: string;
+  uploadedBy: {
+    userId: string;
+    userName?: string;
+    userAvatar?: string;
+  };
+  fileSize: string;
+  uploadedOn: number;
+}
+
+export interface iComment {
+  _id?: string;
+  id?: string;
+  createdBy: {
+    userId: string;
+    userName: string;
+  };
+  content: string;
+  createdOn: number;
+  updatedOn?: number;
+}
+
+export interface userProject {
+  projectId?: string;
+  projectName?: string;
+  owner: boolean;
+}
+
+export interface userType {
+  _id?: string;
+  firstname?: string;
+  lastname?: string;
+  email?: string;
+  password?: string;
+  gender?: string;
+  role?: string;
+  location?: string;
+  projects?: Array<userProject>;
+  teams?: string[];
+  about?: string;
+  isVerified?: boolean;
+  avatar?: string;
+  resetpasswordtoken?: string;
+  resetpasswordexpires?: string;
+  facebookId?: string;
+  googleId?: string;
+  closedTasks: ITask[];
+  openedTasks: ITask[];
+}
 
 function Side(props: any) {
   const { userToken, projectname, projectid } = useParams() as any;
-  let loggedUser: any;
+  let loggedUser: userType;
   if (userToken) {
     console.log(userToken);
-    const user = userToken.split("~").slice(1).join("~");
+    const userFromToken = userToken.split("~").slice(1).join("~");
     const token = userToken.split("~")[0];
-    loggedUser = JSON.parse(user);
+    loggedUser = JSON.parse(userFromToken);
     localStorage.setItem("token", token);
-    localStorage.setItem("user", user);
+    localStorage.setItem("user", userFromToken);
   }
   loggedUser = JSON.parse(localStorage.getItem("user") as string);
+  const preUser = { closedTasks: [], openedTasks: [] } as userType;
+  const [profile, setProfile] = useState<userType>(preUser);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token") as string;
+    axios
+      .request({
+        url: "https://jaraaa.herokuapp.com/profile",
+        method: "get",
+        headers: { authorization: token },
+        withCredentials: true,
+      })
+      .then((res: any) => {
+        console.log(res.data);
+        // setName(`${res.data.user.firstname} ${res.data.user.lastname}`);
+        setProfile(res.data.sendUser);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const [projects, setProjects] = useState<any[]>([]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    fetch(`https://jaraaa.herokuapp.com/profile/getprojects`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data.msg) {
+          console.log("Major:", data);
+          setProjects(data);
+        } else {
+          console.log(data.user, " project data");
+          setProjects(data);
+        }
+        // window.location.href = "/success"
+      })
+      .catch((err) => {
+        console.log(err.response, "error");
+      });
+  }, []);
+
+  console.log(projects, "projects found");
+
+  console.log(loggedUser, "logged user");
 
   const [project, setProject] = useState<{
     projectId: string;
     projectName: string;
-  }>({ projectId: "", projectName: "" });
+    owner: boolean;
+  }>({ projectId: "", projectName: "", owner: false });
   const [teamId, setTeamId] = useState("");
-  const [profile, setProfile] = useState("");
   if (project) console.log(project, "project");
   interface ITeam {
     _id: string;
@@ -76,20 +193,27 @@ function Side(props: any) {
     console.log("The id of a team: ", teamId);
   }, [teamId]);
 
-  const [modalIsOpen, setIsOpen] = useState<boolean>(false);
+  const [projectModalIsOpen, setProjectIsOpen] = useState<boolean>(false);
+  const [teamModalIsOpen, setTeamIsOpen] = useState<boolean>(false);
 
-  function openModal() {
-    setIsOpen(true);
+  function openProjectModal() {
+    setProjectIsOpen(true);
+  }
+
+  function openTeamModal() {
+    setTeamIsOpen(true);
   }
 
   function closeModal() {
-    setIsOpen(false);
+    setProjectIsOpen(false);
+    setTeamIsOpen(false);
   }
 
   function openProject(e: any) {
     setProject({
       projectId: project.projectId,
       projectName: project.projectName,
+      owner: false,
     });
     window.location.href = "/welcome";
   }
@@ -118,7 +242,7 @@ function Side(props: any) {
             onClick={(e) => {
               window.location.href = `/profile`;
               setProfile(loggedUser);
-              setProject({ projectId: "", projectName: "" });
+              setProject({ projectId: "", projectName: "", owner: false });
             }}
             className="profile_sidebar"
           >
@@ -126,14 +250,19 @@ function Side(props: any) {
             <IconButton>
               <Avatar
                 style={{ width: "55px", height: "55px" }}
-                src={loggedUser.avatar}
+                src={profile.avatar}
               />
             </IconButton>
             <div>
               <p className="sidebar_name">
-                {loggedUser.firstname} {loggedUser.lastname}
+                {profile.firstname} {profile.lastname}
               </p>
-              <h5 className="product_name">{loggedUser.role}</h5>
+              {props.owner === "true" ? (
+                <h5 className="product_name">Project Owner</h5>
+              ) : (
+                <h5 className="product_name">{profile.role}</h5>
+              )}
+              {/* <h5 className="product_name">{profile.role}</h5> */}
             </div>
             <IconButton>
               <MoreHorizIcon style={{ fill: "#878787" }} />
@@ -142,11 +271,11 @@ function Side(props: any) {
           </div>
           <div className="Task">
             <div className="completed_Task">
-              <h1>{loggedUser.closedTasks.length}</h1>
+              <h1>{profile.closedTasks.length}</h1>
               <h5 className="task_text">Completed Tasks</h5>
             </div>
             <div className="open_Task">
-              <h1>{loggedUser.openedTasks.length}</h1>
+              <h1>{profile.openedTasks.length}</h1>
               <h5 className="task_text">Open Tasks</h5>
             </div>
           </div>
@@ -164,16 +293,17 @@ function Side(props: any) {
             <div className="Menu_projects_d">
               <h4 className="project">PROJECTS</h4>
             </div>
-            {loggedUser.projects.map((project: any) => (
+            {profile.projects?.map((project) => (
               // <a href={project.projectName}>
               <div
                 onClick={(e) => {
-                  window.location.href = `/${project.projectName}/${project.projectId}/task`;
+                  window.location.href = `/${project.projectName}/${project.projectId}/${project.owner}/task`;
                   setProject({
-                    projectId: project.projectId,
-                    projectName: project.projectName,
+                    projectId: project.projectId as string,
+                    projectName: project.projectName as string,
+                    owner: project.owner,
                   });
-                  setProfile("");
+                  setProfile(preUser);
                 }}
               >
                 {" "}
@@ -182,7 +312,7 @@ function Side(props: any) {
               // </a>
             ))}
           </div>
-          <div onClick={openModal} className="addProject">
+          <div onClick={openProjectModal} className="addProject">
             +Add a Project
           </div>
           <div className="Team_projects">
@@ -211,7 +341,7 @@ function Side(props: any) {
             ))}
           </div>
           {projectid && (
-            <div onClick={openModal} className="addTeam">
+            <div onClick={openTeamModal} className="addTeam">
               +Add a Team
             </div>
           )}
@@ -221,8 +351,14 @@ function Side(props: any) {
         </div>
       </div>
 
-      {modalIsOpen && (
-        <ModalComp setIsOpen={setIsOpen} closeModal={closeModal} />
+      {projectModalIsOpen && (
+        <ProjectModalComp
+          setIsOpen={setProjectIsOpen}
+          closeModal={closeModal}
+        />
+      )}
+      {teamModalIsOpen && (
+        <TeamModalComp setIsOpen={setTeamIsOpen} closeModal={closeModal} />
       )}
     </>
   );

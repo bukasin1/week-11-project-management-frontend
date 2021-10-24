@@ -1,24 +1,40 @@
 /* body {
   display: flex;
 } */
+/* ::-webkit-scrollbar {
+  width: 700px;
+} */
+/*
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+} */
 
 .profile-container {
   background-color: white;
-  height: 700px;
-  width: 500px;
+  height: 580px;
+  width: 45%;
   border-radius: 5px;
   font-size: 12px;
   font-weight: 600;
-  margin-left: 70%;
-  margin-top: 30px;
+  margin-left: 300px;
+  margin-top: 20px;
+  /* display: block; */
+ 
+  /* overflow-y: auto; */
 }
 .profile-imgwrap {
   /* display: flex;
   justify-content: center;
   align-items: center; */
   margin: auto;
-  width: 120px;
-  height: 120px;
+  width: 60px;
+  height: 60px;
   margin-bottom: 15px;
 }
 img {
@@ -35,22 +51,33 @@ img {
   width: 400px;
   margin: auto;
   margin-top: 20px;
+  margin-right: 57px;
 }
-
 .profile-input {
-  height: 40px;
-  width: 400px;
+  /* height: 40px;
+  width: 100%;
   display: block;
-  margin-top: 6px;
-  margin-bottom: 6px;
+  margin-bottom: 20px;
   border: 0px solid #fff;
   background-color: #eaeaea;
   border-radius: 8px;
-}
+  padding: 1px;
+  padding-left: 10px;
+  margin:auto; */
+  height: 25px;
 
+  width: 400px;
+  /* margin: auto; */
+  background-color: #eaeaea;
+  border-radius: 7px;
+  /* margin-bottom: 20px; */
+  margin-top: 5px;
+  padding: 8px;
+ 
+}
 .profile-about {
   display: block;
-  height: 90px;
+  height: 60px;
   justify-content: center;
   width: 400px;
   margin: auto;
@@ -59,6 +86,7 @@ img {
   border-radius: 7px;
   margin-bottom: 20px;
   margin-top: 6px;
+  padding: 7px;
 }
 .profile-button {
   display: block;
@@ -71,26 +99,22 @@ img {
   cursor: pointer;
   border: none;
 }
-.profile-button:hover {background-color: #bff0c0}
-
+.profile-button:hover {
+  background-color: #bff0c0;
+}
 .profile-button:active {
   background-color: #cef9c6;
   box-shadow: 0 0px #cef9c6;
-  transform: translateY(1px);
 }
-
 .profile-cancel {
   margin: auto;
   align-content: center;
   text-align: center;
   cursor: pointer;
 }
-
-
 .cancel {
   margin-top: 8px;
 }
-
 .profile-div {
   background-color: #eaeaea;
   height: 40px;
@@ -99,10 +123,13 @@ img {
   margin-top: 6px;
   margin-bottom: 6px;
 }
-
 .teams {
   background-color: white;
   height: 25px;
   width: 100px;
   margin-top: 6px;
+}
+.input-content{
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
