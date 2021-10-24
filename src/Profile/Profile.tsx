@@ -97,13 +97,12 @@ export default function Profile() {
       });
   };
   return (
-    
     <form onSubmit={submitHandler} className="profile-container">
       <div className="profile-imgwrap">
-        <img src={fine}></img>
+        <img className="profile-img" src={fine}></img>
       </div>
       <div className="small-container">
-        <div className= 'input-content'>
+        <div className="input-content">
           Name
           <input
             value={name}
@@ -112,7 +111,7 @@ export default function Profile() {
             className="profile-input"
           />
         </div>
-        <div className= 'input-content'>
+        <div className="input-content">
           Role
           <input
             value={role}
@@ -121,7 +120,7 @@ export default function Profile() {
             className="profile-input"
           />
         </div>
-        <div className= 'input-content'>
+        <div className="input-content">
           Gender
           <input
             value={gender}
@@ -130,7 +129,7 @@ export default function Profile() {
             className="profile-input"
           />
         </div>
-        <div className= 'input-content'>
+        <div className="input-content">
           Location
           <input
             value={location}
@@ -147,7 +146,7 @@ export default function Profile() {
             </div>
           </div>
         </div> */}
-        <div className= 'input-content'>
+        <div className="input-content">
           About
           <textarea
             value={about}
