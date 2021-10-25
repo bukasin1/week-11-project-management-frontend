@@ -1,7 +1,9 @@
-.main {
+.main-homepage {
   /* display: flex; */
+
   background: #f2f2f2;
   padding-top: 10px;
+  width: 100%;
 }
 .home-main-container {
   /* border: 1px solid red; */
@@ -36,6 +38,11 @@
   /* border: 1px solid palevioletred; */
   flex: 1;
 }
+.task-logo-home {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+}
 .Middle {
   /* border: 1px solid yellow; */
   border-radius: 8px 8px 0px 0px;
@@ -49,8 +56,8 @@
   padding: 10px;
 }
 .today-task-main {
-  display: flex;
-  justify-content: space-between;
+  /* display: flex; */
+  /* justify-content: space-between; */
   padding: 20px 10px;
   margin: 10px 10px;
   /* border: 1px solid goldenrod; */
@@ -95,4 +102,10 @@
 .pending-task-main {
   padding: 20px 10px;
   margin: 10px 10px;
+}
+.no-task-today {
+  margin-left: 10px;
+}
+.no-task-pending {
+  margin-left: 10px;
 }
