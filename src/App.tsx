@@ -15,6 +15,7 @@ import HomeComponent from './Sidebar/Home';
 import ProjectComponent from './Sidebar/ProjectComp';
 import ProfileComponent from './Sidebar/ProfileComp';
 import TeamComponent from './Sidebar/teamComponent';
+import Maintask from './Tasks/Maintask';
 
 export function ProtectedRoute(props: any) {
   const token = localStorage.getItem('token')
@@ -81,6 +82,11 @@ function App() {
             exact
             path="/password/resetpassword/:token"
             component={ForgotPasswordReset}
+          />
+          <Route
+            exact
+            path="/maintask"
+            component={Maintask}
           />
 
           <ProtectedRoute path="/home" exact component={HomeComponent} />
