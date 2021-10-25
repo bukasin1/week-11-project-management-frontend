@@ -20,7 +20,7 @@ body {
     width: 300px;
     background-color: #000; 
     color: #fff;
-    position: absolute;
+    position: fixed;
     height: 145vh;
     overflow: scroll;
   }
