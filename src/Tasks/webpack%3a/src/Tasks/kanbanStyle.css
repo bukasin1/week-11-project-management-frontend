@@ -1,0 +1,82 @@
+.Kanban_Container {
+    width: 30vw;
+    max-height: 100vh;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+ 
+   
+  }
+  
+  .Kanban_top-most {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+
+  }
+  
+  .Kanban_add-task {
+    border-radius: 20px;
+    padding: 8px;
+    background-color: aquamarine;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .Kanban_Info-container{
+      display: flex;
+      justify-content: space-between;
+      background-color: #F7F6F3;
+      border-radius: 10px;
+      height: 20%;
+      width: 90%;
+      margin: 0 auto;
+      margin-top:1rem ;
+      margin-bottom: 2rem;
+    }
+    .Kanban_Info_paragraph{
+        font-weight: bold;
+    }
+    
+    .Kanban_Info_left{
+        align-items: center;
+        margin-top: 3rem;
+    }
+    .Kanban_Info_checkbox{
+        width: 1.3rem;
+        height: 1.3rem;
+      
+    }
+    .Kanban_Info_right{
+        display: flex;
+        flex-direction: column;
+       justify-content: center;
+        width: 20rem;
+    }
+    .Kanban_Info_bottom{
+        display: flex;
+        align-items: center;
+    }
+  .Kanban_Info_bottom-image{
+      height: 2rem;
+      width: 2rem;
+      border-radius: 50%;
+  }
+
+  .Kanban_Info_paragraph_container{
+         display: flex;
+    align-items: flex-start;
+    margin: 10px 5px;
+  }
+  .Kanban_Info_bottom-content{
+     padding: 0.3rem;
+      font-weight: bold;
+      border-radius: 1rem;
+      background-color: pink;
+      margin-left: 0.5rem;
+  }
