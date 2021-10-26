@@ -2,6 +2,7 @@ import { useParams } from "react-router";
 import { useState } from "react";
 import axios from "axios";
 import "./ForgotPasswordReset.css";
+import { Link } from "react-router-dom";
 
 function ForgotPasswordReset() {
   const { token }: any = useParams();
@@ -10,7 +11,10 @@ function ForgotPasswordReset() {
     newPassword: "",
     repeatPassword: "",
   });
-  console.log(passwordreset);
+
+  const [errorMessage, seterrorMessage] = useState("");
+  const [successMessage, setsuccessMessage] = useState(false);
+
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     try {
@@ -20,8 +24,11 @@ function ForgotPasswordReset() {
       );
       setPasswordReset({ newPassword: "", repeatPassword: "" });
       console.log("i am a response", response.data);
+      setsuccessMessage(true);
+      console.log(successMessage);
     } catch (error: any) {
       console.log(error.response.data, "res error");
+      seterrorMessage(error.response.data.message);
     }
   };
 
@@ -46,6 +53,7 @@ function ForgotPasswordReset() {
               <input
                 type="password"
                 name="newPassword"
+                minLength={6}
                 value={passwordreset.newPassword}
                 onChange={handleChange}
                 className="ForgotPasswordReset_form-row-input"
@@ -59,11 +67,20 @@ function ForgotPasswordReset() {
               <input
                 type="password"
                 name="repeatPassword"
+                minLength={6}
                 onChange={handleChange}
                 value={passwordreset.repeatPassword}
                 className="ForgotPasswordReset_form-row-input"
               />
             </div>
+            {errorMessage && <p style={{ color: "Red" }}>{errorMessage}</p>}
+            {successMessage && (
+              <p style={{ color: "black" }}>
+                {" "}
+                Password has been successfully reset. Click this{" "}
+                <Link to={"/login"}>link</Link> to login
+              </p>
+            )}
             <button type="submit" className="ForgotPasswordReset_btn">
               Submit
             </button>

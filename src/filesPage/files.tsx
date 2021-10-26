@@ -10,7 +10,7 @@ export const FilesPage = (props:any) => {
     { _id: 'test', fileName: "test", fileUrl: './logo512.png', uploadedBy:{userName: "test"}, uploadedOn: 'date' },
     { _id: 'test', fileName: "test", fileUrl: './logo512.png', uploadedBy:{userName: "test"}, uploadedOn: 'date' },
     { _id: 'test', fileName: "test", fileUrl: './logo512.png', uploadedBy:{userName: "test"}, uploadedOn: 'date' }]
-    const [files, setFiles] = useState(testFiles)
+    const [files, setFiles] = useState([])
 
     const {} = useParams()
     console.log(useParams())

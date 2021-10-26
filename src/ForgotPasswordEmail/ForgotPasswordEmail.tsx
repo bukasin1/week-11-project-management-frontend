@@ -3,7 +3,11 @@ import { useState } from "react";
 import axios from "axios";
 
 function ForgotPasswordEmail() {
-  const [emailValue, setEmail] = useState({ email: "" });
+  const [emailValue, setEmail] = useState<{ email: string; message?: string }>({
+    email: "",
+    message: "",
+  });
+  const [message, setMessage] = useState("");
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -14,8 +18,10 @@ function ForgotPasswordEmail() {
       );
       setEmail({ email: "" });
       console.log("i am a response", response.data);
+      setMessage(response.data.message as string);
     } catch (error: any) {
       console.log(error.response.data, "res error");
+      setMessage(error.response.data.message);
     }
   };
 
@@ -41,11 +47,13 @@ function ForgotPasswordEmail() {
               <input
                 type="email"
                 name="email"
+                minLength={6}
                 value={emailValue.email}
                 onChange={handleChange}
                 className="ForgotPasswordEmail_form-row-input"
               />
             </div>
+            {message && <p style={{ color: "red" }}>{message}</p>}
             <button type="submit" className="ForgotPasswordEmail_btn">
               Submit
             </button>

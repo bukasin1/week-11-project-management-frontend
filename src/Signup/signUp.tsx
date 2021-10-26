@@ -2,6 +2,8 @@ import axios from "axios";
 import './Signup.css'
 import { useRef, useState } from "react"
 import { Link } from "react-router-dom";
+import Facebook from './facebook.svg'
+import Google from './google.svg'
 
 function SignUp() {
   const [message, setmessage] = useState('')
@@ -34,18 +36,18 @@ function SignUp() {
 
   }
   return (
-    <div className="container">
+    <div className="signup-container">
       <div className="header">
-        <div className="firstDivElement">
+        <div className="firstDivElement1">
           <div className="mark"></div>
-          <div className="dash"></div>
+          <div className="dash1"></div>
         </div>
-        <div className="secondDivElement">
+        <br/>
           <div className="mark"></div>
-          <div className="mark_dash"></div>
-        </div>
+          <div className="dash1"></div>
+          <hr className="horiz" />
       </div>
-      <div className="divider"></div>
+      
       <form className="form_body" onSubmit={handler} ref={nameForm}>
         <div className="body_info">
           <label className="form_label" htmlFor="firstname">
@@ -75,15 +77,20 @@ function SignUp() {
           <label className="form_label" htmlFor="repeatedPassword">
             Repeat Password
           </label>
-          <input type="password" name="password2" className="form_input" />
+          <input  type="password" className="form_input" name="password2"  required/>
         </div>
         <h5 className="error_mssg"> {!validate ? message : validate}</h5>
-        <button type="submit">
+        <div>
+        <button type="submit" className = 'signup-button ' >
           Sign Up
         </button>
-        <p>"Already have an account? <Link to={"/login"}>Login" </Link> </p>
-        <div className="footer">
-          <button><a href="https://jaraaa.herokuapp.com/auth/google">Use Google Account</a></button>
+        </div>
+        <p className = 'signup-p'>"Already have an account?  <Link to= {"/login"}> Login" </Link> </p>
+        <div className="button-footer">
+        <img src = {Google} className = 'signup-google' />
+          <button className="button-google"><a href="https://jaraaa.herokuapp.com/auth/google">Use Google</a></button>
+          <img src = {Facebook} className = 'signup-facebook'/>
+          <button className="button-facebook"><a href="https://jaraaa.herokuapp.com/auth/facebook">Use Facebook</a></button>
         </div>
 
       </form>

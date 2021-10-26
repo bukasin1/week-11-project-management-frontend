@@ -60,11 +60,11 @@ export function ProjectNavbar(props: any) {
     window.location.href = "/login"
   }
 
-  const pathToFiles = `/${props.project.projectname}/${props.project.projectid}/files`
-  const pathToTask = `/${props.project.projectname}/${props.project.projectid}/task`
-  const pathToKanban = `/${props.project.projectname}/${props.project.projectid}/kanban`
-  const pathToActivity = `/${props.project.projectname}/${props.project.projectid}/activity`
-  const pathToCalender = `/${props.project.projectname}/${props.project.projectid}/calender`
+  const pathToFiles = `/${props.project.projectname}/${props.project.projectid}/${props.project.owner}/files`
+  const pathToTask = `/${props.project.projectname}/${props.project.projectid}/${props.project.owner}/task`
+  const pathToKanban = `/${props.project.projectname}/${props.project.projectid}/${props.project.owner}/kanban`
+  const pathToActivity = `/${props.project.projectname}/${props.project.projectid}/${props.project.owner}/activity`
+  const pathToCalender = `/${props.project.projectname}/${props.project.projectid}/${props.project.owner}/calender`
 
   return (
     <div className = "nav-fixed">

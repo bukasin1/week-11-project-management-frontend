@@ -39,7 +39,10 @@ margin-top: 25px;
     width: 350px;
     margin-top: 10px;
     margin-bottom: 10px;
-    padding: 5px;
+    padding: 15px;
+    background-color: rgba(234,234,234,1);
+    border-radius: 6px;
+    border:none;
 }
 .btn-cancel{
 font-family: Heebo;
@@ -50,4 +53,8 @@ line-height: 21px;
 /* identical to box height */
 text-align: center;
 color: #131313;
+}
+
+.message-error{
+    margin-top: 40px;
 }
