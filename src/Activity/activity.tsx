@@ -79,7 +79,7 @@ export function ActivityPage(props: any) {
                         }
                         if (activity.commentDetails) {
                             return (
-                                <div className="each-activity">
+                                <div key = {activity.id} className="each-activity">
                                     <div className="comment-div">
                                         <div className="comment">
                                             <img src="/IconComment-icon.png" alt="" />
@@ -101,7 +101,7 @@ export function ActivityPage(props: any) {
                             )
                         } else {
                             return (
-                                <div className="each-activity">
+                                <div key = {activity.id} className="each-activity">
                                     <div className="comment-div">
                                         <div className="task-activity">
                                             <img src="/Iconmark.png" alt="" />
@@ -135,7 +135,7 @@ export function ActivityPage(props: any) {
                         }
                         if (activity.commentDetails) {
                             return (
-                                <div className="each-activity">
+                                <div key = {activity.id} className="each-activity">
                                     <div className="comment-div">
                                         <div className="comment">
                                             <img src="/IconComment-icon.png" alt="" />
@@ -157,7 +157,7 @@ export function ActivityPage(props: any) {
                             )
                         } else {
                             return (
-                                <div className="each-activity">
+                                <div key = {activity.id} className="each-activity">
                                     <div className="comment-div">
                                         <div className="task-activity">
                                             <img src="/Iconmark.png" alt="" />

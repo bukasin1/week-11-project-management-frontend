@@ -51,6 +51,7 @@ export interface iComment {
 }
 
 export interface userProject {
+  id?: string;
   projectId?: string;
   projectName?: string;
   owner: boolean;
@@ -276,7 +277,7 @@ function Side(props: any) {
             </div>
             {profile.projects?.map((project) => (
               // <a href={project.projectName}>
-              <div onClick={e => {
+              <div key = {project.id} onClick={e => {
                 window.location.href = `/${project.projectName}/${project.projectId}/${project.owner}/task`
                 setProject({ projectId: project.projectId as string, projectName: project.projectName as string, owner: project.owner })
                 setProfile(preUser)
@@ -291,12 +292,12 @@ function Side(props: any) {
             </div>
 
             {teams.map(team => (
-              <div onClick={e =>{ 
-              window.location.href = `/${projectid}/${team.teamName}/${team._id}`
+              <div key = {team._id} onClick={e =>{ 
+              window.location.href = `/${projectid}/${team.teamName}/${team._id}/${props.owner}`
               setTeamId(team._id)}} 
               className="backend">{team.teamName}
                 {team.members.map(member => (
-                  <IconButton>
+                  <IconButton key = {member.userId}>
                     <Avatar
                       style={{ width: "25px", height: "25px" }}
                       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHZx41E6X-WX4Q7rru7Ut0tRUHgdkJn-qTDg&usqp=CAU"

@@ -8,7 +8,7 @@ import { useParams } from "react-router";
 
 export default function TeamComponent(props: any) {
     const path = props.location.pathname;
-    const {projectid, teamname, teamid}: {projectid: string,teamname: string, teamid: string} = useParams()
+    const {projectid, teamname, teamid, owner}: {projectid: string,teamname: string, teamid: string, owner: string} = useParams()
     const team = {
         teamname ,
         teamid
@@ -18,7 +18,7 @@ export default function TeamComponent(props: any) {
     return (
         <>
 
-            <Side projectId = {projectid} />
+            <Side projectId = {projectid} owner = {owner} />
             <div className="content">
 
                 <TeamNavbar team = {team} />

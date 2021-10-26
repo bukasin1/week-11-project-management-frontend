@@ -115,7 +115,7 @@ function App() {
             component={ProfileComponent}
           ></ProtectedRoute>
           <ProtectedRoute
-            path="/:projectid/:teamname/:teamid"
+            path="/:projectid/:teamname/:teamid/:owner"
             component={TeamComponent}
           ></ProtectedRoute>
           <Route

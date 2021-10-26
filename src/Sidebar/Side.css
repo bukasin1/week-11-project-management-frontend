@@ -254,6 +254,7 @@ body {
     height: 110px;
     width: 80vw;
     background-color: #fff;
+    z-index: 2;
   }
 
   .navbar_content{
@@ -313,8 +314,8 @@ body {
   .test {
     /* background-color: red; */
     max-width: 100%;
-    max-height: 100vh;
-    overflow: scroll;
+    /* max-height: 100vh; */
+    /* overflow: scroll; */
     margin-top: 100px;
     /* margin-left: 100px; */
     /* margin-right: 100px; */
