@@ -2,6 +2,7 @@ import { useParams } from "react-router";
 import { FilesPage } from "../filesPage/files";
 import Kanban from "../Tasks/Kanban";
 import { Navbar, ProjectNavbar } from "./navbar";
+import KanbanAndMainTaks from "../Tasks/KanbanAndMainTask";
 import Side from "./Side";
 
 export default function ProjectComponent(props: any) {
@@ -25,7 +26,7 @@ export default function ProjectComponent(props: any) {
         <ProjectNavbar project={project} />
         <div className="test">
           {path.includes("files") && <FilesPage project={project.projectid} />}
-          {path.includes("task") && <Kanban />}
+          {path.includes("task") && <KanbanAndMainTaks />}
           {/* {path.includes('kanban') && <FilesPage />} */}
         </div>
       </div>
