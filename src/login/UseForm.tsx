@@ -37,8 +37,8 @@ const handleSubmit = async (e: { preventDefault: () => void }) => {
           
         
     }).catch(err=>{
-        console.log(err.response.data.message);
-        setmessage("Error: "+err.response.data.message)
+        console.log(err.response.data.msg);
+        setmessage("Error: " + err.response.data.msg)
 
     })
     //console.log(message)
