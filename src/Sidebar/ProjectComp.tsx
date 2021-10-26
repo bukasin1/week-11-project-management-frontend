@@ -1,7 +1,6 @@
 import { useParams } from "react-router";
 import { FilesPage } from "../filesPage/files";
 import Kanban from "../Tasks/Kanban";
-// import Kanban from "../Tasks/Kanban";
 import { Navbar, ProjectNavbar } from "./navbar";
 import Side from "./Side";
 

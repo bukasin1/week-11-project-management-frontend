@@ -1,7 +1,8 @@
 import "./kanbanStyle.css";
 import person from "./businessman-png.png";
-import { FC } from "react";
-
+import { FC, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 function generateRandomHexColor() {
   const colors = ["#F7F6F3", "#FFF8DD", "#EAEAEA"];
   const randomIndex = Math.floor(Math.random() * colors.length + 0);
@@ -20,6 +21,29 @@ function generateRandomFontColor() {
 }
 
 function Kanban() {
+  const { projectid }: any = useParams();
+  const [data, setData] = useState([]);
+  const [backlog, setBacklog] = useState();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token") as string;
+    axios
+      .request({
+        url: `https://jaraaa.herokuapp.com/tasks/${projectid}`,
+        method: "get",
+        headers: { authorization: token },
+        withCredentials: true,
+      })
+      .then((res: any) => {
+        console.log(res.data, "i am data haha");
+        const data = res.data;
+        setData(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <>
       <div className="Kanban_Container">
@@ -27,136 +51,68 @@ function Kanban() {
           <h2>Backlog</h2>
           <button className="Kanban_add-task">+ Add Task</button>
         </div>
-        <div
-          style={{ backgroundColor: generateRandomHexColor() }}
-          className="Kanban_Info-container"
-        >
-          <div className="Kanban_Info_right">
-            <div className="Kanban_Info_paragraph_container">
-              <div className="Kanban_Info_checkbox_container">
-                <input className="Kanban_Info_checkbox" type="checkbox" />
+        {data.map((obj: any) => {
+          return (
+            obj.status === "backlog" && (
+              <div
+                key={obj._id}
+                style={{ backgroundColor: generateRandomHexColor() }}
+                className="Kanban_Info-container"
+              >
+                <div className="Kanban_Info_right">
+                  <div className="Kanban_Info_paragraph_container">
+                    <div className="Kanban_Info_checkbox_container">
+                      <input className="Kanban_Info_checkbox" type="checkbox" />
+                    </div>
+                    <p className="Kanban_Info_paragraph">{obj.title}</p>
+                  </div>
+                  <div className="Kanban_Info_bottom">
+                    <div className="Kanban_Info_bottom-image_container">
+                      <img
+                        className="Kanban_Info_bottom-image"
+                        src={obj.AssignedUserAvatar}
+                      />
+                    </div>
+                    <TaskTag tag={obj.AssaignedUserName} />
+                  </div>
+                </div>
               </div>
-              <p className="Kanban_Info_paragraph">
-                E-mail after registration so that I can confirm my address
-              </p>
-            </div>
-            <div className="Kanban_Info_bottom">
-              <div className="Kanban_Info_bottom-image_container">
-                <img className="Kanban_Info_bottom-image" src={person} />
-              </div>
-              <TaskTag tag="APEX " />
-            </div>
-          </div>
-        </div>
-        <div
-          style={{ backgroundColor: generateRandomHexColor() }}
-          className="Kanban_Info-container"
-        >
-          <div className="Kanban_Info_right">
-            <div className="Kanban_Info_paragraph_container">
-              <div className="Kanban_Info_checkbox_container">
-                <input className="Kanban_Info_checkbox" type="checkbox" />
-              </div>
-              <p className="Kanban_Info_paragraph">
-                E-mail after registration so that I can confirm my address
-              </p>
-            </div>
-            <div className="Kanban_Info_bottom">
-              <div className="Kanban_Info_bottom-image_container">
-                <img className="Kanban_Info_bottom-image" src={person} />
-              </div>
-              <TaskTag tag="APEX " />
-            </div>
-          </div>
-        </div>
-        <div
-          style={{ backgroundColor: generateRandomHexColor() }}
-          className="Kanban_Info-container"
-        >
-          <div className="Kanban_Info_right">
-            <div className="Kanban_Info_paragraph_container">
-              <div className="Kanban_Info_checkbox_container">
-                <input className="Kanban_Info_checkbox" type="checkbox" />
-              </div>
-              <p className="Kanban_Info_paragraph">
-                E-mail after registration so that I can confirm my address
-              </p>
-            </div>
-            <div className="Kanban_Info_bottom">
-              <div className="Kanban_Info_bottom-image_container">
-                <img className="Kanban_Info_bottom-image" src={person} />
-              </div>
-              <TaskTag tag="APEX " />
-            </div>
-          </div>
-        </div>
+            )
+          );
+        })}
         <div className="Kanban_top-most">
-          <h2>Backlog</h2>
+          <h2>to Do</h2>
           <button className="Kanban_add-task">+ Add Task</button>
         </div>
-        <div
-          style={{ backgroundColor: generateRandomHexColor() }}
-          className="Kanban_Info-container"
-        >
-          <div className="Kanban_Info_right">
-            <div className="Kanban_Info_paragraph_container">
-              <div className="Kanban_Info_checkbox_container">
-                <input className="Kanban_Info_checkbox" type="checkbox" />
+        {data.map((obj: any) => {
+          return (
+            obj.status === "todo" && (
+              <div
+                key={obj._id}
+                style={{ backgroundColor: generateRandomHexColor() }}
+                className="Kanban_Info-container"
+              >
+                <div className="Kanban_Info_right">
+                  <div className="Kanban_Info_paragraph_container">
+                    <div className="Kanban_Info_checkbox_container">
+                      <input className="Kanban_Info_checkbox" type="checkbox" />
+                    </div>
+                    <p className="Kanban_Info_paragraph">{obj.title}</p>
+                  </div>
+                  <div className="Kanban_Info_bottom">
+                    <div className="Kanban_Info_bottom-image_container">
+                      <img
+                        className="Kanban_Info_bottom-image"
+                        src={obj.AssignedUserAvatar}
+                      />
+                    </div>
+                    <TaskTag tag={obj.AssaignedUserName} />
+                  </div>
+                </div>
               </div>
-              <p className="Kanban_Info_paragraph">
-                E-mail after registration so that I can confirm my address
-              </p>
-            </div>
-            <div className="Kanban_Info_bottom">
-              <div className="Kanban_Info_bottom-image_container">
-                <img className="Kanban_Info_bottom-image" src={person} />
-              </div>
-              <TaskTag tag="APEX " />
-            </div>
-          </div>
-        </div>
-        <div
-          style={{ backgroundColor: generateRandomHexColor() }}
-          className="Kanban_Info-container"
-        >
-          <div className="Kanban_Info_right">
-            <div className="Kanban_Info_paragraph_container">
-              <div className="Kanban_Info_checkbox_container">
-                <input className="Kanban_Info_checkbox" type="checkbox" />
-              </div>
-              <p className="Kanban_Info_paragraph">
-                E-mail after registration so that I can confirm my address
-              </p>
-            </div>
-            <div className="Kanban_Info_bottom">
-              <div className="Kanban_Info_bottom-image_container">
-                <img className="Kanban_Info_bottom-image" src={person} />
-              </div>
-              <TaskTag tag="DESIGN" />
-            </div>
-          </div>
-        </div>
-        <div
-          style={{ backgroundColor: generateRandomHexColor() }}
-          className="Kanban_Info-container"
-        >
-          <div className="Kanban_Info_right">
-            <div className="Kanban_Info_paragraph_container">
-              <div className="Kanban_Info_checkbox_container">
-                <input className="Kanban_Info_checkbox" type="checkbox" />
-              </div>
-              <p className="Kanban_Info_paragraph">
-                E-mail after registration so that I can confirm my address
-              </p>
-            </div>
-            <div className="Kanban_Info_bottom">
-              <div className="Kanban_Info_bottom-image_container">
-                <img className="Kanban_Info_bottom-image" src={person} />
-              </div>
-              <TaskTag tag="DEVELOPMENT" />
-            </div>
-          </div>
-        </div>
+            )
+          );
+        })}
       </div>
     </>
   );
@@ -172,7 +128,7 @@ const TaskTag: FC<{ tag: string }> = ({ tag }) => {
       }}
       className="Kanban_Info_bottom-content"
     >
-      DEVELOPMENT
+      {tag}
     </p>
   );
 };
