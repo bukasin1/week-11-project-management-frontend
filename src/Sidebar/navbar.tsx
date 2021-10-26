@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Avatar, IconButton } from "@material-ui/core";
 import SearchIcon from "@mui/icons-material/Search";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import FineIcon from "../assets/designicon.svg";
 
 export function Navbar() {
 
@@ -39,6 +40,7 @@ export function TeamNavbar(props: any) {
     <div className = "nav-fixed">
       <nav className="navbar_content">
         <div className="navbar_title">
+        <span className="FineIcon2"><img src={FineIcon} alt ="ion"/></span>
           {props.team.teamname}
           <IconButton>
             <MoreHorizIcon style={{ fill: "black" }} />
@@ -68,6 +70,7 @@ export function ProjectNavbar(props: any) {
     <div className = "nav-fixed">
       <nav className="navbar_content">
         <div className="navbar_title">
+        <span className="FineIcon2"><img src={FineIcon} alt ="ion"/></span>
           {props.project.projectname}
           <IconButton>
             <MoreHorizIcon style={{ fill: "black" }} />

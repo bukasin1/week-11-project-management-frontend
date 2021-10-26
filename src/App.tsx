@@ -15,6 +15,7 @@ import HomeComponent from './Sidebar/Home';
 import ProjectComponent from './Sidebar/ProjectComp';
 import ProfileComponent from './Sidebar/ProfileComp';
 import TeamComponent from './Sidebar/teamComponent';
+// import KanbanComponent from './kanban/kanbanComponent';
 
 export function ProtectedRoute(props: any) {
   const token = localStorage.getItem('token')
@@ -63,6 +64,8 @@ function App() {
           <ProtectedRoute path = "/changepassword" exact component = {ProfileComponent}/>
           <ProtectedRoute path = "/:projectid/:teamname/:teamid" component = {TeamComponent}/>
           <Route path="/welcome/:userToken/" exact component={HomeComponent}></Route>
+         
+
 
 
 

@@ -11,17 +11,13 @@ export default function ProfileComponent(props: any) {
 
     return (
         <>
-
             <Side />
             <div className="content">
-
                 <ProfileNavbar />
                 <div className="test">
                     {path.includes('changepassword') && <Password />}
                     {path.includes('profile') && <Profile />}
-
                 </div>
-
             </div>
         </>
     );
