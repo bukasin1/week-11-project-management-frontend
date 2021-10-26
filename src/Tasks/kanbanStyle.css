@@ -1,11 +1,12 @@
 .Kanban_Container {
     width: 45%;
-    max-height: 100vh;
+    max-height: 107vh;
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
     overflow: auto;
-   
+    margin-left: 2%;
+    border-radius: 8px;
   }
   
   .Kanban_top-most {

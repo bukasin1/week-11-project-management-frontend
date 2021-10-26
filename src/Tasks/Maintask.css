@@ -4,10 +4,10 @@
     background-color: white;
     width: 55%;
 height: 750px;
-margin-left: 65%;
-margin-right: 20px;
-border-radius: 8px;
-margin-top: 1%; 
+margin-left: 1%;
+margin-right: 10px;
+border-radius: 9px;
+margin-top: 0.1%; 
 
 }
 .maintask-header{
@@ -17,9 +17,7 @@ margin-top: 1%;
     font-style: normal;
     font-weight: bold;
     font-size: 19px;
-    line-height: 23px;
-
-    
+    line-height: 23px;   
 }
 .content55{
     display: flex;
@@ -98,7 +96,7 @@ color: #4e4c4c;
 
 }
 .m3rdHeader1{
-    margin-left: -20px;
+    margin-left: -28px;
     margin-top: 41px;
 }
 .m3rdHeader0{
@@ -108,13 +106,13 @@ color: #4e4c4c;
 }
 .m3rdHeader3{
     margin-left: -0.5px;
-    margin-top: 21px;
+    margin-top: 32px;
     
 }
 
 .m3rdHeader2{
     display: flex;
-    margin-left: -35px;
+    margin-left: -20px;
     color: #764CED;
     height: 17px;
     background-color: rgb(248, 241, 248);
@@ -158,6 +156,13 @@ margin-right: 20px;
 margin-top: 10px;
 }
 
+.maintask-5rdHeader p{
+  color:  #4e4c4c;
+  font-family: Heebo;
+font-style: normal;
+font-size: 14px;
+line-height: 20px;
+}
 .maintask-6rdHeader {
 font-family: Heebo;
 font-style: normal;
@@ -282,6 +287,7 @@ padding-right: 10px;
     align-items: center;
     margin-left: -2px;
     width:20px;
+    margin-top: 7px;
     border-radius: 15px;
     
 
@@ -294,7 +300,7 @@ padding-right: 10px;
 
 .maintask-pdf{
    width: 30px;
-    margin-bottom: -50px;
+    margin-bottom: -35px;
     margin-left: 20px; 
     margin-top:-0px ;
 
@@ -322,4 +328,16 @@ padding-right: 10px;
     margin-left: 15px;
     border-radius: 50%;
   
+}
+
+.TaskContents{
+display: flex;
+}
+
+.taskSeperator{
+    height: 750px;
+    background-color: white;
+    width: 5px;
+    margin-left: 10px;
+    border-radius: 20px;
 }
