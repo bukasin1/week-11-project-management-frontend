@@ -19,23 +19,23 @@ const headerlinks = [
 
 
 const itemsFromBackend = [
-  { id: 1, title: 'E-mail after registration so that I can confirm my', avatarUrl: "", tag:'Development' },
-  { id: 2, title: '2 E-mail after registration so that I can confirm my', avatarUrl: "", tag:'Development' },
-  { id: 3, title: '3E-mail after registration so that I can confirm my', avatarUrl: "", tag:'Development' },
-  { id: 4, title: '4E-mail after registration so that I can confirm my', avatarUrl: "https://res.cloudinary.com/projectmanagementgroupb/image/upload/v1634869516/vjjkzu5pxvy3n0sylgua.jpg", tag:'Development' },
+  { id: "1", title: 'E-mail after registration so that I can confirm my', avatarUrl: "", tag:'Development' },
+  { id: "2", title: '2 E-mail after registration so that I can confirm my', avatarUrl: "", tag:'Development' },
+  { id: "3", title: '3E-mail after registration so that I can confirm my', avatarUrl: "", tag:'Development' },
+  { id: "4", title: '4E-mail after registration so that I can confirm my', avatarUrl: "https://res.cloudinary.com/projectmanagementgroupb/image/upload/v1634869516/vjjkzu5pxvy3n0sylgua.jpg", tag:'Development' },
 
 ];
 
 const columnsFromBackend = {
-  [5]: {
+  ["5"]: {
     name: "Backlog",
     items: itemsFromBackend
   },
-  [6]: {
+  ["6"]: {
     name: "To Do",
     items: []
   },
-  [7]: {
+  ["7"]: {
     name: "Done",
     items: []
   }
