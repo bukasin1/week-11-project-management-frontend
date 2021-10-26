@@ -81,7 +81,7 @@ function Kanban() {
           );
         })}
         <div className="Kanban_top-most">
-          <h2>to Do</h2>
+          <h2>To Do</h2>
           <button className="Kanban_add-task">+ Add Task</button>
         </div>
         {data.map((obj: any) => {
