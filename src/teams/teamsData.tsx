@@ -2,7 +2,7 @@ import "./teamData.css";
 
 function TeamData(props: any) {
   return (
-    <div className="main-container-team">
+    <div onClick={props.setMemberD} className="main-container-team">
       <div className="first-sub-main">
         <div className="image-container">
           <img src={props.img} alt="" className="image" />

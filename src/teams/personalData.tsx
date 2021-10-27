@@ -1,54 +1,78 @@
 import "./personalData.css";
 
-const person = {
-  _id: "5b21ca3eeb7f6fbccd471815",
-  firstname: "Carl",
-  lastname: "Edit",
-  role: "Team Lead",
-  tasksAssigned: 100,
-  location: "Oklahoma",
-  img: "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50.jpg",
-};
-function PersonalData() {
+function PersonalData(props: any) {
   return (
     <div className="main-container-personal">
       <div className="first-division">
         <div className="sub-main">
-          <div className="avatar">
-            <img src={person.img} alt="profile-pic" className="profile-pic" />
+          <div className="avatar-personal">
+            <img
+              src={
+                props.member.avatar
+                  ? props.member.avatar
+                  : `https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50.jpg`
+              }
+              alt="profile-pic"
+              className="profile-pic-personal"
+            />
           </div>
           <div className="personal-details">
-            <div className="name-container">
-              <h2 className="name">
-                {person.firstname}
-                {person.lastname}
-              </h2>
+            <div className="name-container-personal">
+              <h2 className="firstname">{props.member.firstname}</h2>
+              <h2 className="lastname">{props.member.lastname}</h2>
             </div>
             <div className="role-location-container">
-              <p>{person.role}</p>
-              <p>{person.location}</p>
+              <p className="role-personal">{props.member.role}</p>
+              <p className="location-personal">{props.member.location}</p>
             </div>
           </div>
         </div>
         <div className="logo-picture">
-          <img src="/person/logo copy.png" alt="logo" />
-        </div>
-      </div>
-      <hr />
-      <div className="task-container-personal">
-        <div className="closed-task">
-          <h1>400</h1>
-          <br />
-          <p>Closed Task</p>
-        </div>
-        <div className="open-task">
-          <h1>100</h1>
-          <br />
-          <p>Open Task</p>
+          <img
+            className="logo-picture-personal"
+            src="https://www.vhv.rs/dpng/d/429-4293806_commercial-floating-floor-menu-button-menu-button-icon.png"
+            alt="logo"
+          />
         </div>
       </div>
 
-      <hr />
+      <div className="task-container-personal">
+        <div className="closed-task">
+          <h1>{props.member.closedTasks.length}</h1>
+          <br />
+          <p>
+            {" "}
+            {props.member.closedTasks.length > 1
+              ? "Closed Tasks"
+              : "Closed Task"}
+          </p>
+        </div>
+        <div className="open-task">
+          <h1>{props.member.openedTasks.length}</h1>
+          <br />
+          <p>
+            {" "}
+            {props.member.openedTasks.length > 1 ? "Open Tasks" : "Open Task"}
+          </p>
+        </div>
+      </div>
+      <div className="task-assigned-container">
+        <div className="number-of-task">
+          <h2 className="assihned-task-personal">
+            {props.member.openedTasks.length > 1
+              ? "Assigned Tasks"
+              : "Assigned Task"}
+          </h2>
+          <h2 className="number-task-personal">
+            {props.member.openedTasks.length}
+          </h2>
+        </div>
+        <div className="task-details-personal">
+          {props.member.openedTasks.map((task: any) => (
+            <p className="task-detail">{task.title}</p>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
