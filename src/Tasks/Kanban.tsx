@@ -20,11 +20,10 @@ function generateRandomFontColor() {
   return colors[randomIndex];
 }
 
-function Kanban() {
+function Kanban({ setApiData }: any) {
   const { projectid }: any = useParams();
   const [data, setData] = useState([]);
   const [backlog, setBacklog] = useState();
-
   useEffect(() => {
     const token = localStorage.getItem("token") as string;
     axios
@@ -55,6 +54,7 @@ function Kanban() {
           return (
             obj.status === "backlog" && (
               <div
+                onClick={() => setApiData(obj)}
                 key={obj._id}
                 style={{ backgroundColor: generateRandomHexColor() }}
                 className="Kanban_Info-container"
@@ -91,6 +91,7 @@ function Kanban() {
                 key={obj._id}
                 style={{ backgroundColor: generateRandomHexColor() }}
                 className="Kanban_Info-container"
+                onClick={() => setApiData(obj)}
               >
                 <div className="Kanban_Info_right">
                   <div className="Kanban_Info_paragraph_container">
