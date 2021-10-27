@@ -9,20 +9,20 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 
 const headerlinks = [
-    { name: "Tasks", link: "/tasks" },
-    { name: "Kanban", link: "/kanban" },
-    { name: "Activity", link: "/activity" },
-    { name: "Calendar", link: "/calendar" },
-    { name: "Files", link: "/file" },
-  ];
-  
+  { name: "Tasks", link: "/tasks" },
+  { name: "Kanban", link: "/kanban" },
+  { name: "Activity", link: "/activity" },
+  { name: "Calendar", link: "/calendar" },
+  { name: "Files", link: "/file" },
+];
+
 
 
 const itemsFromBackend = [
-  { id: "1", title: 'E-mail after registration so that I can confirm my', avatarUrl: "", tag:'Development' },
-  { id: "2", title: '2 E-mail after registration so that I can confirm my', avatarUrl: "", tag:'Development' },
-  { id: "3", title: '3E-mail after registration so that I can confirm my', avatarUrl: "", tag:'Development' },
-  { id: "4", title: '4E-mail after registration so that I can confirm my', avatarUrl: "https://res.cloudinary.com/projectmanagementgroupb/image/upload/v1634869516/vjjkzu5pxvy3n0sylgua.jpg", tag:'Development' },
+  { id: "1", title: 'E-mail after registration so that I can confirm my', avatarUrl: "", tag: 'Development' },
+  { id: "2", title: '2 E-mail after registration so that I can confirm my', avatarUrl: "", tag: 'Development' },
+  { id: "3", title: '3E-mail after registration so that I can confirm my', avatarUrl: "", tag: 'Development' },
+  { id: "4", title: '4E-mail after registration so that I can confirm my', avatarUrl: "https://res.cloudinary.com/projectmanagementgroupb/image/upload/v1634869516/vjjkzu5pxvy3n0sylgua.jpg", tag: 'Development' },
 
 ];
 
@@ -81,112 +81,112 @@ function KanbanComp() {
 
   const [columns, setColumns] = useState(columnsFromBackend);
   return (
-      <>
-                {/* <Header signOut="signOut" header="PROJECT PRIMUS" headerlinks={headerlinks} /> */}
-    <KanbanSection >
+    <>
+      {/* <Header signOut="signOut" header="PROJECT PRIMUS" headerlinks={headerlinks} /> */}
+      <KanbanSection >
 
-      <DragDropContext
-        onDragEnd={result => onDragEnd(result, columns, setColumns)}
-      >
-        {Object.entries(columns).map(([columnId, column], index) => {
-          return (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                // backgroundColor:'white'
-              }}
-              key={columnId}
-            >
-
-              <Kanbans >
-                <Droppable droppableId={columnId} key={columnId}>
-                  {(provided, snapshot) => {
-                    return (
-                      <KanbanColumn
-                        {...provided.droppableProps}
-                        ref={provided.innerRef}
-                        style={{
-                            background: snapshot.isDraggingOver
-                            ? "#F7F6F3"
-                            : "white",
-                          borderRadius: '10px',
-                          width: 350,
-                          minHeight: 500
-                        }}
-                      >
-                                   <KanbanHeaderContainer>
-                                   <KanbanHeader>{column.name} </KanbanHeader>
-                                   <AddTaskDiv>+Add Task</AddTaskDiv>
-                                   </KanbanHeaderContainer>
-                        {column.items.map((item, index) => {
-                          return (
-                            <Draggable
-                              key={item.id}
-                              draggableId={item.id}
-                              index={index}
-                            >
-                              {(provided, snapshot) => {
-                                return (
-                                    <KanbanCard
-ref={provided.innerRef}
-{...provided.draggableProps}
-{...provided.dragHandleProps}
-style={{
-  userSelect: "none",
-
-  backgroundColor: snapshot.isDragging
-    ? "#CEF9C6"
-    : "#F7F6F3",
-    overflowY: 'scroll',
-
-  ...provided.draggableProps.style
-}}
->
- <h3
-            style={{
-              display: "inline-block",
-              marginLeft: "5px",
-              lineHeight: "24px",
-              marginBottom: "7px",
-            }}
-          >
-            {item.title}
-          </h3>
-          <div
-          style={{
-            display: "flex",
-            marginLeft: "5px",
-            justifyContent: "flex-start",
-            alignItems: "center",
-          }}
+        <DragDropContext
+          onDragEnd={result => onDragEnd(result, columns, setColumns)}
         >
-          <div>
-            {item.avatarUrl ? <Avatar src={item.avatarUrl} /> : <AccountCircleIcon />}
-            {/* <AccountCircleIcon /> */}
-          </div>
-          <TagContainer >
-            {item.tag}
-          </TagContainer>
-        </div>
-</KanbanCard>
-                                );
-                              }}
-                            </Draggable>
-                          );
-                        })}
-                        {provided.placeholder}
-                      </KanbanColumn>
-                    );
-                  }}
-                </Droppable>
-              </Kanbans>
-            </div>
-          );
-        })}
-      </DragDropContext>
-    </KanbanSection>
+          {Object.entries(columns).map(([columnId, column], index) => {
+            return (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  // backgroundColor:'white'
+                }}
+                key={columnId}
+              >
+
+                <Kanbans >
+                  <Droppable droppableId={columnId} key={columnId}>
+                    {(provided, snapshot) => {
+                      return (
+                        <KanbanColumn
+                          {...provided.droppableProps}
+                          ref={provided.innerRef}
+                          style={{
+                            background: snapshot.isDraggingOver
+                              ? "#F7F6F3"
+                              : "white",
+                            borderRadius: '10px',
+                            width: 350,
+                            minHeight: 500
+                          }}
+                        >
+                          <KanbanHeaderContainer>
+                            <KanbanHeader>{column.name} </KanbanHeader>
+                            <AddTaskDiv>+Add Task</AddTaskDiv>
+                          </KanbanHeaderContainer>
+                          {column.items.map((item, index) => {
+                            return (
+                              <Draggable
+                                key={item.id}
+                                draggableId={item.id}
+                                index={index}
+                              >
+                                {(provided, snapshot) => {
+                                  return (
+                                    <KanbanCard
+                                      ref={provided.innerRef}
+                                      {...provided.draggableProps}
+                                      {...provided.dragHandleProps}
+                                      style={{
+                                        userSelect: "none",
+
+                                        backgroundColor: snapshot.isDragging
+                                          ? "#CEF9C6"
+                                          : "#F7F6F3",
+                                        overflowY: 'scroll',
+
+                                        ...provided.draggableProps.style
+                                      }}
+                                    >
+                                      <h3
+                                        style={{
+                                          display: "inline-block",
+                                          marginLeft: "5px",
+                                          lineHeight: "24px",
+                                          marginBottom: "7px",
+                                        }}
+                                      >
+                                        {item.title}
+                                      </h3>
+                                      <div
+                                        style={{
+                                          display: "flex",
+                                          marginLeft: "5px",
+                                          justifyContent: "flex-start",
+                                          alignItems: "center",
+                                        }}
+                                      >
+                                        <div>
+                                          {item.avatarUrl ? <Avatar src={item.avatarUrl} /> : <AccountCircleIcon />}
+                                          {/* <AccountCircleIcon /> */}
+                                        </div>
+                                        <TagContainer >
+                                          {item.tag}
+                                        </TagContainer>
+                                      </div>
+                                    </KanbanCard>
+                                  );
+                                }}
+                              </Draggable>
+                            );
+                          })}
+                          {provided.placeholder}
+                        </KanbanColumn>
+                      );
+                    }}
+                  </Droppable>
+                </Kanbans>
+              </div>
+            );
+          })}
+        </DragDropContext>
+      </KanbanSection>
     </>
   );
 }
