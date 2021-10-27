@@ -124,6 +124,8 @@
 }
 .logo-picture-personal {
   padding-right: 10px;
+  width: 30px;
+  height: 30px;
 }
 
 .sub-main {
@@ -162,7 +164,9 @@
   margin-right: 10px;
 }
 .task-detail {
-  padding: 5px 5px;
+  padding: 20px 10px;
   background: #f7f6f3;
   border-radius: 10px;
+  font-size: 22px;
+  font-weight: 500;
 }
