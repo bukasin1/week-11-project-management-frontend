@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom'
-import Form from './login/Form'
-import './App.css';
-import SignUp from './Signup/signUp';
-import LoginSuccess from './login/LoginSuccess';
-import Verify from './Signup/Verify';
-import { FilesPage } from './filesPage/files';
+import React, { useState, useEffect } from "react";
+import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom";
+import Form from "./login/Form";
+import "./App.css";
+import SignUp from "./Signup/signUp";
+import LoginSuccess from "./login/LoginSuccess";
+import Verify from "./Signup/Verify";
+import { FilesPage } from "./filesPage/files";
 import ForgotPasswordEmail from "./ForgotPasswordEmail/ForgotPasswordEmail";
 import ForgotPasswordReset from "./ForgotPasswordReset/ForgotPasswordReset";
-import Password from "./ChangePassword/Password"
-import Side, { userType } from './Sidebar/Side';
+import Password from "./ChangePassword/Password";
+import Side, { userType } from "./Sidebar/Side";
 // import { ModalComp } from './Sidebar/Mod';
 import HomeComponent from './Sidebar/Home';
 import ProjectComponent from './Sidebar/ProjectComp';
@@ -18,17 +18,17 @@ import TeamComponent from './Sidebar/teamComponent';
 import Maintask from './Tasks/Maintask';
 
 export function ProtectedRoute(props: any) {
-  const token = localStorage.getItem('token')
-  console.log(token, 'token')
+  const token = localStorage.getItem("token");
+  console.log(token, "token");
   if (token) {
-    console.log(token, 'protected')
-    return (
-      <Route path={props.path} exact component={props.component}></Route>
-    )
+    console.log(token, "protected");
+    return <Route path={props.path} exact component={props.component}></Route>;
   }
   return (
-    <Route><Redirect to="/login" /> </Route>
-  )
+    <Route>
+      <Redirect to="/login" />{" "}
+    </Route>
+  );
 }
 
 export function OpenRoute(props: any) {
@@ -48,46 +48,48 @@ export function OpenRoute(props: any) {
 
 
 function App() {
-
-
-  const preUser = {closedTasks: [], openedTasks: []} as userType
-  const [user, setUser] = useState<userType>(preUser)
+  const preUser = { closedTasks: [], openedTasks: [] } as userType;
+  const [user, setUser] = useState<userType>(preUser);
 
   useEffect(() => {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem("token");
     fetch(`https://jaraaa.herokuapp.com`, {
       method: "GET",
-      headers: { 'Content-Type': 'application/json', "authorization": `${token}` }
-    }).then(res => res.json())
-      .then(data => {
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
         if (!data.msg) {
-          console.log("Major:", data)
+          console.log("Major:", data);
         } else {
-          console.log(data, 'data')
-          setUser(data.sendUser)
+          console.log(data, "data");
+          setUser(data.sendUser);
         }
         // window.location.href = "/success"
       })
-      .catch(err => {
-        console.log(err.response, 'error');
-      })
-  },[])
-  console.log(user, 'from app')
+      .catch((err) => {
+        console.log(err.response, "error");
+      });
+  }, []);
+  console.log(user, "from app");
 
-  const [notloggedIn, setLoggedIn] = useState(false)
+  const [notloggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem('token')
-    const user = JSON.parse(localStorage.getItem('user') as string)
-    console.log(token)
+    const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem("user") as string);
+    console.log(token);
 
     if (user) {
-      console.log(user.firstname)
-      setLoggedIn(false)
+      console.log(user.firstname);
+      setLoggedIn(false);
     } else {
-      setLoggedIn(true)
+      setLoggedIn(true);
     }
-  }, [])
+  }, []);
 
   return (
     <div className="app">

@@ -11,6 +11,7 @@ import MainContent from "./mainContent";
 import { FilesPage } from "../filesPage/files";
 import Password from "../ChangePassword/Password";
 import axios from "axios";
+import TeamData from "../teams/teamsData";
 // import Profile from "./profile";
 import FineIcon from "../assets/designicon.svg";
 
@@ -408,3 +409,26 @@ function Side(props: any) {
 }
 
 export default Side;
+
+export function Team() {
+  const teams: any[] = [];
+  let team = teams.map((team: any) => (
+    <TeamData
+      key={team._id}
+      firstname={team.firstname}
+      lastname={team.lastname}
+      role={team.role}
+      tasksAssigned={team.tasksAssigned}
+      img={team.img}
+    />
+  ));
+  return (
+    <div className="main-page">
+      <div className="members-container">
+        <h1>Members </h1>
+        <h1>{team.length}</h1>
+      </div>
+      {team}
+    </div>
+  );
+}
