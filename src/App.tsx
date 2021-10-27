@@ -31,6 +31,21 @@ export function ProtectedRoute(props: any) {
   )
 }
 
+export function OpenRoute(props: any) {
+  const token = localStorage.getItem('token')
+  console.log(token, 'token')
+  if (token) {
+    console.log(token, 'protected')
+    return (
+      <Route><Redirect to="/home" /> </Route>
+    )
+  }
+  return (
+    <Route path={props.path} exact component={props.component}></Route>
+    // <Route><Redirect to="/login" /> </Route>
+  )
+}
+
 
 function App() {
 
@@ -129,17 +144,17 @@ function App() {
             exact
             component={HomeComponent}
           ></Route>
-          <Route path="/login" exact component={Form}></Route>
+          <OpenRoute path="/login" exact component={Form}></OpenRoute>
           <ProtectedRoute path="/success" exact component={LoginSuccess} />
           <Route
             path="/success/:userToken/"
             exact
             component={LoginSuccess}
           ></Route>
-          <Route path="/signup" exact component={SignUp}></Route>
-          <Route path="/verify" exact component={Verify}></Route>
-          <Route path="/signup" exact component={SignUp}></Route>
-          <Route exact path="/forgotpassword" component={ForgotPasswordEmail} />
+          <OpenRoute path="/signup" exact component={SignUp}></OpenRoute>
+          <OpenRoute path="/verify" exact component={Verify}></OpenRoute>
+          <OpenRoute path="/signup" exact component={SignUp}></OpenRoute>
+          <OpenRoute exact path="/forgotpassword" component={ForgotPasswordEmail} />
           {/* <ProtectedRoute path="/changepassword" exact component={Password} /> */}
           <Route path="/welcome/:userToken/" exact component={Side}></Route>
           {/* <ProtectedRoute path="/:files" component={Side} /> */}
