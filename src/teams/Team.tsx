@@ -45,9 +45,28 @@ function Team(props: any) {
       });
   }, []);
 
+  const [memberDetails, setMember] = useState<teamMember>({
+    _id: "",
+    avatar: "",
+    firstname: "",
+    lastname: "",
+    role: "",
+    location: "",
+    closedTasks: [],
+    openedTasks: [],
+  });
+
+  function setMemberDetails(team: any) {
+    setMember(team);
+  }
+
   let team = teams.map((team) => (
     <TeamData
       key={team._id}
+      setMemberD={() => {
+        setMemberDetails(team);
+      }}
+      team={team}
       firstname={team.firstname}
       lastname={team.lastname}
       role={team.role ? team.role : "No role"}
@@ -72,7 +91,7 @@ function Team(props: any) {
         <div className="members-container">{team}</div>
       </div>
       <div className="second-main-page">
-        <PersonalData />
+        <PersonalData member={memberDetails} />
       </div>
     </div>
   );
