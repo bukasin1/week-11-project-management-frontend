@@ -23,6 +23,7 @@ margin-top: 0.1%;
     display: flex;
     align-content: center;
     margin-top: 20px;
+    border-radius: 50%;
 }
 
 .maintask-header2{
@@ -286,9 +287,11 @@ padding-right: 10px;
 .maintask-avarter{
     align-items: center;
     margin-left: -2px;
+    margin-right: 3px;
     width:20px;
-    margin-top: 7px;
-    border-radius: 15px;
+    height: 20px;
+    margin-top: 20px;
+    border-radius: 50%;
     
 
 }

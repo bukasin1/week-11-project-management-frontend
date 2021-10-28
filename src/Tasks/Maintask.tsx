@@ -7,17 +7,67 @@ import videoimg from "./MaintaskImag/videoimg.svg";
 import mick from "./MaintaskImag/mick.svg";
 import terus from "./MaintaskImag/terus.svg";
 import vergo from "./MaintaskImag/vergo.svg";
+import { useParams } from "react-router-dom";
+import dateFormat from "dateformat"
+import axios from 'axios'
 
-const Maintask = ({ apiSetdata }: any) => {
-  console.log(apiSetdata);
+const Maintask = ({ apiSetdata}: any) => {
+ console.log(apiSetdata)
+  
+const d = dateFormat(apiSetdata.createdAt, "dddd, mmmm dS, yyyy, h:MM:ss TT");
+const c = d.split(' ')
+const e = c[4].split(':').slice(0, 2)
+const createdOn = (`${c[0]} at ${e[0]}:${e[1]} ${c[5].toLowerCase()}`)
+
+const a = dateFormat(apiSetdata.dueDate, "dddd, mmmm dS, yyyy, h:MM:ss TT");
+const q = a.split(' ')
+const n = q[4].split(':').slice(0, 2)
+const dueOn = (`${q[0]} at ${n[0]}:${n[1]} ${q[5].toLowerCase()}`)
+
+  const { taskID }: any = useParams();
+
+
+  const [comment, setComments] = useState({
+    comment: '',
+})
+
+
+const handleChange = (e: { target: { name: any; value: any; }; }) => {
+    const {name, value} = e.target
+    setComments({
+        ...comment,
+        [name]: value
+})
+}
+
+const handleKeyDown = async  (event: { key: string; }) => {
+  if (event.key === 'Enter') {
+    console.log(comment)
+    const token = localStorage.getItem('token') as string
+    console.log(token)
+    await axios.request({url:`https://jaraaa.herokuapp.com/tasks/${apiSetdata._id}/create-comment`, method: "post", data: comment, headers: {authorization: token}, withCredentials:true})
+    .then(response => {
+        console.log(response.data)
+        console.log("Major:",response.data)
+        console.log("login successful")
+            // window.location.href = "/success"
+          
+    }).catch(err=>{
+        console.log(err);
+       
+
+    })
+  }
+}
+
   return (
     <div className="maintask-content">
       <div className="maintask-header">
-        <h3>{apiSetdata.title}</h3>
+        <h3>{!apiSetdata.title? <h3> No Title </h3> : apiSetdata.title}</h3>
       </div>
 
       <div className="maintask-header2">
-        <p>Added by Kristin A. yesterday at 12:41pm</p>
+        <p>Added by Kristin A. {createdOn}</p>
       </div>
 
       <div className="maintask-2ndHeader">
@@ -28,10 +78,10 @@ const Maintask = ({ apiSetdata }: any) => {
       </div>
       <div className="maintask-3rdHeader">
         <div className="content55">
-          <img src={Avater1} className="maintask-avarter" />
+          <img src={apiSetdata.AssignedUserAvatar? apiSetdata.AssignedUserAvatar: Avater1} className="maintask-avarter" />
           <h4 className="m3rdHeader0">{apiSetdata.AssaignedUserName}</h4>
         </div>
-        <h4 className="m3rdHeader1">Tues, Dec 25</h4>
+        <h4 className="m3rdHeader1">{dueOn}</h4>
         <h4 className="m3rdHeader2">MARKETING</h4>
         <h4 className="m3rdHeader3">
           <img src={Avater1} className="maintask-avarter" />
@@ -46,7 +96,7 @@ const Maintask = ({ apiSetdata }: any) => {
       </div>
 
       <div className="maintask-5rdHeader">
-        <p>{apiSetdata.description}</p>
+        <p>{!apiSetdata.description? <p> No Description Yet</p>: apiSetdata.description}</p>
       </div>
 
       <div className="flex-div">
@@ -85,11 +135,13 @@ const Maintask = ({ apiSetdata }: any) => {
       </div>
       <div className="maintask-8rdHeader">
         <input
-          id="email"
-          type="name"
-          name="email"
+          id="comment"
+          type="text"
+          name="comment"
           className="maintask-input"
           placeholder="Add a comment…"
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
         />
       </div>
       <div className="img-content1">
