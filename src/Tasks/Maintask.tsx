@@ -11,52 +11,52 @@ import { useParams } from "react-router-dom";
 import dateFormat from "dateformat"
 import axios from 'axios'
 
-const Maintask = ({ apiSetdata}: any) => {
- console.log(apiSetdata)
+const Maintask = ({ apiSetdata }: any) => {
+  console.log(apiSetdata)
 
-const createdOn = dateFormat(apiSetdata.createdAt, "dddd,  h:MM TT")
-const dueOn = dateFormat(apiSetdata.dueDate, "dddd,  h:MM TT");
+  const createdOn = dateFormat(apiSetdata.createdAt, "dddd,  h:MM TT")
+  const dueOn = dateFormat(apiSetdata.dueDate, "dddd,  h:MM TT");
 
   const { taskID }: any = useParams();
 
 
   const [comment, setComments] = useState({
     comment: '',
-})
+  })
 
 
-const handleChange = (e: { target: { name: any; value: any; }; }) => {
-    const {name, value} = e.target
+  const handleChange = (e: { target: { name: any; value: any; }; }) => {
+    const { name, value } = e.target
     setComments({
-        ...comment,
-        [name]: value
-})
-}
-
-const handleKeyDown = async  (event: { key: string; }) => {
-  if (event.key === 'Enter') {
-    console.log(comment)
-    const token = localStorage.getItem('token') as string
-    console.log(token)
-    await axios.request({url:`https://jaraaa.herokuapp.com/tasks/${apiSetdata._id}/create-comment`, method: "post", data: comment, headers: {authorization: token}, withCredentials:true})
-    .then(response => {
-        console.log(response.data)
-        console.log("Major:",response.data)
-        console.log("login successful")
-            // window.location.href = "/success"
-          
-    }).catch(err=>{
-        console.log(err);
-       
-
+      ...comment,
+      [name]: value
     })
   }
-}
+
+  const handleKeyDown = async (event: { key: string; }) => {
+    if (event.key === 'Enter') {
+      console.log(comment)
+      const token = localStorage.getItem('token') as string
+      console.log(token)
+      await axios.request({ url: `https://jaraaa.herokuapp.com/tasks/${apiSetdata._id}/create-comment`, method: "post", data: comment, headers: { authorization: token }, withCredentials: true })
+        .then(response => {
+          console.log(response.data)
+          console.log("Major:", response.data)
+          console.log("login successful")
+          // window.location.href = "/success"
+
+        }).catch(err => {
+          console.log(err);
+
+
+        })
+    }
+  }
 
   return (
     <div className="maintask-content">
       <div className="maintask-header">
-        <h3>{!apiSetdata.title? <h3> No Title </h3> : apiSetdata.title}</h3>
+        <h3>{!apiSetdata.title ? <h3> No Title </h3> : apiSetdata.title}</h3>
       </div>
 
       <div className="maintask-header2">
@@ -71,7 +71,7 @@ const handleKeyDown = async  (event: { key: string; }) => {
       </div>
       <div className="maintask-3rdHeader">
         <div className="content55">
-          <img src={apiSetdata.AssignedUserAvatar? apiSetdata.AssignedUserAvatar: Avater1} className="maintask-avarter" />
+          <img src={apiSetdata.AssignedUserAvatar ? apiSetdata.AssignedUserAvatar : Avater1} className="maintask-avarter" />
           <h4 className="m3rdHeader0">{apiSetdata.AssaignedUserName}</h4>
         </div>
         <h4 className="m3rdHeader1">{dueOn}</h4>
@@ -89,32 +89,41 @@ const handleKeyDown = async  (event: { key: string; }) => {
       </div>
 
       <div className="maintask-5rdHeader">
-        <p>{!apiSetdata.description? <p> No Description Yet</p>: apiSetdata.description}</p>
+        <p>{!apiSetdata.description ? <p> No Description Yet</p> : apiSetdata.description}</p>
       </div>
 
       <div className="flex-div">
-        <div className="img-content">
-          <img src={pdf} className="maintask-pdf" />
-        </div>
-        <div className="download-pdf">
-          <p className="maintask-6rdHeader">Redesign Brief 2019.pdf</p>
-          <div className="maintask-7rdHeader">
-            <p>
-              159 KB<span className="dele">Delete</span>{" "}
-            </p>
-          </div>
-        </div>
 
-        <div className="img-content">
-          <img src={videoimg} className="maintask-pdf" />
-        </div>
-        <div className="download-pdf">
-          <p className="maintask-6rdHeader">Redesign Brief 2019.pdf</p>
-          <div className="maintask-7rdHeader">
-            <p className="size-content">
-              159 KB<span className="dele">Delete</span>{" "}
-            </p>
+        {apiSetdata.files && apiSetdata.files.slice(0, 2).map((file: any) => (
+          <div>
+
+            <div className="img-content">
+              <img src={file.fileUrl} alt={file.fileName} className="maintask-pdf" />
+            </div>
+            <div className="download-pdf">
+              <p className="maintask-6rdHeader">{file.fileName}</p>
+              <div className="maintask-7rdHeader">
+                <p>
+                  {file.fileSize}<span className="dele"></span>{" "}
+                </p>
+              </div>
+            </div>
           </div>
+        ))}
+
+        <div>
+                <div className="img-content">
+                  <img src={videoimg} className="maintask-pdf" />
+                </div>
+                <div className="download-pdf">
+                  <p className="maintask-6rdHeader">Redesign Brief 2019.pdf</p>
+                  <div className="maintask-7rdHeader">
+                    <p className="size-content">
+                      159 KB<span className="dele"></span>{" "}
+                    </p>
+                  </div>
+                </div>
+
         </div>
       </div>
 
@@ -137,22 +146,28 @@ const handleKeyDown = async  (event: { key: string; }) => {
           onKeyDown={handleKeyDown}
         />
       </div>
-      <div className="img-content1">
-        <img src={mick} className="maintask-comment" />
-      </div>
-      <div className="maintask-9rdHeader">
-        <p className="main4">
-          Helena Brauer,<span className="main41">Designer</span>
-        </p>{" "}
-        <p className="main41">Yesterday at 12:37pm</p>
-      </div>
-      <div className="maintask-10rdHeader">
-        <p className="main5">
-          During a project build, it is necessary to evaluate the product design
-          and development against project requirements and outcomes
-        </p>
-      </div>
-      <div className="img-content1">
+
+      {apiSetdata.comments && apiSetdata.comments.slice(0, 2).map((comment: any) => (
+        <div>
+          <div className="img-content1">
+            <img src={mick} className="maintask-comment" />
+          </div>
+          <div className="maintask-9rdHeader">
+            <p className="main4">
+              {comment.createdBy.userName},<span className="main41">{comment.createdBy.userRole}</span>
+            </p>{" "}
+            <p className="main41">{dateFormat(comment.createdAt , "dddd,  h:MM TT")}</p>
+          </div>
+          <div className="maintask-10rdHeader">
+            <p className="main5">
+              {comment.content}
+            </p>
+          </div>
+        </div>
+      ))}
+
+
+      {/* <div className="img-content1">
         <img src={terus} className="maintask-comment" />
       </div>
       <div className="maintask-9rdHeader">
@@ -166,7 +181,7 @@ const handleKeyDown = async  (event: { key: string; }) => {
           @Helena Software quality assurance activity in which one or several
           humans check a program mainly{" "}
         </p>
-      </div>
+      </div> */}
     </div>
   );
 };
