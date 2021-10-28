@@ -42,10 +42,11 @@ const Maintask = ({ apiSetdata }: any) => {
         .then(response => {
           console.log(response.data)
           console.log("Major:", response.data)
-          console.log("login successful")
+          alert("Your comment has been added successfully")
           // window.location.href = "/success"
 
         }).catch(err => {
+          alert("Click on a Task to comment")
           console.log(err);
 
 
