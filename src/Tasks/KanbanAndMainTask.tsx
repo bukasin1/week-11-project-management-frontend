@@ -1,15 +1,16 @@
 import Kanban from "./Kanban";
 import Maintask from "./Maintask";
-import  "./Maintask.css"
+import { useState } from "react";
+import "./Maintask.css";
 
 export default function KanbanAndMainTaks() {
+  const [allState, setAllState] = useState({});
+
   return (
     <div className="TaskContents">
-      
-      <Kanban />
-      <div className= "taskSeperator"></div>
-      <Maintask />
-    
+      <Kanban setApiData={setAllState} />
+      <div className="taskSeperator"></div>
+      <Maintask apiSetdata={allState} />
     </div>
   );
 }

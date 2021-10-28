@@ -1,6 +1,6 @@
 .Kanban_Container {
     width: 45%;
-    max-height: 107vh;
+    max-height: 100vh;
     background-color: #ffffff;
     display: flex;
     flex-direction: column;

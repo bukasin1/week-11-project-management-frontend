@@ -23,6 +23,7 @@ margin-top: 0.1%;
     display: flex;
     align-content: center;
     margin-top: 20px;
+    border-radius: 50%;
 }
 
 .maintask-header2{
@@ -96,7 +97,7 @@ color: #4e4c4c;
 
 }
 .m3rdHeader1{
-    margin-left: -28px;
+    margin-left: 20px;
     margin-top: 41px;
 }
 .m3rdHeader0{
@@ -169,7 +170,8 @@ font-style: normal;
 font-weight: bold;
 font-size: 12px;
 line-height: 20px;
-margin-left: -60px;
+margin-top: -4px;
+margin-left: -10px;
 
 }
 .maintask-6rdHeader  p{
@@ -182,7 +184,7 @@ font-weight: normal;
 font-size: 12px;
 line-height: 5px;
 margin-top: -13px;
-margin-left: -60px;
+margin-left: -10px;
 
 }
 .dele{
@@ -260,7 +262,7 @@ top: calc(50% - 24px/2 - 24px);
 font-family: Heebo;
 font-style: normal;
 font-weight: normal;
-font-size: 13px;
+font-size: 12px;
 line-height: 23px;
 /* identical to box height */
 margin-left: 10px;
@@ -286,9 +288,11 @@ padding-right: 10px;
 .maintask-avarter{
     align-items: center;
     margin-left: -2px;
+    margin-right: 3px;
     width:20px;
-    margin-top: 7px;
-    border-radius: 15px;
+    height: 20px;
+    margin-top: 20px;
+    border-radius: 50%;
     
 
 }
