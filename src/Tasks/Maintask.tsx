@@ -13,16 +13,9 @@ import axios from 'axios'
 
 const Maintask = ({ apiSetdata}: any) => {
  console.log(apiSetdata)
-  
-const d = dateFormat(apiSetdata.createdAt, "dddd, mmmm dS, yyyy, h:MM:ss TT");
-const c = d.split(' ')
-const e = c[4].split(':').slice(0, 2)
-const createdOn = (`${c[0]} at ${e[0]}:${e[1]} ${c[5].toLowerCase()}`)
 
-const a = dateFormat(apiSetdata.dueDate, "dddd, mmmm dS, yyyy, h:MM:ss TT");
-const q = a.split(' ')
-const n = q[4].split(':').slice(0, 2)
-const dueOn = (`${q[0]} at ${n[0]}:${n[1]} ${q[5].toLowerCase()}`)
+const createdOn = dateFormat(apiSetdata.createdAt, "dddd,  h:MM TT")
+const dueOn = dateFormat(apiSetdata.dueDate, "dddd,  h:MM TT");
 
   const { taskID }: any = useParams();
 
