@@ -126,12 +126,17 @@ export default function Profile() {
         </div>
         <div className="input-content">
           Gender
-          <input
+          <select onChange={(e) => setGender(e.target.value)} className="profile-input" name="" id="">
+            <option value={gender}>{gender}</option>
+            <option value="male">male</option>
+            <option value="female">female</option>
+          </select>
+          {/* <input
             value={gender}
             onChange={(e) => setGender(e.target.value)}
             type="text"
             className="profile-input"
-          />
+          /> */}
         </div>
         <div className="input-content">
           Location

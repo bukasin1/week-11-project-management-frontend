@@ -74,7 +74,7 @@ function Team(props: any) {
       img={
         team.avatar
           ? team.avatar
-          : `https://res.cloudinary.com/demo/image/twitter/1330457336.jpg`
+          : `/Avatar.png`
       }
     />
   ));
@@ -87,11 +87,12 @@ function Team(props: any) {
             {teams.length > 1 ? "Members" : "Member"}
           </h1>
           <h1>{team.length}</h1>
+          <button className="member-add-btn" >Add member</button>
         </div>
         <div className="members-container">{team}</div>
       </div>
       <div className="second-main-page">
-        <PersonalData member={memberDetails} />
+        {memberDetails.firstname ? <PersonalData member={memberDetails} /> : <p>Click on a member to see details</p>}
       </div>
     </div>
   );

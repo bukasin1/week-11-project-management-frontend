@@ -24,6 +24,7 @@
 }
 .profile-pic-personal {
   border-radius: 50%;
+  width: 100px;
   /* width: 120px;
   height: 120px; */
   /* padding-top: 50px; */
@@ -170,3 +171,7 @@
   font-size: 22px;
   font-weight: 500;
 }
+
+/* https://res.cloudinary.com/demo/image/twitter/1330457336.jpg */
+
+/* https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50.jpg */

@@ -29,7 +29,7 @@ export default function TeamComponent(props: any) {
         <TeamNavbar team={team} />
         <div className="test">
           <div className="sub-test">
-            <Team team={team} />
+            <Team team={team} projectId={projectid} />
           </div>
           {/* <div className="sub-test2">
             {" "}

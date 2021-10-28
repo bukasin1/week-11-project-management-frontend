@@ -21,7 +21,8 @@
 }
 .header_members {
   display: flex;
-  align-content: center;
+  align-items: center;
+  justify-content: space-between;
   width: 90%;
   margin-left: 20px;
 }
@@ -31,4 +32,20 @@
   margin-top: 20px;
   margin-bottom: 10px;
   margin-left: 20px;
+}
+
+.member-add-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* margin-right: 120px; */
+  background: #CEF9C6;
+  border-radius: 20px;
+  font-family: Heebo;
+  height: 30px;
+  width: 80px;
+  text-align: center;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  border: none;
 }

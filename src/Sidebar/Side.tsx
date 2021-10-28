@@ -6,7 +6,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Navbar, ProjectNavbar, ProfileNavbar } from "./navbar";
 import "./Side.css";
-import { ProjectModalComp, TeamModalComp } from "./Mod";
+import { InviteModalComp, ProjectModalComp, TeamModalComp } from "./Mod";
 import MainContent from "./mainContent";
 import { FilesPage } from "../filesPage/files";
 import Password from "../ChangePassword/Password";
@@ -93,7 +93,7 @@ function Side(props: any) {
     localStorage.setItem("user", userFromToken);
   }
   loggedUser = JSON.parse(localStorage.getItem("user") as string);
-  const preUser = { closedTasks: [], openedTasks: [] } as userType;
+  const preUser = { projects: [], closedTasks: [], openedTasks: [] } as userType;
   const [profile, setProfile] = useState<userType>(preUser);
 
   useEffect(() => {
@@ -114,6 +114,10 @@ function Side(props: any) {
         console.log(err);
       });
   }, []);
+
+  const ownerProjects = profile.projects?.filter(project => project.owner)
+
+  console.log(ownerProjects, "Projects for invite")
 
   const [projects, setProjects] = useState<any[]>([]);
 
@@ -197,6 +201,7 @@ function Side(props: any) {
 
   const [projectModalIsOpen, setProjectIsOpen] = useState<boolean>(false);
   const [teamModalIsOpen, setTeamIsOpen] = useState<boolean>(false);
+  const [projectInviteIsOpen, setInviteIsOpen] = useState<boolean>(false)
 
   function openProjectModal() {
     setProjectIsOpen(true);
@@ -206,9 +211,14 @@ function Side(props: any) {
     setTeamIsOpen(true);
   }
 
+  function openInviteModal(){
+    setInviteIsOpen(true)
+  }
+
   function closeModal() {
     setProjectIsOpen(false);
     setTeamIsOpen(false);
+    setInviteIsOpen(false)
   }
 
   function openProject(e: any) {
@@ -390,7 +400,7 @@ function Side(props: any) {
             </div>
           )}
           <div className="sidebar_footer">
-            <span>Invite your team</span> and start collaborating!
+            <span onClick = {openInviteModal}>Invite your team</span> and start collaborating!
           </div>
         </div>
       </div>
@@ -403,6 +413,10 @@ function Side(props: any) {
       )}
       {teamModalIsOpen && (
         <TeamModalComp setIsOpen={setTeamIsOpen} closeModal={closeModal} />
+      )}
+
+      {projectInviteIsOpen && (
+        <InviteModalComp closeModal={closeModal} projects={ownerProjects} />
       )}
     </>
   );

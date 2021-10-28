@@ -10,7 +10,7 @@ function PersonalData(props: any) {
               src={
                 props.member.avatar
                   ? props.member.avatar
-                  : `https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50.jpg`
+                  : `/Avatar.png`
               }
               alt="profile-pic"
               className="profile-pic-personal"
