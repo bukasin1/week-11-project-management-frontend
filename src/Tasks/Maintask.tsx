@@ -112,7 +112,7 @@ const Maintask = ({ apiSetdata }: any) => {
           </div>
         ))}
 
-        <div>
+        {/* <div>
                 <div className="img-content">
                   <img src={videoimg} className="maintask-pdf" />
                 </div>
@@ -125,7 +125,7 @@ const Maintask = ({ apiSetdata }: any) => {
                   </div>
                 </div>
 
-        </div>
+        </div> */}
       </div>
 
       <hr className="hor6" />
