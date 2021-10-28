@@ -35,7 +35,6 @@ function Team(props: any) {
         if (data.msg || data.error) {
           console.log("Major:", data);
         } else {
-          console.log(data.data, "team data");
           setTeams(data.data);
         }
         // window.location.href = "/success"
