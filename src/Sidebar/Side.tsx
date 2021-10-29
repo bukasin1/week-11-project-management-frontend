@@ -196,6 +196,7 @@ function Side(props: any) {
 
   const [projectModalIsOpen, setProjectIsOpen] = useState<boolean>(false);
   const [teamModalIsOpen, setTeamIsOpen] = useState<boolean>(false);
+  const [activeId, setActiveId] = useState<null|string|undefined>(null)
 
   function openProjectModal() {
     setProjectIsOpen(true);
@@ -331,6 +332,7 @@ function Side(props: any) {
               <div
                 key={project.id}
                 onClick={(e) => {
+                  setActiveId(project.projectId)
                   window.location.href = `/${project.projectName}/${project.projectId}/${project.owner}/task`;
                   setProject({
                     projectId: project.projectId as string,
@@ -340,7 +342,7 @@ function Side(props: any) {
                   setProfile(preUser);
                 }}
               >
-                <div className="projects_img_div">
+                <div className={activeId === project?.projectId ? "projects_img_div activate": "projects_img_div"}>
                   <span className="FineIcon">
                     <img src={FineIcon} alt="ion" />
                   </span>

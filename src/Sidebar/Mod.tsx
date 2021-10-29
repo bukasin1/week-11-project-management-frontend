@@ -5,7 +5,8 @@ import { useParams } from 'react-router'
 
 interface Props {
   closeModal(): void,
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
+  collaborators?: any
 }
 
 // http://localhost:3001/
@@ -56,10 +57,11 @@ export function ProjectModalComp(props: any): JSX.Element {
           <hr />
           <div>
             <label>Name</label>
-            <input onChange={handleChange} type="text" style={{ width: '100%' }} value={input} />
+            <input onChange={handleChange} type="text" style={{ width: '100%', background: '#EAEAEA', height: '30px', 
+            border: 'none', outline: 'none', marginTop: '5px'}} placeholder="  e.g Designer, Developers or Finance" value={input} />
           </div>
 
-          <button onClick={createProject} type="button" style={{ width: '100%', backgroundColor: '#a9f19d', height: '40px', marginTop: '30px', borderRadius: '25px', border: 'none' }}>Create Project</button>
+          <button onClick={createProject} type="button" style={{ width: '100%', backgroundColor: '#a9f19d', height: '40px', marginTop: '20px', borderRadius: '25px', border: 'none' }}>Create Project</button>
         </div>
       </div>
     </>
@@ -113,10 +115,108 @@ export function TeamModalComp(props: Props): JSX.Element {
           <hr />
           <div>
             <label>Name</label>
-            <input onChange={handleChange} type="text" style={{ width: '100%' }} placeholder="  e.g Designer, Developers or Finance" value={input} />
+            <input onChange={handleChange} type="text" style={{ width: '100%', background: '#EAEAEA', height: '30px', 
+            border: 'none', outline: 'none', marginTop: '5px'}}  placeholder="  e.g Designer, Developers or Finance" 
+            
+            value={input} />
           </div>
 
-          <button onClick={createTeam} type="button" style={{ width: '100%', backgroundColor: '#a9f19d', height: '40px', marginTop: '30px', borderRadius: '25px', border: 'none' }}>Create Team</button>
+          <button onClick={createTeam} type="button" style={{ width: '100%', backgroundColor: '#a9f19d', height: '40px', marginTop: '20px', borderRadius: '25px', border: 'none' }}>Create Team</button>
+        </div>
+      </div>
+    
+    </>
+  )
+}
+
+
+export function TaskModalComp(props: Props): JSX.Element {
+
+  const params: {projectid: string} = useParams()
+  const path = window.location.pathname;
+  console.log(path)
+
+  const [title, setTitle] = useState<string>('')
+  const [description, setDesc] = useState('')
+  const [assignedUser, setAssignee] = useState('')
+  const [dueDate, setDate] = useState('')
+  const [message, setMessage] = useState('')
+
+  function handleChange(e: any) {
+    setTitle(e.target.value)
+    setMessage('')
+  }
+
+  function handleDate(e: any){
+    setDate(e.target.value)
+    setMessage('')
+    console.log(dueDate, 'date due')
+  }
+  console.log(typeof dueDate, 'date due')
+  console.log(assignedUser, "assignee")
+
+  function createtask() {
+    if(title && description && assignedUser && dueDate){
+      console.log('Creating Task...')
+      console.log(title)
+  
+      const send = {title, description, assignedUser, dueDate}
+  
+      console.log(send, "data to send")
+  
+      const token = localStorage.getItem('token') as string
+  
+      axios
+      .request({
+        url: `https://jaraaa.herokuapp.com/task/create-task`,
+        method: "post",
+        headers: { authorization: token },
+        withCredentials: true,
+        data: send
+      })
+      .then((res: any) => {
+        console.log(res.data, 'data');
+          // window.location.href = path
+          setTitle('')
+          setDesc('')
+          setAssignee('')
+          setDate('')
+          setMessage("Task Created Successfully!")
+      })
+      .catch((err: any) => {
+        console.log(err.response, 'err');
+      });
+    }else{
+      setMessage("Please complete all fields")
+    }
+  }
+
+  return (
+    <>
+      <div className="modal">
+        <div className="modal-content">
+          <span onClick={props.closeModal} className="close">&times;</span>
+          <h2><strong>Add a New Task</strong></h2>
+          <hr/>
+          <div>
+            <label>Title</label>
+            <input onChange={handleChange} type="text" style={{ width: '100%', background: '#EAEAEA', height: '30px', 
+            border: 'none', outline: 'none', marginTop: '10px', marginBottom: '10px'}} placeholder="  Add your task here" value={title} />
+            <label style={{marginTop: '10px'}}>Description</label>
+            <input onChange={e => {setDesc(e.target.value); setMessage('')}} type="text" style={{ width: '100%', background: '#EAEAEA', height: '30px', 
+            border: 'none', outline: 'none', marginTop: '10px', marginBottom: '20px'}} placeholder="  Add description here" value={description} />
+            <label>Assigned user</label>
+           <select onChange = {e => {setAssignee(e.target.value); setMessage('')}} style={{ width: '100%', padding: '6px', background: '#EAEAEA', border: 'none', outline: "none", marginTop: '10px', marginBottom: '10px'}}>
+             <option value="">-------------</option>
+             {props.collaborators && props.collaborators.map((member:any) => (
+               <option key = {member.userId} value={member.userId}>{member.firstname} {member.lastname}</option>
+             ))}
+           </select>
+           <label>Due Date</label>
+           <input onChange = {handleDate} type="date" style={{width: '100%',marginTop: '10px', background: '#EAEAEA',height: '30px', border: 'none', outline: "none"}}/>
+          </div>
+          {message && <p>{message}</p>}
+          <button onClick={createtask} type="button" style={{ width: '100%', backgroundColor: '#a9f19d', height: '40px', marginTop: '20px', borderRadius: '25px', border: 'none' }}>Create Task</button>
         </div>
       </div>
     </>
