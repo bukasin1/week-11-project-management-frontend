@@ -189,7 +189,7 @@ export function InviteModalComp(props: any): JSX.Element {
             <select onChange={setProject} name="" id="">
               <option value="---">---</option>
               {props.projects.map((project: any) => (
-                <option value={project.projectId}>{project.projectName}</option>
+                <option key = {project.projectId} value={project.projectId}>{project.projectName}</option>
               ))}
             </select>
             <label>Email</label>
