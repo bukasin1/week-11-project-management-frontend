@@ -353,7 +353,7 @@ function Side(props: any) {
                   setProfile(preUser);
                 }}
               >
-                <div className={activeId === project?.projectId ? "projects_img_div activate": "projects_img_div"}>
+                <div className={projectid === project?.projectId ? "projects_img_div activate": "projects_img_div"}>
                   <span className="FineIcon">
                     <img src={FineIcon} alt="ion" />
                   </span>
