@@ -186,7 +186,10 @@ export function TaskModalComp(props: Props): JSX.Element {
       })
       .catch((err: any) => {
         console.log(err.response.data, 'err');
-        setMessage("Error with creating task")
+        if(err.response.data.message){
+          setMessage(err.response.data.message)
+        }else{
+          setMessage("Error with creating task")}
       });
     }else{
       setMessage("Please complete all fields")

@@ -249,14 +249,14 @@ function handleCloseModal() {
                                         }}
                                       >
                                         <div>
-                                          {item.avatarUrl ? (
-                                            <Avatar src={item.avatarUrl} />
+                                          {item.AssignedUserAvatar ? (
+                                            <Avatar src={item.AssignedUserAvatar} />
                                           ) : (
                                             <AccountCircleIcon />
                                           )}
                                           {/* <AccountCircleIcon/> */}
                                         </div>
-                                        <TagContainer>{item.tag}</TagContainer>
+                                        <TagContainer>{item.AssaignedUserName}</TagContainer>
                                       </div>
                                     </KanbanCard>
                                   );
