@@ -68,8 +68,8 @@ function PersonalData(props: any) {
           </h2>
         </div>
         <div className="task-details-personal">
-          {props.member.openedTasks.map((task: any) => (
-            <p className="task-detail">{task.title}</p>
+          {props.member.openedTasks.map((task: any, index: number) => (
+            <p key={index} className="task-detail">{task.title}</p>
           ))}
         </div>
       </div>

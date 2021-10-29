@@ -169,7 +169,7 @@ export function TaskModalComp(props: Props): JSX.Element {
   
       axios
       .request({
-        url: `https://jaraaa.herokuapp.com/profile/${props.project}/create-task`,
+        url: `https://jaraaa.herokuapp.com/profile/${props.project}/task`,
         method: "post",
         headers: { authorization: token },
         withCredentials: true,
@@ -300,6 +300,82 @@ export function InviteModalComp(props: any): JSX.Element {
 
           {message && <p>{message}</p>}
           <button onClick={sendInvite} type="button" style={{ width: '100%', backgroundColor: '#a9f19d', height: '40px', marginTop: '30px', borderRadius: '25px', border: 'none' }}>Send Invite</button>
+        </div>
+      </div>
+    </>
+  )
+}
+
+
+export function TeamMemberModalComp(props: any): JSX.Element {
+
+  const path = window.location.pathname
+  console.log(path)
+
+  const [input, setInput] = useState<string>('')
+  const [project, setProjectId] = useState('')
+  const [message, setMessage] = useState('')
+
+  function handleChange(e: any) {
+    setInput(e.target.value)
+    setMessage('')
+  }
+
+  console.log(project, 'project id, after')
+
+  function addMember() {
+    if(input){
+      console.log('Creating project...')
+      console.log(input)
+  
+      const send = {memberId: input}
+  
+      const token = localStorage.getItem('token') as string
+  
+      axios
+      .request({
+        url: `https://jaraaa.herokuapp.com/${props.team.teamid}/addmembertoteam`,
+        method: "post",
+        headers: { authorization: token },
+        withCredentials: true,
+        data: send
+      })
+      .then((res: any) => {
+        console.log(res.data, 'data');
+        setMessage("Member added succesfully !")
+          window.location.href = path
+          // setFiles(data.data)
+      })
+      .catch((err: any) => {
+        console.log(err.response.data, 'err');
+        setMessage(err.response.data.message)
+      });
+    }else{
+      setMessage("Please select a member to add")
+    }
+  }
+
+  return (
+    <>
+      <div className="modal">
+        <div className="modal-content">
+          <span onClick={props.closeModal} className="close">&times;</span>
+          <h2><strong>Add a Team member</strong></h2>
+          <hr />
+          <div>
+            <label htmlFor="Project">Collaborators</label>
+            <select onChange={handleChange} name="" id="">
+            <option value="">-------------</option>
+             {props.collaborators && props.collaborators.map((member:any) => (
+               <option key = {member.userId} value={member.userId}>{member.firstname} {member.lastname}</option>
+             ))}
+            </select>
+            {/* <label>Email</label>
+            <input onChange={handleChange} type="text" style={{ width: '100%' }} value={input} /> */}
+          </div>
+
+          {message && <p>{message}</p>}
+          <button onClick={addMember} type="button" style={{ width: '100%', backgroundColor: '#a9f19d', height: '40px', marginTop: '30px', borderRadius: '25px', border: 'none' }}>Add To Team</button>
         </div>
       </div>
     </>

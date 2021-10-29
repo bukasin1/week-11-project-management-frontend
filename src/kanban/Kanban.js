@@ -50,12 +50,16 @@ const itemsFromBackend = [
 const onDragEnd = (result, columns, setColumns) => {
   if (!result.destination) return;
   const { source, destination } = result;
+  console.log(result, "result")
   if (source.droppableId !== destination.droppableId) {
+    console.log(source, "source")
     const sourceColumn = columns[source.droppableId];
     const destColumn = columns[destination.droppableId];
     const sourceItems = [...sourceColumn.items];
+    console.log(sourceItems, "source items")
     const destItems = [...destColumn.items];
     const [removed] = sourceItems.splice(source.index, 1);
+    console.log(removed, 'removed')
     destItems.splice(destination.index, 0, removed);
     setColumns({
       ...columns,
@@ -68,6 +72,23 @@ const onDragEnd = (result, columns, setColumns) => {
         items: destItems,
       },
     });
+    console.log(destination, "destination")
+    const token = localStorage.getItem("token");
+    axios
+      .request({
+        url: `https://jaraaa.herokuapp.com/profile/${removed.id}`,
+        method: "put",
+        headers: { authorization: token },
+        data: {status: destination.droppableId},
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log(res.data, "status updated");
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
+
   } else {
     const column = columns[source.droppableId];
     const copiedItems = [...column.items];
@@ -85,29 +106,62 @@ const onDragEnd = (result, columns, setColumns) => {
 
 function KanbanComp({collaborators, project}) {
 
+  const [taskData, setTaskData] = useState([])
+
   useEffect(() => {
-    
-  })
+    const token = localStorage.getItem("token");
+    axios
+      .request({
+        url: `https://jaraaa.herokuapp.com/tasks/${project}`,
+        method: "get",
+        headers: { authorization: token },
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log(res.data, "i am data haha");
+        const data = res.data;
+        setTaskData(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },[])
+
+  console.log(taskData, "project tasks")
+
+  const backlogTasks = taskData.filter(task => task.status === "backlog")
+  const todoTasks = taskData.filter(task => task.status === "todo")
+  const doneTasks = taskData.filter(task => task.status === "done")
+
+  console.log(backlogTasks, "backlog")
 
   const columnsFromBackend = {
-    ["5"]: {
+    ["backlog"]: {
       name: "Backlog",
-      items: itemsFromBackend,
+      items: backlogTasks,
     },
-    ["6"]: {
+    ["todo"]: {
       name: "To Do",
-      items: [],
+      items: todoTasks,
     },
-    ["7"]: {
+    ["done"]: {
       name: "Done",
-      items: [],
+      items: doneTasks,
     },
   };
+
+  console.log(columnsFromBackend, "columns from backend")
 
   console.log(collaborators, "in kanban")
   const [columns, setColumns] = useState(columnsFromBackend);
   const [taskModal, setTaskModal] = useState(false);
   const [closeModal, setCloseModal] = useState(false);
+
+  useEffect(() => {
+    setColumns(columnsFromBackend)
+  }, [taskData])
+
+  console.log(columns, "columns")
 function addTaskModal() {
   setTaskModal(true);
 }
