@@ -11,8 +11,11 @@ import { useParams } from "react-router-dom";
 import dateFormat from "dateformat"
 import axios from 'axios'
 
-const Maintask = ({ apiSetdata }: any) => {
+const Maintask = ({ apiSetdata, setApiData }: any) => {
   console.log(apiSetdata)
+
+  const commentsToDisplay = [...apiSetdata.comments].reverse()
+  console.log(commentsToDisplay, "Reversed")
 
   const createdOn = dateFormat(apiSetdata.createdAt, "dddd,  h:MM TT")
   const dueOn = dateFormat(apiSetdata.dueDate, "dddd,  h:MM TT");
@@ -39,10 +42,12 @@ const Maintask = ({ apiSetdata }: any) => {
       const token = localStorage.getItem('token') as string
       console.log(token)
       await axios.request({ url: `https://jaraaa.herokuapp.com/tasks/${apiSetdata._id}/create-comment`, method: "post", data: comment, headers: { authorization: token }, withCredentials: true })
-        .then(response => {
+        .then((response: any) => {
           console.log(response.data)
           console.log("Major:", response.data)
-          alert("Your comment has been added successfully")
+          setApiData(response.data.task)
+          setComments({comment: ''})
+          // alert("Your comment has been added successfully")
           // window.location.href = "/success"
 
         }).catch(err => {
@@ -145,10 +150,11 @@ const Maintask = ({ apiSetdata }: any) => {
           placeholder="Add a comment…"
           onChange={handleChange}
           onKeyDown={handleKeyDown}
+          value = {comment.comment}
         />
       </div>
 
-      {apiSetdata.comments && apiSetdata.comments.slice(0, 2).map((comment: any) => (
+      {apiSetdata.comments && commentsToDisplay.slice(0, 3).map((comment: any) => (
         <div>
           <div className="img-content1">
             <img src={mick} className="maintask-comment" />

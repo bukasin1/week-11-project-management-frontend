@@ -42,7 +42,7 @@ export default function ProjectComponent(props: any) {
 
     return (
         <>
-            <Side projectId = {project.projectid} owner = {project.owner}/>
+            {/* <Side projectId = {project.projectid} owner = {project.owner}/> */}
             <div className="content">
 
                 <ProjectNavbar project = {project} />

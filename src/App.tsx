@@ -106,8 +106,8 @@ function App() {
             component={Maintask}
           />
 
-          <ProtectedRoute path="/home" exact component={HomeComponent} />
-          <ProtectedRoute
+          {/* <ProtectedRoute path="/home" exact component={HomeComponent} /> */}
+          {/* <ProtectedRoute
             path="/:projectname/:projectid/:owner/task"
             component={ProjectComponent}
           ></ProtectedRoute>
@@ -140,12 +140,12 @@ function App() {
           <ProtectedRoute
             path="/:projectid/:teamname/:teamid/:owner"
             component={TeamComponent}
-          ></ProtectedRoute>
-          <Route
+          ></ProtectedRoute> */}
+          {/* <Route
             path="/welcome/:userToken/"
             exact
             component={HomeComponent}
-          ></Route>
+          ></Route> */}
           <OpenRoute path="/login" exact component={Form}></OpenRoute>
           <ProtectedRoute path="/success" exact component={LoginSuccess} />
           <Route
@@ -158,12 +158,13 @@ function App() {
           <OpenRoute path="/signup" exact component={SignUp}></OpenRoute>
           <OpenRoute exact path="/forgotpassword" component={ForgotPasswordEmail} />
           {/* <ProtectedRoute path="/changepassword" exact component={Password} /> */}
-          <Route path="/welcome/:userToken/" exact component={Side}></Route>
+          {/* <Route path="/welcome/:userToken/" exact component={Side}></Route> */}
           {/* <ProtectedRoute path="/:files" component={Side} /> */}
           {/* <Route path="/files/:test" exact>{notloggedIn ? <Redirect to="/login" /> : <FilesPage />}</Route> */}
 
           {/* <ProtectedRoute path="/welcome" exact component={Side}></ProtectedRoute> */}
           {/* <Route path="/modal" exact component={ModalComp}></Route> */}
+          <Side />
         </Switch>
       </BrowserRouter>
     </div>

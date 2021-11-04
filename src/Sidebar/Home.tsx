@@ -6,7 +6,7 @@ import "./Home.css";
 export default function HomeComponent(props: any) {
   return (
     <>
-      <Side />
+      {/* <Side /> */}
       <div className="content">
         <Navbar />
         <div className="test">

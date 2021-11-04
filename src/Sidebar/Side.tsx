@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, Switch, Route } from "react-router-dom";
 import { Avatar, IconButton } from "@material-ui/core";
 import SearchIcon from "@mui/icons-material/Search";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
@@ -14,6 +14,11 @@ import axios from "axios";
 import TeamData from "../teams/teamsData";
 // import Profile from "./profile";
 import FineIcon from "../assets/designicon.svg";
+import { ProtectedRoute } from "../App";
+import HomeComponent from "./Home";
+import ProjectComponent from './ProjectComp';
+import ProfileComponent from './ProfileComp';
+import TeamComponent from './teamComponent';
 
 export interface ITask {
   [x: string]: any;
@@ -82,12 +87,14 @@ export interface userType {
 }
 
 function Side(props: any) {
+  console.log(props.location.pathname.split('/').slice(2).join('/'), "props")
+  const otherToken = props.location.pathname.split('/').slice(2).join('/')
   const { userToken, projectname, projectid } = useParams() as any;
   let loggedUser: userType;
-  if (userToken) {
+  if (userToken || otherToken) {
     console.log(userToken);
-    const userFromToken = userToken.split("~").slice(1).join("~");
-    const token = userToken.split("~")[0];
+    const userFromToken = otherToken.split("~").slice(1).join("~");
+    const token = otherToken.split("~")[0];
     loggedUser = JSON.parse(userFromToken);
     localStorage.setItem("token", token);
     localStorage.setItem("user", userFromToken);
@@ -319,13 +326,13 @@ function Side(props: any) {
             <div>
               <h4 className="menu">MENU</h4>
             </div>
-            <div
+            <Link to = "/home"
               className="div_home"
-              onClick={(e) => (window.location.href = "/home")}
+              // onClick={(e) => (window.location.href = "/home")}
             >
               {" "}
               Home{" "}
-            </div>
+            </Link>
             <div className="div_home"> My Tasks </div>
             <div className="notifications">
               <div> Notfications </div>
@@ -338,34 +345,37 @@ function Side(props: any) {
             <div className="Menu_projects_d">
               <h4 className="project">PROJECTS</h4>
             </div>
-            {profile.projects?.map((project) => (
-              // <a href={project.projectName}>
-              <div
-                key={project.id}
-                onClick={(e) => {
-                  setActiveId(project.projectId)
-                  window.location.href = `/${project.projectName}/${project.projectId}/${project.owner}/task`;
-                  setProject({
-                    projectId: project.projectId as string,
-                    projectName: project.projectName as string,
-                    owner: project.owner,
-                  });
-                  setProfile(preUser);
-                }}
-              >
-                <div className={projectid === project?.projectId ? "projects_img_div activate": "projects_img_div"}>
-                  <span className="FineIcon">
-                    <img src={FineIcon} alt="ion" />
-                  </span>
-                  <p className="projects_items">
-                    {project.projectName.length > 20
-                      ? project.projectName.slice(0, 20) + " ..."
-                      : project.projectName}
-                  </p>
-                </div>
-              </div>
-              // </a>
-            ))}
+            {profile.projects?.map((project) => {
+              const linkTo = `/${project.projectName}/${project.projectId}/${project.owner}/task`
+              return (
+                // <a href={project.projectName}>
+                <Link to = {linkTo}
+                  key={project.id}
+                  onClick={(e) => {
+                    setActiveId(project.projectId)
+                    // window.location.href = `/${project.projectName}/${project.projectId}/${project.owner}/task`;
+                    setProject({
+                      projectId: project.projectId as string,
+                      projectName: project.projectName as string,
+                      owner: project.owner,
+                    });
+                    setProfile(preUser);
+                  }}
+                >
+                  <div className={projectid === project?.projectId ? "projects_img_div activate": "projects_img_div"}>
+                    <span className="FineIcon">
+                      <img src={FineIcon} alt="ion" />
+                    </span>
+                    <p className="projects_items">
+                      {project.projectName.length > 20
+                        ? project.projectName.slice(0, 20) + " ..."
+                        : project.projectName}
+                    </p>
+                  </div>
+                </Link>
+                // </a>
+              )
+            })}
           </div>
           <div onClick={openProjectModal} className="addProject">
             +Add a Project
@@ -405,6 +415,50 @@ function Side(props: any) {
             <span onClick = {openInviteModal}>Invite your team</span> and start collaborating!
           </div>
         </div>
+      </div>
+      <div>
+        <Switch>
+          <ProtectedRoute path="/home" exact component={HomeComponent} />
+          <ProtectedRoute
+            path="/:projectname/:projectid/:owner/task"
+            component={ProjectComponent}
+          ></ProtectedRoute>
+          <ProtectedRoute
+            path="/:projectname/:projectid/:owner/kanban"
+            component={ProjectComponent}
+          ></ProtectedRoute>
+          <ProtectedRoute
+            path="/:projectname/:projectid/:owner/activity"
+            component={ProjectComponent}
+          ></ProtectedRoute>
+          <ProtectedRoute
+            path="/:projectname/:projectid/:owner/calender"
+            component={ProjectComponent}
+          ></ProtectedRoute>
+          <ProtectedRoute
+            path="/:projectname/:projectid/:owner/files"
+            component={ProjectComponent}
+          ></ProtectedRoute>
+          <ProtectedRoute
+            path="/profile"
+            exact
+            component={ProfileComponent}
+          ></ProtectedRoute>
+          <ProtectedRoute
+            path="/changepassword"
+            exact
+            component={ProfileComponent}
+          ></ProtectedRoute>
+          <ProtectedRoute
+            path="/:projectid/:teamname/:teamid/:owner"
+            component={TeamComponent}
+          ></ProtectedRoute>
+          <Route
+            path="/welcome/:userToken/"
+            exact
+            component={HomeComponent}
+          ></Route>
+        </Switch>
       </div>
 
       {projectModalIsOpen && (
