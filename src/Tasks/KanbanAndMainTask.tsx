@@ -10,7 +10,7 @@ export default function KanbanAndMainTaks() {
     <div className="TaskContents">
       <Kanban setApiData={setAllState} />
       <div className="taskSeperator"></div>
-      {allState.comments? <Maintask apiSetdata={allState} /> : <p>Click on a task to see details</p>}
+      {allState.comments? <Maintask apiSetdata={allState} setApiData={setAllState} /> : <p>Click on a task to see details</p>}
       {/* <Maintask apiSetdata={allState} /> */}
     </div>
   );
