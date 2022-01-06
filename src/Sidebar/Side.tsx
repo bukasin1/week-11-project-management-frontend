@@ -87,17 +87,20 @@ export interface userType {
 }
 
 function Side(props: any) {
-  console.log(props.location.pathname.split('/').slice(2).join('/'), "props")
-  const otherToken = props.location.pathname.split('/').slice(2).join('/')
   const { userToken, projectname, projectid } = useParams() as any;
+  console.log(useParams(), "side params")
   let loggedUser: userType;
-  if (userToken || otherToken) {
-    console.log(userToken);
-    const userFromToken = otherToken.split("~").slice(1).join("~");
-    const token = otherToken.split("~")[0];
-    loggedUser = JSON.parse(userFromToken);
-    localStorage.setItem("token", token);
-    localStorage.setItem("user", userFromToken);
+  if(props.location.pathname.includes('welcome')){
+    console.log(props.location.pathname.split('/').slice(2).join('/'), "props")
+    const otherToken = props.location.pathname.split('/').slice(2).join('/')
+    if (userToken || otherToken) {
+      console.log(userToken);
+      const userFromToken = otherToken.split("~").slice(1).join("~");
+      const token = otherToken.split("~")[0];
+      loggedUser = JSON.parse(userFromToken);
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", userFromToken);
+    }
   }
   loggedUser = JSON.parse(localStorage.getItem("user") as string);
   const preUser = { projects: [], closedTasks: [], openedTasks: [] } as userType;
@@ -180,7 +183,7 @@ function Side(props: any) {
   useEffect(() => {
     const token = localStorage.getItem("token");
     console.log(token);
-    fetch(`https://jaraaa.herokuapp.com/${props.projectId}/get-teams`, {
+    fetch(`https://jaraaa.herokuapp.com/${project.projectId}/get-teams`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -328,7 +331,14 @@ function Side(props: any) {
             </div>
             <Link to = "/home"
               className="div_home"
-              // onClick={(e) => (window.location.href = "/home")}
+              onClick={(e) => {
+                // window.location.href = "/home"
+                setProject({
+                  projectId: "",
+                  projectName: "",
+                  owner: false,
+                });
+              }}
             >
               {" "}
               Home{" "}
@@ -359,10 +369,10 @@ function Side(props: any) {
                       projectName: project.projectName as string,
                       owner: project.owner,
                     });
-                    setProfile(preUser);
+                    // setProfile(preUser);
                   }}
                 >
-                  <div className={projectid === project?.projectId ? "projects_img_div activate": "projects_img_div"}>
+                  <div className={activeId === project?.projectId ? "projects_img_div activate": "projects_img_div"}>
                     <span className="FineIcon">
                       <img src={FineIcon} alt="ion" />
                     </span>
@@ -406,7 +416,7 @@ function Side(props: any) {
               </div>
             ))}
           </div>
-          {projectid && (
+          {project.projectId && (
             <div onClick={openTeamModal} className="addTeam">
               +Add a Team
             </div>

@@ -1,4 +1,6 @@
 import { useParams } from "react-router";
+import { Link, Switch, Route } from "react-router-dom";
+import { ProtectedRoute } from "../App";
 import { ActivityPage } from "../Activity/activity";
 import { FilesPage } from "../filesPage/files";
 import KanbanComp from "../kanban/Kanban";
@@ -18,6 +20,10 @@ export default function ProjectComponent(props: any) {
         projectid,
         owner
     }
+
+    // const project = props.project
+    console.log(props, "props proj")
+    console.log(project, "selectd project")
 
     const [collaborators, setCollab] = useState([])
 
@@ -47,6 +53,10 @@ export default function ProjectComponent(props: any) {
 
                 <ProjectNavbar project = {project} />
                 <div className="test">
+                    {/* <Switch>
+                        <ProtectedRoute></ProtectedRoute>
+                        <KanbanAndMainTaks />
+                    </Switch> */}
                     {path.includes('task') && <KanbanAndMainTaks />}
                     {path.includes('kanban') && <KanbanComp collaborators = {collaborators} project = {project.projectid} />}
                     {path.includes('activity') && <ActivityPage project = {project.projectid} />}

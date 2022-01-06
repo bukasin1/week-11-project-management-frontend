@@ -21,14 +21,16 @@ function generateRandomFontColor() {
 }
 
 function Kanban({ setApiData }: any) {
+  console.log(useParams(), "kanban tasks")
   const { projectid }: any = useParams();
   const [data, setData] = useState([]);
   const [backlog, setBacklog] = useState();
   useEffect(() => {
     const token = localStorage.getItem("token") as string;
+    console.log(token, "token from kanban")
     axios
       .request({
-        url: `https://jaraaa.herokuapp.com/tasks/${projectid}`,
+        url: `http://localhost:3001/tasks/${projectid}`,
         method: "get",
         headers: { authorization: token },
         withCredentials: true,
@@ -39,7 +41,7 @@ function Kanban({ setApiData }: any) {
         setData(data);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response);
       });
   }, []);
 

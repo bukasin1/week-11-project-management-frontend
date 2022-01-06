@@ -112,7 +112,7 @@ function KanbanComp({collaborators, project}) {
     const token = localStorage.getItem("token");
     axios
       .request({
-        url: `https://jaraaa.herokuapp.com/tasks/${project}`,
+        url: `https://localhost:3001/tasks/${project}`,
         method: "get",
         headers: { authorization: token },
         withCredentials: true,
